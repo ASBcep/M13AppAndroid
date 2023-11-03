@@ -6,16 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- Changed the LinearLayout width to 0dp to work with constraints
+         and weight to allow the TextView to fill it.
+         Removed the absolute positioning as it's not needed with ConstraintLayout. -->
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Polis Tècnics!"
-        android:textSize="100sp"
-        android:textColor="#0000FF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Changed the layout_width to 0dp and added weight so that
+             it fills the LinearLayout horizontally.
+             Changed layout_height to wrap_content to fit the content.
+             Adjusted textSize to a smaller value for better appearance. -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hola! Esto ha sido escrito por el Raton"
+            android:textColor="#0000FF"
+            android:textSize="24sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
