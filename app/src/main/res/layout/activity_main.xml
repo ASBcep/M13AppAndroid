@@ -28,6 +28,13 @@
             android:text="Hola! Esto ha sido escrito por el Raton"
             android:textColor="#0000FF"
             android:textSize="24sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hola! Esto ha sido escrito por el don Raton"
+            android:textColor="#1979A6"
+            android:textSize="24sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
