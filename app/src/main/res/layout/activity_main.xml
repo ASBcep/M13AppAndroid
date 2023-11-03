@@ -1,48 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Changed the LinearLayout width to 0dp to work with constraints
-         and weight to allow the TextView to fill it.
-         Removed the absolute positioning as it's not needed with ConstraintLayout. -->
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <!-- Changed the layout_width to 0dp and added weight so that
-             it fills the LinearLayout horizontally.
-             Changed layout_height to wrap_content to fit the content.
-             Adjusted textSize to a smaller value for better appearance. -->
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Hola! Esto ha sido escrito por el Raton"
-            android:textColor="#0000FF"
-            android:textSize="24sp" />
-        <TextView
-            android:layout_width="0dp"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Hola! Esto ha sido escrito por el Raton"
+                android:textColor="#0000FF"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Hola! Esto ha sido escrito por el don Raton"
+                android:textColor="#1979A6"
+                android:textSize="24sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Hola! Esto ha sido escrito por el don Raton"
-            android:textColor="#1979A6"
-            android:textSize="24sp" />
+            tools:ignore="MissingConstraints">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pinky TEAM"
+                android:textSize="100sp"
+                android:textColor="#E91E63"
+                tools:ignore="MissingConstraints" />
+        </LinearLayout>
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pinky TEAM"
-        android:textSize="100sp"
-        android:textColor="#E91E63"
-        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
