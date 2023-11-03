@@ -13,5 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "M13AppAndroid"
+rootProject.name = "AppAndroid"
 include(":app")
+ 
