@@ -1,6 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dp">
+        <ImageButton
+            android:id="@+id/BtnAtras"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/flecha"
+            />
+        <TextView
+            android:id="@+id/TxtAltresElements"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="TRIA UN NIVELL DE DIFICULTAT"
+            android:textSize="64sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/BtnFacil"
+            android:layout_width="377dp"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:text="FÀCIL"
+            android:textSize="64sp"
+            android:background="@color/black"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
+            android:padding="20dp"/>
+
+        <Button
+            android:id="@+id/BtnNormal"
+            android:layout_width="377dp"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:background="@color/black"
+            android:text="NORMAL"
+            android:textSize="64sp"
+            android:padding="20dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"/>
+        <Button
+            android:id="@+id/BtnDificil"
+            android:layout_width="377dp"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:text="DIFÍCIL"
+            android:textSize="64sp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
+            android:background="@color/black"
+            android:padding="20dp"/>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/BtnIdioma"
+        android:layout_width="88dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/icon"
+        android:layout_margin="18dp"
+        android:layout_weight="1"/>
+</LinearLayout>
