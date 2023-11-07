@@ -29,7 +29,14 @@
         <activity android:name=".Activity3"
                   android:screenOrientation="landscape"/>
         <activity android:name=".Activity4"
-                  android:screenOrientation="landscape"/>
+                  android:exported="true"
+                  android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Activity5"
                   android:screenOrientation="landscape"/>
         <activity android:name=".Activity6"
