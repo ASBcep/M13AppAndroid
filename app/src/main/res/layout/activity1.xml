@@ -9,14 +9,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#111111"
+
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
-            android:background="#AEA8A8"
+
             android:gravity="top"
             android:orientation="horizontal"
             tools:ignore="MissingConstraints">
@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="0"
-                android:background="#CF7979"
+
                 android:text="👈"
                 android:textSize="50sp" />
 
@@ -33,16 +33,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#7CCF79"
+
                 android:gravity="center"
                 android:text="ELEMENT MÉS PRÒXIM"
                 android:textSize="50sp" />
 
             <TextView
+                android:id="@+id/botonpasar1a2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:background="#799BCF"
+
                 android:text="👉"
                 android:textSize="50sp" />
         </LinearLayout>
@@ -54,7 +55,7 @@
             android:layout_gravity="center"
             android:layout_margin="25dp"
             android:layout_weight="2"
-            android:background="#F44336"
+
             android:orientation="vertical"
             tools:ignore="MissingConstraints">
 

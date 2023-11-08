@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,42 +9,106 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+
+            android:gravity="top"
             android:orientation="horizontal"
             tools:ignore="MissingConstraints">
 
-             <TextView
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Hola! Esto ha sido escrito por el Raton"
-                android:textColor="#0000FF"
-                android:textSize="24sp" />
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+
+                android:text="👈"
+                android:textSize="50sp" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Hola! Esto ha sido escrito por el don Raton"
-                android:textColor="#1979A6"
-                android:textSize="24sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints">
+
+                android:gravity="center"
+                android:text="ELEMENT MÉS PRÒXIM"
+                android:textSize="50sp" />
+
             <TextView
+                android:id="@+id/botonpasar1a2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pinky TEAM"
-                android:textSize="100sp"
-                android:textColor="#E91E63"
-                tools:ignore="MissingConstraints" />
+                android:layout_weight="0"
+
+                android:text="👉"
+                android:textSize="50sp" />
         </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="25dp"
+            android:layout_weight="2"
+
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#CFCE79"
+                    android:gravity="center"
+                    android:src="@drawable/simpsonscarherb"
+
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="25dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#9D79CF"
+                    android:gravity="bottom|center"
+                    android:text="NOM ELEMENT"
+                    android:textSize="30sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:background="#AEA8A8"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="IDIOMA" />
+
+        </LinearLayout>
+
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
