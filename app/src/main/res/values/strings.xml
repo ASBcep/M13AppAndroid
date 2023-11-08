@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Activity2</string>
+    <!--<string name="app_name">Activity2</string>-->
+    <string name="app_name">AppAndroid</string>
     <string name="texto">Caract 1\nCaract 2
         \nCaract 3
         \nCaract 4
@@ -13,4 +14,7 @@
         \nCaract 12
         \nCaract 13</string>
     <string name="texto2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et egestas dolor. Nunc consectetur lobortis nisl a vehicula. Sed vel pulvinar nulla. Maecenas et condimentum purus, quis accumsan tortor. Quisque ultricies turpis ut metus lacinia porta. Proin placerat erat magna, id luctus nisi imperdiet eleifend. Nulla risus metus, aliquet a fringilla semper, porttitor id enim. Pellentesque iaculis ligula mauris, vitae gravida neque placerat condimentum. Mauris ultrices luctus quam, non pellentesque mi commodo nec. Proin nibh lorem, ullamcorper nec lectus non, commodo auctor elit. Quisque varius a justo ut suscipit. Nulla sit amet consectetur erat. Phasellus placerat dignissim risus, ac tempor libero eleifend nec. Cras quis lacinia diam. Integer malesuada metus tempor ultrices luctus.</string>
+    <string name="fletxaEnrere">👈</string>
+    <string name="fletxaEndavant">👉</string>
+    <string name="midaTextHead">50sp</string>
 </resources>
