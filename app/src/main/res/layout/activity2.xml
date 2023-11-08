@@ -9,13 +9,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_margin="5dp">
-        <ImageButton
-            android:id="@+id/BtnAtras"
-            android:layout_width="64dp"
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:scaleType="fitStart"
-            android:background="@color/white"
-            android:src="@drawable/flecha" />
+            android:layout_weight="0"
+
+            android:text="👈"
+            android:textSize="50sp" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -24,14 +26,15 @@
             android:gravity="center"
             android:textSize="64sp"
             android:textStyle="bold"/>
-        <ImageButton
-            android:id="@+id/BtnSiguiente"
-            android:layout_width="64dp"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:rotationY="180"
-            android:scaleType="fitStart"
-            android:src="@drawable/flecha"/>
+
+        <TextView
+            android:id="@+id/botonpasar1a2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+
+            android:text="👉"
+            android:textSize="50sp" />
     </LinearLayout>
 
     <LinearLayout
