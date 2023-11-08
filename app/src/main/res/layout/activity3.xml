@@ -39,10 +39,11 @@
                 android:textSize="50sp" />
 
             <TextView
+                android:id="@+id/botonpasar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:background="#799BCF"
+
                 android:text="👉"
                 android:textSize="50sp" />
         </LinearLayout>

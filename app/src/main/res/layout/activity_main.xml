@@ -33,7 +33,7 @@
                 android:textSize="50sp" />
 
             <TextView
-                android:id="@+id/botonpasar1a2"
+                android:id="@+id/botonpasar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
