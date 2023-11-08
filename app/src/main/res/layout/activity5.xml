@@ -7,40 +7,83 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:gravity="top"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="👈"
+            android:textSize="50sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
             android:text="Vols demostrar els teus coneixements?"
-            android:textAlignment="center"
-            android:textSize="50sp"
-            android:textStyle="bold" />
+            android:textSize="50sp" />
 
-        <ImageView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="👉"
+            android:textSize="50sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:orientation="horizontal"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp">
+
+        <!--Ubica aquí els layouts / views-->
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:src="@drawable/simpsonscarherb" />
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
 
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/simpsonscarherb" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_weight="0"
+            android:text="🌍 IDIOMA" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            />
         <Button
             android:id="@+id/btnJugar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#000000"
-            android:text="Jugar"
-            android:textSize="50sp" />
+            android:gravity="right"
+            android:layout_weight="1"
+            android:text="Jugar" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnIdioma"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Idioma"
-        android:backgroundTint="#000000"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="-155dp"
-        android:textSize="50sp"
-        />
 </LinearLayout>
