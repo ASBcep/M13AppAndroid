@@ -20,8 +20,8 @@ class Activity3 : AppCompatActivity() {
         }
 
         botonatras.setOnClickListener {
-            // Crear un Intent para abrir Activity2
-            val intent = Intent(this@Activity3, Activity2::class.java)
+            // Crear un Intent para abrir Activity1
+            val intent = Intent(this@Activity3, MainActivity::class.java)
             startActivity(intent)
         }
     }
