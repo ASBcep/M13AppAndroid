@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         botonidiomas1.setOnClickListener {
             // Crear un Intent para abrir Activity2
-            val intent = Intent(this@MainActivity, Activity1::class.java)
+            val intent = Intent(this@MainActivity, idiomas::class.java)
             startActivity(intent)
         }
     }
