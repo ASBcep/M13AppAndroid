@@ -12,9 +12,16 @@ class MainActivity : AppCompatActivity() {
 
 
         val botonpasar: TextView = findViewById(R.id.botonpasar)
+        val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         botonpasar.setOnClickListener {
             // Crear un Intent para abrir Activity2
             val intent = Intent(this@MainActivity, Activity2::class.java)
+            startActivity(intent)
+        }
+
+        botonidiomas1.setOnClickListener {
+            // Crear un Intent para abrir Activity2
+            val intent = Intent(this@MainActivity, Activity1::class.java)
             startActivity(intent)
         }
     }
