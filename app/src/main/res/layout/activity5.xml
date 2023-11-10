@@ -5,80 +5,83 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:text="@string/fletxaEnrere"
-            android:textSize="30sp" />
-
-        <TextView
-            android:id="@+id/act1FrameText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:text="@string/HeadAct5"
-            android:textSize="30sp"
-            android:textStyle="bold"/>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="7"
-        android:orientation="horizontal"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp">
-
-        <!--Ubica aquí els layouts / views-->
-
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
             android:orientation="horizontal">
 
-
-
-            <ImageView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/simpsonscarherb" />
+                android:layout_weight="0"
+                android:text="@string/fletxaEnrere"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/act1FrameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:text="@string/HeadAct5"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
 
 
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:layout_weight="0"
-        android:gravity="bottom"
-        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/botonidiomas1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="@string/btn_idioma" />
-        <Button
-            android:id="@+id/btnJugar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right"
             android:layout_weight="1"
-            android:text="Jugar" />
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginVertical="32dp">
 
+            <!--Ubica aquí els layouts / views-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/simpsonscarherb" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_weight="0"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/botonidiomas1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/btn_idioma" />
+            <Button
+                android:id="@+id/btnJugar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:text="Jugar" />
+
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
