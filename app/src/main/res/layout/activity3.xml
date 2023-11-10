@@ -76,10 +76,19 @@
                 android:layout_margin="4dp"/>
         </LinearLayout>
     </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="🌍 IDIOMA" />
+        android:layout_margin="0dp"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/botonidiomas1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="🌍 IDIOMA" />
+
+    </LinearLayout>
 </LinearLayout>
