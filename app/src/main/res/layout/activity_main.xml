@@ -9,31 +9,30 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:gravity="top"
+            android:layout_weight="0"
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/act1FrameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:text="ELEMENT MÉS PRÒXIM"
-                android:textSize="50sp" />
+                android:textAlignment="center"
+                android:text="@string/HeadActMain"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/botonpasar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="@string/fletxaEndavant"
-                android:textSize="50sp" />
+                android:textSize="30sp" />
         </LinearLayout>
 
 
@@ -83,16 +82,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
+            android:layout_weight="0"
             android:gravity="bottom"
-            android:orientation="horizontal"
-            tools:ignore="MissingConstraints">
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/botonidiomas1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:text="🌍 IDIOMA" />
+                android:text="@string/btn_idioma" />
 
         </LinearLayout>
 
