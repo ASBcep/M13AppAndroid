@@ -48,12 +48,14 @@
             android:orientation="horizontal"
             android:layout_marginHorizontal="32dp"
             android:layout_marginVertical="32dp">
-            <GridView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ListAltresElements"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:numColumns="3">
-            </GridView>
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginVertical="32dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

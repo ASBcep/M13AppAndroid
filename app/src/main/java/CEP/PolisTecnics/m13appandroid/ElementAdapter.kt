@@ -7,26 +7,30 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 
-class ElementAdapter(context: Context, val layout: Int, val elements: MutableList<Element>) :
-    ArrayAdapter<Element>(context, layout, elements) {
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var view: View
+class ElementAdapter(val elements: List<Element>) :
+    RecyclerView.Adapter<ElementAdapter.ElementViewHolder>() {
 
-        if (convertView != null) {
-            view = convertView
-        } else {
-            view =
-                LayoutInflater.from(getContext()).inflate(layout, parent, false)
-        }
-        bindElement(view, elements[position])
-        return view
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ElementViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.element_itema4, parent, false)
+        return ElementViewHolder(view)
     }
 
-    fun bindElement(view: View, element: Element) {
-        val imgElement = view.findViewById(R.id.ImgListElement) as ImageView
-        imgElement.setImageResource(element.image)
-        val elementNom = view.findViewById(R.id.NomListElement) as TextView
-        elementNom.text = element.nomElement
+    override fun onBindViewHolder(holder: ElementViewHolder, position: Int) {
+        val element = elements[position]
+        holder.bindElement(element)
+    }
+
+    override fun getItemCount(): Int = elements.size
+
+    class ElementViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bindElement(element: Element) {
+            val imgElement = itemView.findViewById<ImageView>(R.id.ImgListElement)
+            imgElement.setImageResource(element.image)
+            val elementNom = itemView.findViewById<TextView>(R.id.NomListElement)
+            elementNom.text = element.nomElement
+        }
     }
 }

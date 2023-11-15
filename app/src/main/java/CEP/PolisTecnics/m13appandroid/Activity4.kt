@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.GridView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class Activity4 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,9 +43,11 @@ class Activity4 : AppCompatActivity() {
             Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
         )
 
-        val listAltresElements = findViewById<GridView>(R.id.ListAltresElements)
-        val adapter = ElementAdapter(this, R.layout.element_itema4, elements)
+        val listAltresElements = findViewById<RecyclerView>(R.id.ListAltresElements)
+        val layoutManager = GridLayoutManager(this, 3)
+        listAltresElements.layoutManager = layoutManager
+
+        val adapter = ElementAdapter(elements)
         listAltresElements.adapter = adapter
     }
-
 }
