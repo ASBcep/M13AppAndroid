@@ -13,7 +13,7 @@ class Activity5 : AppCompatActivity() {
 
         val botonatras: TextView = findViewById(R.id.botonatras)
         val btnJugar: TextView = findViewById(R.id.btnJugar)
-
+        val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         botonatras.setOnClickListener {
             // Crear un Intent para abrir Activity2
             val intent = Intent(this@Activity5, Activity4::class.java)
@@ -22,6 +22,11 @@ class Activity5 : AppCompatActivity() {
         btnJugar.setOnClickListener {
             // Crear un Intent para abrir Activity2
             val intent = Intent(this@Activity5, Activity6::class.java)
+            startActivity(intent)
+        }
+        botonidiomas1.setOnClickListener {
+            // Crear un Intent para abrir idiomas
+            val intent = Intent(this@Activity5, idiomas::class.java)
             startActivity(intent)
         }
     }
