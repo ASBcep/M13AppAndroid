@@ -2,6 +2,8 @@ package CEP.PolisTecnics.m13appandroid
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -30,5 +32,15 @@ class Activity3 : AppCompatActivity() {
             val intent = Intent(this@Activity3, idiomas::class.java)
             startActivity(intent)
         }
+        val listView: ListView = findViewById(R.id.lvCaract1)
+
+// Simulación de datos para el adaptador (reemplaza esto con tus propios datos)
+        val datos = arrayOf("Elemento 1", "Elemento 2", "Elemento 3")
+
+// Configurar el adaptador
+        val adaptador = ArrayAdapter(this, android.R.layout.simple_list_item_1, datos)
+
+// Establecer el adaptador en el ListView
+        listView.adapter = adaptador
     }
 }
