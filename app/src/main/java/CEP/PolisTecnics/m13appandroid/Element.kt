@@ -1,7 +1,7 @@
 package CEP.PolisTecnics.m13appandroid
 
 //class Element (val nomElement: String, val image: Int)
-data class Vehicle(
+data class Element(
     val numeroInventari: Int,
     val any: Int,
     val autonomia: Int,
