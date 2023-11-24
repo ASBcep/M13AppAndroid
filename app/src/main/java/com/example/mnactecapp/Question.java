@@ -4,22 +4,22 @@ public class Question {
 
     private String question;
     private String[] options;
-    private char correctOption;
+    private String correctOption;
 
 
-    public Question(String question, String[] options, char correctOption){
+    public Question(String question, String[] options, String correctOption){
         this.question = question;
         this.options = options;
         this.correctOption = correctOption;
     }
 
-    public String[] getOpciones() {
+    public String[] getOptions() {
         return options;
     }
     public String getQuestion() {
         return question;
     }
-    public char getCorrectOption() {
+    public String getCorrectOption() {
         return correctOption;
     }
 }

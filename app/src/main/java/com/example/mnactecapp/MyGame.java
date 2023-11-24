@@ -1,5 +1,6 @@
 package com.example.mnactecapp;
 
+import android.content.Context;
 import android.content.Intent;
 
 import com.badlogic.gdx.ApplicationAdapter;
@@ -10,8 +11,18 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MyGame extends ApplicationAdapter {
@@ -28,7 +39,6 @@ public class MyGame extends ApplicationAdapter {
     private Rectangle recUC, checkButtonBounds,recCC1,recCC2,recCC3, playButtonBounds, homeButton, backButton;;
     private ShapeRenderer shrend;
     private boolean debug;
-    private ArrayList<Question> questions;
     private int indexQuestion;
     private float touchX,touchY;
     private float laneA,laneB,laneC,laneD;
@@ -40,6 +50,8 @@ public class MyGame extends ApplicationAdapter {
     private int dificulty;
     private int score, questionsAnswered;
     private String language;
+    private Context context;
+    private List<Question> questions;
 
     public MyGame(Intent intent) {
 
@@ -53,9 +65,9 @@ public class MyGame extends ApplicationAdapter {
         ScreenWidth = Gdx.graphics.getWidth();
         ScreenHeight = Gdx.graphics.getHeight();
 
-
         questions = new ArrayList<>();
-        cargarPreguntas();
+        loadQuestionsJSON();
+
 
 
         font = new BitmapFont();
@@ -202,7 +214,7 @@ public class MyGame extends ApplicationAdapter {
             font.setColor(Color.BLACK);
             font.draw(batch, textQuestion, preguntaX, preguntaY);
             // Opciones
-            String[] optionsAnswer = questions.get(indexQuestion).getOpciones();
+            String[] optionsAnswer = questions.get(indexQuestion).getOptions();
             showOptions(optionsAnswer);
             batch.draw(assets.A, laneA + 30,16,100,100);
             batch.draw(assets.B, laneB + 30,16,100,100);
@@ -403,7 +415,7 @@ public class MyGame extends ApplicationAdapter {
 
     public void spawnColisionCars(){
         switch (questions.get(indexQuestion).getCorrectOption()){
-            case 'A':
+            case "A":
                 batch.draw(assets.colisionCar, laneB, recCC1.y,145,350);
                 batch.draw(assets.colisionCar, laneC, recCC2.y,145,350);
                 batch.draw(assets.colisionCar, laneD, recCC3.y,145,350);
@@ -411,7 +423,7 @@ public class MyGame extends ApplicationAdapter {
                 recCC2.setX(laneC);
                 recCC3.setX(laneD);
                 break;
-            case 'B':
+            case "B":
                 batch.draw(assets.colisionCar, laneA, recCC1.y,145,350);
                 batch.draw(assets.colisionCar, laneC, recCC2.y,145,350);
                 batch.draw(assets.colisionCar, laneD, recCC3.y,145,350);
@@ -419,7 +431,7 @@ public class MyGame extends ApplicationAdapter {
                 recCC2.setX(laneC);
                 recCC3.setX(laneD);
                 break;
-            case 'C':
+            case "C":
                 batch.draw(assets.colisionCar, laneA, recCC1.y,145,350);
                 batch.draw(assets.colisionCar, laneB, recCC2.y,145,350);
                 batch.draw(assets.colisionCar, laneD, recCC3.y,145,350);
@@ -427,7 +439,7 @@ public class MyGame extends ApplicationAdapter {
                 recCC2.setX(laneB);
                 recCC3.setX(laneD);
                 break;
-            case 'D':
+            case "D":
                 batch.draw(assets.colisionCar, laneA, recCC1.y,180,400);
                 batch.draw(assets.colisionCar, laneB, recCC2.y,180,400);
                 batch.draw(assets.colisionCar, laneC, recCC3.y,180,400);
@@ -448,19 +460,40 @@ public class MyGame extends ApplicationAdapter {
         }
 
     }
-    public void cargarPreguntas(){
+    public void loadQuestionsJSON() {
+        String dirPath = context.getFilesDir().getAbsolutePath();
+        String filePath = dirPath + File.separator + "json/questions.json";
 
-        Question pregunta1 = new Question("Pregunta1",new String[]{"A","B","C","D"},'A');
-        Question pregunta2 = new Question("Pregunta2",new String[]{"A2","B","C","D"},'B');
-        Question pregunta3 = new Question("Pregunta3",new String[]{"A3","B","C","D"},'C');
-        Question pregunta4 = new Question("Pregunta4",new String[]{"A4","B","C","D"},'D');
-        Question pregunta5 = new Question("Pregunta5",new String[]{"A5","B","C","D"},'A');
+        try {
+            FileReader fr = new FileReader(filePath);
+            BufferedReader br = new BufferedReader(fr);
+
+            Gson gson = new Gson();
+            Type questionListType = new TypeToken<List<Question>>() {}.getType();
+            List<Question> loadedQuestions = gson.fromJson(br, questionListType);
+
+            questions.addAll(loadedQuestions);
+
+            br.close();
+            fr.close();
+        } catch (IOException e) {
+            e.printStackTrace();  // Manejo de errores
+        }
+    }
+    public void loadQuestions(){
+
+        Question pregunta1 = new Question("Pregunta1",new String[]{"A","B","C","D"},"A");
+        Question pregunta2 = new Question("Pregunta2",new String[]{"A2","B","C","D"},"B");
+        Question pregunta3 = new Question("Pregunta3",new String[]{"A3","B","C","D"},"C");
+        Question pregunta4 = new Question("Pregunta4",new String[]{"A4","B","C","D"},"D");
+        Question pregunta5 = new Question("Pregunta5",new String[]{"A5","B","C","D"},"A");
 
         questions.add(pregunta1);
         questions.add(pregunta2);
         questions.add(pregunta3);
         questions.add(pregunta4);
         questions.add(pregunta5);
+
     }
 
     // Define una función que ajusta la posición del rectángulo para que no se salga de los límites
