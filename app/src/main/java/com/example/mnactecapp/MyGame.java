@@ -25,7 +25,7 @@ public class MyGame extends ApplicationAdapter {
     private String textQuestion;
     private float ScreenHeight,ScreenWidth,preguntaX,preguntaY,touchAreaWidth,touchAreaHeight;
     private AssetsManager assets;
-    private Rectangle recUC, smallButtonBounds,recCC1,recCC2,recCC3,bigButtonBounds,backButton;;
+    private Rectangle recUC, checkButtonBounds,recCC1,recCC2,recCC3, playButtonBounds, homeButton, backButton;;
     private ShapeRenderer shrend;
     private boolean debug;
     private ArrayList<Question> questions;
@@ -90,9 +90,10 @@ public class MyGame extends ApplicationAdapter {
         laneD = 1350;
 
         // Limites de los botones
-        smallButtonBounds = new Rectangle(ScreenWidth - 308, 64, 244, 86);
-        bigButtonBounds = new Rectangle(ScreenWidth / 2 - 350, 300, 700, 252);
-        backButton = new Rectangle(32, 32, 247, 250);
+        checkButtonBounds = new Rectangle(32, 32, 244, 86);
+        playButtonBounds = new Rectangle(ScreenWidth / 2 - 350, 300, 700, 252);
+        homeButton = new Rectangle(32, 32, 247, 250);
+        backButton = new Rectangle(ScreenWidth - 32 - assets.buttonBack.getWidth(), 32, 247, 250);
         // Rectangulos para trabajar las colisiones entre el vehiculo del usuario y de los otros coches
         recUC = new Rectangle(ScreenWidth / 2, ScreenHeight / 2,140,350);
         recCC1 = new Rectangle(0, ScreenHeight,145,350);
@@ -135,7 +136,7 @@ public class MyGame extends ApplicationAdapter {
         if(currentScreen == Screen.EXPLANATION) {
             ScreenUtils.clear(1, 1, 1, 1);
 
-            if (bigButtonBounds.contains(touchX, touchY))
+            if (playButtonBounds.contains(touchX, touchY))
             {
                 currentScreen = Screen.MAIN_GAME;
             }
@@ -150,7 +151,7 @@ public class MyGame extends ApplicationAdapter {
             if(debug){
                 shrend.begin(ShapeRenderer.ShapeType.Filled);
                 shrend.setColor(Color.RED);
-                shrend.rect(bigButtonBounds.x, bigButtonBounds.y, bigButtonBounds.width, bigButtonBounds.height);
+                shrend.rect(playButtonBounds.x, playButtonBounds.y, playButtonBounds.width, playButtonBounds.height);
                 shrend.end();
             }
         }
@@ -170,7 +171,7 @@ public class MyGame extends ApplicationAdapter {
                 ajustarLimites();
             }
 
-            if (smallButtonBounds.contains(touchX, touchY)) {
+            if (checkButtonBounds.contains(touchX, touchY)) {
                 canMove = false;
                 if (colision){
                     activarColisionCars();
@@ -180,7 +181,7 @@ public class MyGame extends ApplicationAdapter {
             }
 
 
-            if (canMove && !smallButtonBounds.contains(touchX, touchY)){
+            if (canMove && !checkButtonBounds.contains(touchX, touchY)){
                 colision = true;
             }
 
@@ -194,7 +195,7 @@ public class MyGame extends ApplicationAdapter {
             // Colision Cars
             spawnColisionCars();
             // Button Check
-            batch.draw(assets.buttonCheck,smallButtonBounds.x, smallButtonBounds.y);
+            batch.draw(assets.buttonCheck, checkButtonBounds.x, checkButtonBounds.y);
             // Pregunta
             textQuestion = questions.get(indexQuestion).getQuestion();
             font.getData().setScale(3.5F);
@@ -228,7 +229,7 @@ public class MyGame extends ApplicationAdapter {
 
                 shrend.begin(ShapeRenderer.ShapeType.Filled);
                 shrend.setColor(Color.RED);
-                shrend.rect(smallButtonBounds.x, smallButtonBounds.y, smallButtonBounds.width, smallButtonBounds.height);
+                shrend.rect(checkButtonBounds.x, checkButtonBounds.y, checkButtonBounds.width, checkButtonBounds.height);
                 shrend.end();
 
 
@@ -312,14 +313,14 @@ public class MyGame extends ApplicationAdapter {
     public void drawBackButton()
     {
         if (currentScreen == Screen.MAIN_GAME ){
-            batch.draw(assets.buttonBack, backButton.x,backButton.y);
+            batch.draw(assets.buttonBack, backButton.x, backButton.y);
             if (backButton.contains(touchX, touchY))
             {
                 currentScreen = Screen.EXPLANATION;
             }
         }else if (currentScreen == Screen.EXPLANATION || currentScreen == Screen.WIN || currentScreen == Screen.GAME_OVER){
-            batch.draw(assets.buttonHome, backButton.x,backButton.y);
-            if (backButton.contains(touchX, touchY))
+            batch.draw(assets.buttonHome, homeButton.x, homeButton.y);
+            if (homeButton.contains(touchX, touchY))
             {
                 dispose();
             }
@@ -337,7 +338,7 @@ public class MyGame extends ApplicationAdapter {
                                 "\nel botó 'Comprova' per verificar si has triat correctament" +
                                 "\nSi estàs preparat, prem el botó 'Jugar'.", 15, ScreenHeight - 16);
                 //font.draw(batch, "Si estàs preparat, prem el botó 'Jugar'.", 15, ScreenHeight - 700);
-                batch.draw(assets.buttonJugar,bigButtonBounds.x,bigButtonBounds.y);
+                batch.draw(assets.buttonJugar, playButtonBounds.x, playButtonBounds.y);
 
                 break;
             case "ES":
@@ -349,7 +350,7 @@ public class MyGame extends ApplicationAdapter {
                                 "\nal botón 'Check' para verificar si has elegido bien" +
                                 "\nSi estás preparado dal al botón 'Jugar'.", 15, ScreenHeight - 16);
                 //font.draw(batch, "Si estás preparado dal al botón 'Jugar'.", 15, ScreenHeight - 700);
-                batch.draw(assets.buttonJugar,bigButtonBounds.x,bigButtonBounds.y);
+                batch.draw(assets.buttonJugar, playButtonBounds.x, playButtonBounds.y);
                 break;
             case "EN":
                 font.draw(batch,
@@ -360,7 +361,7 @@ public class MyGame extends ApplicationAdapter {
                                 "\nthe 'Check' button to verify if you have chosen correctly" +
                                 "\nIf you're ready, press the 'Play' button.", 15, ScreenHeight - 16);
                 // font.draw(batch, "If you're ready, press the 'Play' button.", 15, ScreenHeight - 700);
-                batch.draw(assets.buttonPlay,bigButtonBounds.x,bigButtonBounds.y);
+                batch.draw(assets.buttonPlay, playButtonBounds.x, playButtonBounds.y);
                 break;
             default:
         }
@@ -484,7 +485,7 @@ public class MyGame extends ApplicationAdapter {
     public void moverUserCar(){
         touchAreaWidth = 1580; // Ancho del área de toque
         touchAreaHeight = 680;// Alto del área de toque
-        if (!smallButtonBounds.contains(touchX,touchY)){
+        if (!checkButtonBounds.contains(touchX,touchY)){
             recUC.x = Math.max(touchAreaX, Math.min(touchAreaX + touchAreaWidth - recUC.width, touchX - recUC.width / 2));
             recUC.y = Math.max(touchAreaY, Math.min(touchAreaY + touchAreaHeight - recUC.height, touchY - recUC.width / 2));
         }
@@ -495,9 +496,9 @@ public class MyGame extends ApplicationAdapter {
     public void activarColisionCars() {
 
         timeLeft = TIMEOUT_TIME;
-        recCC1.y -= 10f;
-        recCC2.y -= 10f;
-        recCC3.y -= 10f;
+        recCC1.y -= 25f;
+        recCC2.y -= 25f;
+        recCC3.y -= 25f;
 
 
         if (recUC.overlaps(recCC1) || recUC.overlaps(recCC2) || recUC.overlaps(recCC3)) {
