@@ -1,6 +1,7 @@
 package CEP.PolisTecnics.m13appandroid
 
-//class Element (val nomElement: String, val image: Int)
+class Element (val nomElement: String, val image: Int)
+/*
 data class Element(
     val numeroInventari: Int,
     val any: Int,
@@ -36,4 +37,4 @@ data class Element(
     val sostreMaximDeVol: Int,
     val velocitat: Int,
     val velocitatMax: Int
-)
+)*/
