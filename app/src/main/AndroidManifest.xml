@@ -13,6 +13,9 @@
         android:theme="@style/Theme.M13AppAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".carregaJson"
+            android:exported="false" />
+        <activity
             android:name=".idiomas"
             android:exported="false" />
         <activity
@@ -30,9 +33,6 @@
         </activity>
         <activity
             android:name=".Activity1"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".Activity2"
             android:screenOrientation="landscape" />
         <activity
             android:name=".Activity3"
