@@ -1,3 +1,39 @@
 package CEP.PolisTecnics.m13appandroid
 
-class Element (val nomElement: String, val image: Int)
+//class Element (val nomElement: String, val image: Int)
+data class Vehicle(
+    val numeroInventari: Int,
+    val any: Int,
+    val autonomia: Int,
+    val capacitatDiposit: Int,
+    val cicleCA: String,
+    val cicleES: String,
+    val cicleEN: String,
+    val cilindrada: Int,
+    val descripcioCA: String,
+    val descripcioES: String,
+    val descripcioEN: String,
+    val envergadura: Int,
+    val fontEnergiaCA: String,
+    val fontEnergiaES: String,
+    val fontEnergiaEN: String,
+    val fontIngresCA: String,
+    val fontIngresES: String,
+    val fontIngresEN: String,
+    val formaIngresCA: String,
+    val formaIngresES: String,
+    val formaIngresEN: String,
+    val llocFabricacioCA: String,
+    val llocFabricacioES: String,
+    val llocFabricacioEN: String,
+    val nomElementCA: String,
+    val nomElementES: String,
+    val nomElementEN: String,
+    val longitud: Int,
+    val pes: Int,
+    val potencia: Int,
+    val kmsFets: Int,
+    val sostreMaximDeVol: Int,
+    val velocitat: Int,
+    val velocitatMax: Int
+)

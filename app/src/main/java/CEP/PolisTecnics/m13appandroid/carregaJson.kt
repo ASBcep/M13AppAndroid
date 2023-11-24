@@ -149,7 +149,7 @@ class carregaJson : AppCompatActivity() {
 
                 // Aquí pots fer el que vulguis amb les dades llegides
                 // Per exemple, emmagatzemar-les en una llista, mostrar-les en un log, etc.
-                println("Element $i: NumeroInventari=$numeroInventari, Any=$any, Autonomia=$autonomia")
+                // println("Element $i: NumeroInventari=$numeroInventari, Any=$any, Autonomia=$autonomia")
                 Toast.makeText(this,"el num inventari és: " + numeroInventari, Toast.LENGTH_SHORT).show()
             }
         } catch (e: Exception) {
