@@ -5,11 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".carregaJson">
-    <Button
-        android:id="@+id/BtnJson"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="carregar json"
-        tools:ignore="MissingConstraints" />
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tria el json d'elements:"/>
+        <Button
+            android:id="@+id/BtnJson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="carregar json elements"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tria l'element que es mostrarà per defecte"/>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Triar element per defecte"/>
+             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tria el json de preguntes:"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="carregar json de preguntes"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

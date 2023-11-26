@@ -74,7 +74,7 @@
                     android:id="@+id/BtnMesInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Més informacio sobre l'element"
+                    android:text="Més informació envers l'element"
                     android:textSize="20dp"/>
             </LinearLayout>
 

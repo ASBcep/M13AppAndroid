@@ -128,8 +128,10 @@ class carregaJson : AppCompatActivity() {
 	}
 ]
 """
-
+    var elements = mutableListOf<Element>()
     val btnJson = findViewById<Button>(R.id.BtnJson)
+
+
     btnJson.setOnClickListener()
     {
         try {
@@ -142,12 +144,15 @@ class carregaJson : AppCompatActivity() {
 
                 // Obtenir els valors de cada propietat
                 val numeroInventari = jsonObject.getInt("NumeroInventari")
+
                 val any = jsonObject.getInt("Any")
                 val autonomia = jsonObject.getInt("Autonomia")
                 val nomElementCA = jsonObject.getString("NomElementCA")
                 // Obté la resta de propietats de manera similar...
 
+
                 //FALTA afegir dades llegides al llistat d'elements
+                //elements.add(Element(numeroInventari,any,autonomia,0,"","","",0,"","","",0,"","","","","","","","","", R.drawable.moto,"","","",nomElementCA,"","",0,0,0,0,0,0,0))
                 //FALTA assignar una imatge per defecte en cas que no en tingui una.
 
                 // Aquí pots fer el que vulguis amb les dades llegides

@@ -1,8 +1,8 @@
 package CEP.PolisTecnics.m13appandroid
 
 class Element (val nomElement: String, val image: Int)
-/*
-data class Element(
+
+/*data class Element(
     val numeroInventari: Int,
     val any: Int,
     val autonomia: Int,
@@ -24,6 +24,7 @@ data class Element(
     val formaIngresCA: String,
     val formaIngresES: String,
     val formaIngresEN: String,
+    val image: Int,
     val llocFabricacioCA: String,
     val llocFabricacioES: String,
     val llocFabricacioEN: String,

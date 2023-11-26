@@ -15,6 +15,10 @@ class Activity3 : AppCompatActivity() {
         val botonpasar: TextView = findViewById(R.id.botonpasar)
         val botonatras: TextView = findViewById(R.id.botonatras)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
+        val txtVwDescripcio: TextView = findViewById(R.id.TxtVwDescripcio)
+
+        //permetre scroll en el textview
+        txtVwDescripcio.movementMethod = android.text.method.ScrollingMovementMethod.getInstance()
 
         botonpasar.setOnClickListener {
             // Crear un Intent para abrir Activity2
@@ -43,4 +47,7 @@ class Activity3 : AppCompatActivity() {
 // Establecer el adaptador en el ListView
         listView.adapter = adaptador
     }
+
+
+
 }
