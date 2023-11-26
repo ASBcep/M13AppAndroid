@@ -125,7 +125,7 @@ class carregaJson : AppCompatActivity() {
 		"SostreMaximDeVol": 1,
 		"Velocitat": 1,
 		"VelocitatMax": 1
-	},
+	}
 ]
 """
 
@@ -147,10 +147,13 @@ class carregaJson : AppCompatActivity() {
                 val nomElementCA = jsonObject.getString("NomElementCA")
                 // Obté la resta de propietats de manera similar...
 
+                //FALTA afegir dades llegides al llistat d'elements
+                //FALTA assignar una imatge per defecte en cas que no en tingui una.
+
                 // Aquí pots fer el que vulguis amb les dades llegides
                 // Per exemple, emmagatzemar-les en una llista, mostrar-les en un log, etc.
                 // println("Element $i: NumeroInventari=$numeroInventari, Any=$any, Autonomia=$autonomia")
-                Toast.makeText(this,"el num inventari és: " + numeroInventari, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Importat número d'inventari " + numeroInventari + " amb denominació " + nomElementCA, Toast.LENGTH_SHORT).show()
             }
         } catch (e: Exception) {
             e.printStackTrace()

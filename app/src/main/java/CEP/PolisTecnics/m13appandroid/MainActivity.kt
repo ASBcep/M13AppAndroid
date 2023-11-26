@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val botonpasar: TextView = findViewById(R.id.botonpasar)
+        val btnMesInfo: Button = findViewById(R.id.BtnMesInfo)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         val btnJsonShortcut = findViewById<Button>(R.id.BtnJsonShortcut)
         botonpasar.setOnClickListener {
@@ -20,6 +21,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, Activity3::class.java)
             startActivity(intent)
 
+        }
+        // Crear un Intent para abrir Activity3
+        btnMesInfo.setOnClickListener {
+            val intent = Intent(this@MainActivity, Activity3::class.java)
+            startActivity(intent)
         }
 
         botonidiomas1.setOnClickListener {
