@@ -70,8 +70,7 @@
                 android:id="@+id/botonidiomas1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_idioma"
-                android:layout_marginEnd="350dp"/>
+                android:text="@string/btn_idioma"/>
 
             <Button
                 android:id="@+id/btnJugar"

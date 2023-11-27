@@ -2,6 +2,7 @@ package com.example.mnactecapp;
 
 import android.annotation.SuppressLint;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -36,35 +37,47 @@ public class AssetsManager {
         assignedVehicle = new Texture(FassignedVehicle);
         background = new TextureRegion(Tbackground,0,0,Tbackground.getWidth(),Tbackground.getHeight());
     }
-
-
-    @SuppressLint("SdCardPath")
     public void loadFileHandle(){
 
-         FTbackground = new FileHandle("/data/data/com.example.mnactecapp/files/img/background.png");
-         FuserCar = new FileHandle("/data/data/com.example.mnactecapp/files/img/userCar.png");
-         FcolisionCar = new FileHandle("/data/data/com.example.mnactecapp/files/img/colisionCar.png");
-         FbuttonCheck = new FileHandle("/data/data/com.example.mnactecapp/files/img/buttonCheck.png");
-         Flife = new FileHandle("/data/data/com.example.mnactecapp/files/img/life.png");
-         FgameOver = new FileHandle("/data/data/com.example.mnactecapp/files/img/game_over.png");
-         Fcongrats = new FileHandle("/data/data/com.example.mnactecapp/files/img/congrats.png");
-         Ffelicidades = new FileHandle("/data/data/com.example.mnactecapp/files/img/felicidades.png");
-         Ffelicitats = new FileHandle("/data/data/com.example.mnactecapp/files/img/felicitats.png");
-         FbuttonJugar = new FileHandle("/data/data/com.example.mnactecapp/files/img/buttonJugar.png");
-         FbuttonPlay = new FileHandle("/data/data/com.example.mnactecapp/files/img/buttonPlay.png");
-         FbuttonBack = new FileHandle("/data/data/com.example.mnactecapp/files/img/buttonBack.png");
-         FbuttonHome = new FileHandle("/data/data/com.example.mnactecapp/files/img/buttonHome.png");
-         FassignedVehicle = new FileHandle("/data/data/com.example.mnactecapp/files/img/assignedVehicle.png");
-         FA = new FileHandle("/data/data/com.example.mnactecapp/files/img/A.png");
-         FB = new FileHandle("/data/data/com.example.mnactecapp/files/img/B.png");
-         FC = new FileHandle("/data/data/com.example.mnactecapp/files/img/C.png");
-         FD = new FileHandle("/data/data/com.example.mnactecapp/files/img/D.png");
+         FTbackground = new FileHandle(Gdx.files.getLocalStoragePath() + "img/background.png");
+         FuserCar = new FileHandle(Gdx.files.getLocalStoragePath() + "img/userCar.png");
+         FcolisionCar = new FileHandle(Gdx.files.getLocalStoragePath() + "img/colisionCar.png");
+         FbuttonCheck = new FileHandle(Gdx.files.getLocalStoragePath() + "img/buttonCheck.png");
+         Flife = new FileHandle(Gdx.files.getLocalStoragePath() + "img/life.png");
+         FgameOver = new FileHandle(Gdx.files.getLocalStoragePath() + "/img/game_over.png");
+         Fcongrats = new FileHandle(Gdx.files.getLocalStoragePath() + "img/congrats.png");
+         Ffelicidades = new FileHandle(Gdx.files.getLocalStoragePath() + "img/felicidades.png");
+         Ffelicitats = new FileHandle(Gdx.files.getLocalStoragePath() + "img/felicitats.png");
+         FbuttonJugar = new FileHandle(Gdx.files.getLocalStoragePath() + "img/buttonJugar.png");
+         FbuttonPlay = new FileHandle(Gdx.files.getLocalStoragePath() + "img/buttonPlay.png");
+         FbuttonBack = new FileHandle(Gdx.files.getLocalStoragePath() + "img/buttonBack.png");
+         FbuttonHome = new FileHandle(Gdx.files.getLocalStoragePath() + "img/buttonHome.png");
+         FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "img/assignedVehicle.png");
+         FA = new FileHandle(Gdx.files.getLocalStoragePath() + "img/A.png");
+         FB = new FileHandle(Gdx.files.getLocalStoragePath() + "img/B.png");
+         FC = new FileHandle(Gdx.files.getLocalStoragePath() + "img/C.png");
+         FD = new FileHandle(Gdx.files.getLocalStoragePath() + "img/D.png");
 
     }
     public void disposeAssets(){
         Tbackground.dispose();
         userCar.dispose();
         colisionCar.dispose();
+        buttonCheck.dispose();
+        buttonJugar.dispose();
+        buttonPlay.dispose();
+        buttonBack.dispose();
+        buttonHome.dispose();
+        A.dispose();
+        B.dispose();
+        C.dispose();
+        D.dispose();
+        life.dispose();
+        gameOver.dispose();
+        congrats.dispose();
+        felicidades.dispose();
+        felicitats.dispose();
+        assignedVehicle.dispose();
     }
 
 }

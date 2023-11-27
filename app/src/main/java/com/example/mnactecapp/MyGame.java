@@ -1,8 +1,6 @@
 package com.example.mnactecapp;
 
-import android.content.Context;
 import android.content.Intent;
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -10,19 +8,13 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class MyGame extends ApplicationAdapter {
@@ -50,9 +42,7 @@ public class MyGame extends ApplicationAdapter {
     private int dificulty;
     private int score, questionsAnswered;
     private String language;
-    private Context context;
-    private List<Question> questions;
-
+    private Array<Question>questions;
     public MyGame(Intent intent) {
 
         // Obtener dificultad desde la activity donde se elige la dificultad
@@ -65,10 +55,8 @@ public class MyGame extends ApplicationAdapter {
         ScreenWidth = Gdx.graphics.getWidth();
         ScreenHeight = Gdx.graphics.getHeight();
 
-        questions = new ArrayList<>();
+        questions = new Array<>();
         loadQuestionsJSON();
-
-
 
         font = new BitmapFont();
         preguntaX = ScreenWidth / 4;
@@ -102,7 +90,7 @@ public class MyGame extends ApplicationAdapter {
         laneD = 1350;
 
         // Limites de los botones
-        checkButtonBounds = new Rectangle(32, 32, 244, 86);
+        checkButtonBounds = new Rectangle(32, 290, 244, 86);
         playButtonBounds = new Rectangle(ScreenWidth / 2 - 350, 300, 700, 252);
         homeButton = new Rectangle(32, 32, 247, 250);
         backButton = new Rectangle(ScreenWidth - 32 - assets.buttonBack.getWidth(), 32, 247, 250);
@@ -132,6 +120,7 @@ public class MyGame extends ApplicationAdapter {
         batch = new SpriteBatch();
 
     }
+
 
     public void timeout(){
         timeLeft -= Gdx.graphics.getDeltaTime();
@@ -460,26 +449,29 @@ public class MyGame extends ApplicationAdapter {
         }
 
     }
-    public void loadQuestionsJSON() {
-        String dirPath = context.getFilesDir().getAbsolutePath();
-        String filePath = dirPath + File.separator + "json/questions.json";
 
-        try {
-            FileReader fr = new FileReader(filePath);
+
+    public void loadQuestionsJSON() {
+
+        String filepath = Gdx.files.getLocalStoragePath() + "json/questions.json";
+
+        try{
+            FileReader fr = new FileReader(filepath);
             BufferedReader br = new BufferedReader(fr);
 
             Gson gson = new Gson();
-            Type questionListType = new TypeToken<List<Question>>() {}.getType();
-            List<Question> loadedQuestions = gson.fromJson(br, questionListType);
+            Question[] loadQuestions = gson.fromJson(br, Question[].class);
+            questions.addAll(loadQuestions);
 
-            questions.addAll(loadedQuestions);
-
-            br.close();
             fr.close();
-        } catch (IOException e) {
-            e.printStackTrace();  // Manejo de errores
+            br.close();
+        }catch (IOException e){
+            System.out.println(e);
         }
+
+
     }
+
     public void loadQuestions(){
 
         Question pregunta1 = new Question("Pregunta1",new String[]{"A","B","C","D"},"A");
@@ -533,23 +525,25 @@ public class MyGame extends ApplicationAdapter {
         recCC2.y -= 25f;
         recCC3.y -= 25f;
 
-
+        // Falló la pregunta
         if (recUC.overlaps(recCC1) || recUC.overlaps(recCC2) || recUC.overlaps(recCC3)) {
+            lives--;
+            questionsAnswered += 1;
+            if (lives <= 0) {
+                currentScreen = Screen.GAME_OVER;
+            }
             // Si hay colisión, reducir las vidas
             // Restablecer las posiciones de los coches y avanzar a la siguiente pregunta
             recCC1.setY(ScreenHeight);
             recCC2.setY(ScreenHeight);
             recCC3.setY(ScreenHeight);
-            lives--;
-            questionsAnswered += 1;
             colision = false;
             checkIndexQuestion();
 
-            if (lives <= 0) {
-                currentScreen = Screen.GAME_OVER;
-            }
+
         }
 
+        // Acertó la pregunta
         if (recCC1.y + recCC1.height < 0 && recCC2.y + recCC2.height < 0 && recCC3.y + recCC3.height < 0) {
             recCC1.setY(ScreenHeight);
             recCC2.setY(ScreenHeight);
