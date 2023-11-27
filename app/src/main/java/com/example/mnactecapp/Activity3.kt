@@ -15,6 +15,11 @@ class Activity3 : AppCompatActivity() {
         val botonpasar: TextView = findViewById(R.id.botonpasar)
         val botonatras: TextView = findViewById(R.id.botonatras)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
+        val txtVwDescripcio: TextView = findViewById(R.id.TxtVwDescripcio)
+        val listView: ListView = findViewById(R.id.lvCaract1)
+
+        //permetre scroll en el textview
+        txtVwDescripcio.movementMethod = android.text.method.ScrollingMovementMethod.getInstance()
 
         botonpasar.setOnClickListener {
             // Crear un Intent para abrir Activity2
@@ -32,10 +37,11 @@ class Activity3 : AppCompatActivity() {
             val intent = Intent(this@Activity3, idiomas::class.java)
             startActivity(intent)
         }
-        val listView: ListView = findViewById(R.id.lvCaract1)
+
 
 // Simulación de datos para el adaptador (reemplaza esto con tus propios datos)
-        val datos = arrayOf("Elemento 1", "Elemento 2", "Elemento 3")
+        val datos = arrayOf("Elemento 1", "Elemento 2", "Elemento 3","Elemento 1", "Elemento 2", "Elemento 3"
+        ,"Elemento 1", "Elemento 2", "Elemento 3","Elemento 1", "Elemento 2", "Elemento 3","Elemento 1", "Elemento 2", "Elemento 3")
 
 // Configurar el adaptador
         val adaptador = ArrayAdapter(this, android.R.layout.simple_list_item_1, datos)
@@ -43,4 +49,7 @@ class Activity3 : AppCompatActivity() {
 // Establecer el adaptador en el ListView
         listView.adapter = adaptador
     }
+
+
+
 }
