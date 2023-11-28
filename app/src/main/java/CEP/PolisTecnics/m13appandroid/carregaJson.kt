@@ -146,7 +146,7 @@ class carregaJson : AppCompatActivity() {
         //contingut del json, sense contingut, per a carregar-se des de un arxiu
         val jsonString = String
         var elements = mutableListOf<Element>()
-        val btnJson = findViewById<Button>(R.id.BtnJson)
+        //val btnJson = findViewById<Button>(R.id.BtnJson)
 
             //inici codi chatgpt dialeg arxiu json part 2
             openFileButton = findViewById(R.id.openFileButton)
@@ -157,8 +157,9 @@ class carregaJson : AppCompatActivity() {
                 intent.type = "application/json"
                 getContent.launch(intent)
             }
-            //inici codi chatgpt dialeg arxiu json part 2
+            //final codi chatgpt dialeg arxiu json part 2
 
+/*codi original per llegir string de jsons, però no d'obrir jsons. Copiat al mètode getContent()
         btnJson.setOnClickListener()
         {
             try {
@@ -191,7 +192,7 @@ class carregaJson : AppCompatActivity() {
                 e.printStackTrace()
                 Toast.makeText(this,"Error de lectura del .JSON", Toast.LENGTH_LONG).show()
             }
-        }
+        }*/
 
     }
     //inici codi chatgpt dialeg arxiu json part 1
@@ -205,7 +206,8 @@ class carregaJson : AppCompatActivity() {
                     val inputStream = contentResolver.openInputStream(uri)
                     val reader = BufferedReader(InputStreamReader(inputStream))
                     val stringBuilder = StringBuilder()
-
+                    var elementsLlegitsJson = 0
+                    var llargadaJson = 0
                     var line: String?
                     while (reader.readLine().also { line = it } != null) {
                         stringBuilder.append(line).append("\n")
@@ -220,9 +222,11 @@ class carregaJson : AppCompatActivity() {
                     try {
                         // Convertir el JSON string a un JSONArray
                         val jsonArray = JSONArray(jsonString)
+                        llargadaJson = jsonArray.length()
+                        Toast.makeText(this, "el JSON conté" + llargadaJson + " elements", Toast.LENGTH_SHORT).show()
 
                         // Iterar sobre cada objecte dins del JSONArray
-                        for (i in 0 until jsonArray.length()) {
+                        for (i in 0 until llargadaJson) {
                             val jsonObject = jsonArray.getJSONObject(i)
 
                             // Obtenir els valors de cada propietat
@@ -241,15 +245,18 @@ class carregaJson : AppCompatActivity() {
                             // Aquí pots fer el que vulguis amb les dades llegides
                             // Per exemple, emmagatzemar-les en una llista, mostrar-les en un log, etc.
                             // println("Element $i: NumeroInventari=$numeroInventari, Any=$any, Autonomia=$autonomia")
-                            Toast.makeText(this,"Importat número d'inventari " + numeroInventari + " amb denominació " + nomElementCA, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this,"Importat element " + i + ", número d'inventari " + numeroInventari + " amb denominació " + nomElementCA, Toast.LENGTH_SHORT).show()
+                            elementsLlegitsJson++
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
                         Toast.makeText(this,"Error de lectura del .JSON", Toast.LENGTH_LONG).show()
                     }
                     // Exemple: mostra el contingut llegit en el Logcat
-                    println(jsonString)
+                    //println(jsonString)
                     //Toast.makeText(this, jsonString, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Importats " + elementsLlegitsJson + " de " + llargadaJson + " elements que conté el JSON", Toast.LENGTH_LONG).show()
+
                 }
             }
         }
