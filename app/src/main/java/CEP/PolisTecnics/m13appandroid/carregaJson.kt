@@ -6,16 +6,56 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import org.json.JSONArray
+//
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
+//import android.os.Bundle
+//import android.widget.Button
+import androidx.activity.result.contract.ActivityResultContracts
+//import androidx.appcompat.app.AppCompatActivity
+import java.io.BufferedReader
+import java.io.InputStreamReader
+
 
 class carregaJson : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
+//inici codi chatgpt dialeg arxiu json part 1
+    private lateinit var openFileButton: Button
+
+    private val getContent =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.data?.let { uri ->
+                    val inputStream = contentResolver.openInputStream(uri)
+                    val reader = BufferedReader(InputStreamReader(inputStream))
+                    val stringBuilder = StringBuilder()
+
+                    var line: String?
+                    while (reader.readLine().also { line = it } != null) {
+                        stringBuilder.append(line).append("\n")
+                    }
+
+                    val jsonString = stringBuilder.toString()
+
+                    // Processa el contingut del fitxer JSON (jsonString) com desitgis
+                    // Aquí pots utilitzar libraries com Gson per a processar el JSON
+
+                    // Exemple: mostra el contingut llegit en el Logcat
+                    println(jsonString)
+                }
+            }
+        }
+//fi codi chatgpt dialeg arxiu json part 1
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_carrega_json)
 
 
 
-// El teu JSON
+// Contingut del json en un string (no carregat des d'arxiu)
         val jsonString = """
 [
 	{
@@ -131,6 +171,16 @@ class carregaJson : AppCompatActivity() {
     var elements = mutableListOf<Element>()
     val btnJson = findViewById<Button>(R.id.BtnJson)
 
+        //inici codi chatgpt dialeg arxiu json part 2
+        openFileButton = findViewById(R.id.openFileButton)
+
+        openFileButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            intent.type = "application/json"
+            getContent.launch(intent)
+        }
+        //inici codi chatgpt dialeg arxiu json part 2
 
     btnJson.setOnClickListener()
     {

@@ -17,7 +17,7 @@ class Activity3 : AppCompatActivity() {
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         val txtVwDescripcio: TextView = findViewById(R.id.TxtVwDescripcio)
 
-        //permetre scroll en el textview
+        //permetre scroll en el textview TxtVwDescripcio
         txtVwDescripcio.movementMethod = android.text.method.ScrollingMovementMethod.getInstance()
 
         botonpasar.setOnClickListener {
@@ -39,7 +39,7 @@ class Activity3 : AppCompatActivity() {
         val listView: ListView = findViewById(R.id.lvCaract1)
 
 // Simulación de datos para el adaptador (reemplaza esto con tus propios datos)
-        val datos = arrayOf("Elemento 1", "Elemento 2", "Elemento 3")
+        val datos = arrayOf("Número d'inventari: 12345", "Any d'ingrés: 1989", "Alçada: 2m")
 
 // Configurar el adaptador
         val adaptador = ArrayAdapter(this, android.R.layout.simple_list_item_1, datos)

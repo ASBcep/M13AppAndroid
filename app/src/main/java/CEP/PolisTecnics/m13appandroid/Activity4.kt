@@ -31,16 +31,16 @@ class Activity4 : AppCompatActivity() {
 
         var elements = mutableListOf(
             Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
+            Element("MOTOCICLETA SANGLAS 401", R.drawable.moto),
+            Element("MOTOCICLETA SANGLAS 402", R.drawable.moto),
+            Element("MOTOCICLETA SANGLAS 403", R.drawable.moto),
+            Element("MOTOCICLETA SANGLAS 404", R.drawable.moto),
+            Element("MOTOCICLETA SANGLAS 405", R.drawable.moto),
+            Element("MOTOCICLETA SANGLAS 406", R.drawable.moto),
+            Element("MOTOCICLETA SANGLAS 407", R.drawable.moto),
+            Element("MOTOCICLETA SANGLAS 408", R.drawable.moto),
+            Element("MOTOCICLETA SANGLAS 409", R.drawable.moto),
+            Element("MOTOCICLETA SANGLAS 410", R.drawable.moto),
         )
 
         val listAltresElements = findViewById<RecyclerView>(R.id.ListAltresElements)
