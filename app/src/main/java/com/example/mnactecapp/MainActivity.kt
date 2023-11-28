@@ -3,6 +3,7 @@ package com.example.mnactecapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
@@ -12,9 +13,16 @@ class MainActivity : AppCompatActivity() {
 
 
         val botonpasar: TextView = findViewById(R.id.botonpasar)
+        val btnMesInfo: Button = findViewById(R.id.BtnMesInfo)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         botonpasar.setOnClickListener {
             // Crear un Intent para abrir Activity3
+            val intent = Intent(this@MainActivity, Activity3::class.java)
+            startActivity(intent)
+
+        }
+        // Crear un Intent para abrir Activity3
+        btnMesInfo.setOnClickListener {
             val intent = Intent(this@MainActivity, Activity3::class.java)
             startActivity(intent)
         }
@@ -24,7 +32,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, idiomas::class.java)
             startActivity(intent)
         }
-        // https://www.youtube.com/watch?v=OprxdkVKEcc
-    }
 
+    }
 }
