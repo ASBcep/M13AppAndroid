@@ -13,6 +13,8 @@ class Activity4 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity4)
 
+        val elements = ElementManager.elements
+
         val botonpasar: TextView = findViewById(R.id.botonpasar)
         val botonatras: TextView = findViewById(R.id.botonatras)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
@@ -29,7 +31,7 @@ class Activity4 : AppCompatActivity() {
         }
 
 
-        var elements = mutableListOf(
+        /*var elements = mutableListOf(
             Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
             Element("MOTOCICLETA SANGLAS 401", R.drawable.moto),
             Element("MOTOCICLETA SANGLAS 402", R.drawable.moto),
@@ -41,7 +43,7 @@ class Activity4 : AppCompatActivity() {
             Element("MOTOCICLETA SANGLAS 408", R.drawable.moto),
             Element("MOTOCICLETA SANGLAS 409", R.drawable.moto),
             Element("MOTOCICLETA SANGLAS 410", R.drawable.moto),
-        )
+        )*/
 
         val listAltresElements = findViewById<RecyclerView>(R.id.ListAltresElements)
         val layoutManager = GridLayoutManager(this, 3)

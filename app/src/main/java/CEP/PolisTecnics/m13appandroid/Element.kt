@@ -1,9 +1,10 @@
 package CEP.PolisTecnics.m13appandroid
 
-class Element (val nomElement: String, val image: Int)
+//class Element (val nomElement: String, val image: Int)
 
-/*data class Element(
+data class Element(
     val numeroInventari: Int,
+    val ambit: String,
     val any: Int,
     val autonomia: Int,
     val capacitatDiposit: Int,
@@ -14,6 +15,7 @@ class Element (val nomElement: String, val image: Int)
     val descripcioCA: String,
     val descripcioES: String,
     val descripcioEN: String,
+    val elementPerDefecte: Boolean,
     val envergadura: Int,
     val fontEnergiaCA: String,
     val fontEnergiaES: String,
@@ -38,4 +40,4 @@ class Element (val nomElement: String, val image: Int)
     val sostreMaximDeVol: Int,
     val velocitat: Int,
     val velocitatMax: Int
-)*/
+)

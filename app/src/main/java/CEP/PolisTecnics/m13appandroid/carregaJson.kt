@@ -21,131 +21,15 @@ import java.io.InputStreamReader
 class carregaJson : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
 
-
+    var elements = mutableListOf<Element>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_carrega_json)
 
 
-/*
-// Contingut del json en un string (no carregat des d'arxiu)
-        val jsonString = """
-[
-	{
-		"NumeroInventari": 0000000,
-		"Any": 2023,
-		"Autonomia": 1,
-		"CapacitatDiposit": 1,
-		"CicleCA": "exemple",
-		"CicleES": "ejemplo",
-		"CicleEN": "example",
-		"Cilindrada": 1,
-		"DescripcioCA": "exemple",
-		"DescripcioES": "ejemplo",
-		"DescripcioEN": "example",
-		"Envergadura": 1,
-		"FontEnergiaCA": "exemple",
-		"FontEnergiaES": "ejemplo",
-		"FontEnergiaEN": "example",
-		"FontIngresCA": "exemple",
-		"FontIngresES": "ejemplo",
-		"FontIngresEN": "example",
-		"FormaIngresCA": "exemple",
-		"FormaIngresES": "ejemplo",
-		"FormaIngresEN": "example",
-		"LlocFabricacioCA": "exemple",
-		"LlocFabricacioES": "ejemplo",
-		"LlocFabricacioEN": "example",
-		"NomElementCA": "exemple",
-		"NomElementES": "ejemplo",
-		"NomElementEN": "example",
-		"Longitud": 1,
-		"Pes": 1,
-		"Potencia": 1,
-		"KmsFets": 1,
-		"SostreMaximDeVol": 1,
-		"Velocitat": 1,
-		"VelocitatMax": 1
-	},
-	{
-		"NumeroInventari": 0000001,
-		"Any": 2023,
-		"Autonomia": 1,
-		"CapacitatDiposit": 1,
-		"CicleCA": "exemple",
-		"CicleES": "ejemplo",
-		"CicleEN": "example",
-		"Cilindrada": 1,
-		"DescripcioCA": "exemple",
-		"DescripcioES": "ejemplo",
-		"DescripcioEN": "example",
-		"Envergadura": 1,
-		"FontEnergiaCA": "exemple",
-		"FontEnergiaES": "ejemplo",
-		"FontEnergiaEN": "example",
-		"FontIngresCA": "exemple",
-		"FontIngresES": "ejemplo",
-		"FontIngresEN": "example",
-		"FormaIngresCA": "exemple",
-		"FormaIngresES": "ejemplo",
-		"FormaIngresEN": "example",
-		"LlocFabricacioCA": "exemple",
-		"LlocFabricacioES": "ejemplo",
-		"LlocFabricacioEN": "example",
-		"NomElementCA": "exemple",
-		"NomElementES": "ejemplo",
-		"NomElementEN": "example",
-		"Longitud": 1,
-		"Pes": 1,
-		"Potencia": 1,
-		"KmsFets": 1,
-		"SostreMaximDeVol": 1,
-		"Velocitat": 1,
-		"VelocitatMax": 1
-	},
-	{
-		"NumeroInventari": 0000002,
-		"Any": 2023,
-		"Autonomia": 1,
-		"CapacitatDiposit": 1,
-		"CicleCA": "exemple",
-		"CicleES": "ejemplo",
-		"CicleEN": "example",
-		"Cilindrada": 1,
-		"DescripcioCA": "exemple",
-		"DescripcioES": "ejemplo",
-		"DescripcioEN": "example",
-		"Envergadura": 1,
-		"FontEnergiaCA": "exemple",
-		"FontEnergiaES": "ejemplo",
-		"FontEnergiaEN": "example",
-		"FontIngresCA": "exemple",
-		"FontIngresES": "ejemplo",
-		"FontIngresEN": "example",
-		"FormaIngresCA": "exemple",
-		"FormaIngresES": "ejemplo",
-		"FormaIngresEN": "example",
-		"LlocFabricacioCA": "exemple",
-		"LlocFabricacioES": "ejemplo",
-		"LlocFabricacioEN": "example",
-		"NomElementCA": "exemple",
-		"NomElementES": "ejemplo",
-		"NomElementEN": "example",
-		"Longitud": 1,
-		"Pes": 1,
-		"Potencia": 1,
-		"KmsFets": 1,
-		"SostreMaximDeVol": 1,
-		"Velocitat": 1,
-		"VelocitatMax": 1
-	}
-]
-"""
-        */
-        //contingut del json, sense contingut, per a carregar-se des de un arxiu
+        //String que contindrà el json, sense contingut, per a carregar-lo des de un arxiu
         val jsonString = String
-        var elements = mutableListOf<Element>()
         //val btnJson = findViewById<Button>(R.id.BtnJson)
 
             //inici codi chatgpt dialeg arxiu json part 2
@@ -157,42 +41,6 @@ class carregaJson : AppCompatActivity() {
                 intent.type = "application/json"
                 getContent.launch(intent)
             }
-            //final codi chatgpt dialeg arxiu json part 2
-
-/*codi original per llegir string de jsons, però no d'obrir jsons. Copiat al mètode getContent()
-        btnJson.setOnClickListener()
-        {
-            try {
-                // Convertir el JSON string a un JSONArray
-                val jsonArray = JSONArray(jsonString)
-
-                // Iterar sobre cada objecte dins del JSONArray
-                for (i in 0 until jsonArray.length()) {
-                    val jsonObject = jsonArray.getJSONObject(i)
-
-                    // Obtenir els valors de cada propietat
-                    val numeroInventari = jsonObject.getInt("NumeroInventari")
-
-                    val any = jsonObject.getInt("Any")
-                    val autonomia = jsonObject.getInt("Autonomia")
-                    val nomElementCA = jsonObject.getString("NomElementCA")
-                    // Obté la resta de propietats de manera similar...
-
-
-                    //FALTA afegir dades llegides al llistat d'elements
-                    //elements.add(Element(numeroInventari,any,autonomia,0,"","","",0,"","","",0,"","","","","","","","","", R.drawable.moto,"","","",nomElementCA,"","",0,0,0,0,0,0,0))
-                    //FALTA assignar una imatge per defecte en cas que no en tingui una.
-
-                    // Aquí pots fer el que vulguis amb les dades llegides
-                    // Per exemple, emmagatzemar-les en una llista, mostrar-les en un log, etc.
-                    // println("Element $i: NumeroInventari=$numeroInventari, Any=$any, Autonomia=$autonomia")
-                    Toast.makeText(this,"Importat número d'inventari " + numeroInventari + " amb denominació " + nomElementCA, Toast.LENGTH_SHORT).show()
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Toast.makeText(this,"Error de lectura del .JSON", Toast.LENGTH_LONG).show()
-            }
-        }*/
 
     }
     //inici codi chatgpt dialeg arxiu json part 1
@@ -239,7 +87,7 @@ class carregaJson : AppCompatActivity() {
 
 
                             //FALTA afegir dades llegides al llistat d'elements
-                            //elements.add(Element(numeroInventari,any,autonomia,0,"","","",0,"","","",0,"","","","","","","","","", R.drawable.moto,"","","",nomElementCA,"","",0,0,0,0,0,0,0))
+                            elements.add(Element(numeroInventari,"",any,autonomia,0,"","","",0,"","","",false,0,"","","","","","","","","", R.drawable.moto,"","","",nomElementCA,"","",0,0,0,0,0,0,0))
                             //FALTA assignar una imatge per defecte en cas que no en tingui una.
 
                             // Aquí pots fer el que vulguis amb les dades llegides
@@ -259,6 +107,8 @@ class carregaJson : AppCompatActivity() {
 
                 }
             }
+            ElementManager.elements.clear()
+            ElementManager.elements.addAll(elements)
         }
 //fi codi chatgpt dialeg arxiu json part 1
 }

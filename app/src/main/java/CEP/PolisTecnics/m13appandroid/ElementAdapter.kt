@@ -30,8 +30,8 @@ class ElementAdapter(val elements: List<Element>) :
             val imgElement = itemView.findViewById<ImageView>(R.id.ImgListElement)
             imgElement.setImageResource(element.image)
             val elementNom = itemView.findViewById<TextView>(R.id.NomListElement)
-            elementNom.text = element.nomElement//comento per provar objecte element segons json
-            //elementNom.text = element.nomElementCA//comento per provar objecte element segons json
+            //elementNom.text = element.nomElement//comento per provar objecte element segons json
+            elementNom.text = element.nomElementCA//comento per provar objecte element segons json
         }
     }
 }
