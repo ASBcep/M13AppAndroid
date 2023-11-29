@@ -72,6 +72,7 @@ class carregaJson : AppCompatActivity() {
                         llargadaJson = jsonArray.length()
                         Toast.makeText(this, "El JSON conté " + llargadaJson + " elements", Toast.LENGTH_SHORT).show()
 
+                        var prova = ""
                         // Iterar sobre cada objecte dins del JSONArray
                         for (i in 0 until llargadaJson) {
                             val jsonObject = jsonArray.getJSONObject(i)
@@ -90,13 +91,13 @@ class carregaJson : AppCompatActivity() {
                             val fontEnergia = jsonObject.getString("FontEnergia")
                             val fontIngres = jsonObject.getString("FontIngres")
                             val formaIngres = jsonObject.getString("FormaIngres")
-                            try {
+                            /*try {
                                 val imatge = jsonObject.getString("Imatge")//potser no es fa servir
                             }catch (e: Exception) {
                                 e.printStackTrace()
                                 val imatge = ""
-                            }
-                            //val imatge = jsonObject.getString("Imatge")//potser no es fa servir
+                            }*/
+                            val imatge = jsonObject.getString("Imatge")//potser no es fa servir
                             val llocFabricacio = jsonObject.getString("LlocFabricacio")
                             val nomElement = jsonObject.getString("NomElement")
                             val longitud  = jsonObject.getInt("Longitud")
@@ -106,7 +107,13 @@ class carregaJson : AppCompatActivity() {
                             val sostreMaximDeVol  = jsonObject.getInt("SostreMaximDeVol")
                             val velocitat  = jsonObject.getInt("Velocitat")
                             val velocitatMax  = jsonObject.getInt("VelocitatMax")
-
+                            //amb try+catch podem donar valor "buit" ("") o (-1) a camps que no estiguin al json
+                            try{
+                                prova = jsonObject.getString("prova")
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                prova = "provaException"
+                            }
                             //afegeixo dades llegides al llistat d'elements LOCAL
                             elements.add(Element(
                                 numeroInventari,
@@ -131,7 +138,9 @@ class carregaJson : AppCompatActivity() {
                                 kmsFets,
                                 sostreMaximDeVol,
                                 velocitat,
-                                velocitatMax))
+                                velocitatMax,
+                                //prova
+                                prova))
                             //FALTA assignar una imatge per defecte en cas que no en tingui una.
 
                             // Aquí pots fer el que vulguis amb les dades llegides

@@ -26,4 +26,6 @@ data class Element(
     val sostreMaximDeVol: Int,
     val velocitat: Int,
     val velocitatMax: Int
+    //prova
+    ,val prova: String
 )
