@@ -82,24 +82,14 @@ class carregaJson : AppCompatActivity() {
                             val any = jsonObject.getInt("Any")
                             val autonomia = jsonObject.getInt("Autonomia")
                             val capacitatDiposit = jsonObject.getInt("CapacitatDiposit")
-                            val cicleCA = jsonObject.getString("CicleCA")
-                            val cicleES = jsonObject.getString("CicleES")
-                            val cicleEN = jsonObject.getString("CicleEN")
+                            val cicle = jsonObject.getString("Cicle")
                             val cilindrada = jsonObject.getInt("Cilindrada")
-                            val descipcioCA =  jsonObject.getString("DescripcioCA")
-                            val descripcioES = jsonObject.getString("DescripcioES")
-                            val descripcioEN = jsonObject.getString("DescripcioEN")
+                            val descipcio =  jsonObject.getString("Descripcio")
                             val elementPerDefecte = jsonObject.getBoolean("ElementPerDefecte")
                             val envergadura = jsonObject.getInt("Envergadura")
-                            val fontEnergiaCA = jsonObject.getString("FontEnergiaCA")
-                            val fontEnergiaES = jsonObject.getString("FontEnergiaES")
-                            val fontEnergiaEN = jsonObject.getString("FontEnergiaEN")
-                            val fontIngresCA = jsonObject.getString("FontIngresCA")
-                            val fontIngresES = jsonObject.getString("FontIngresES")
-                            val fontIngresEN = jsonObject.getString("FontIngresEN")
-                            val formaIngresCA = jsonObject.getString("FormaIngresCA")
-                            val formaIngresES = jsonObject.getString("FormaIngresES")
-                            val formaIngresEN = jsonObject.getString("FormaIngresEN")
+                            val fontEnergia = jsonObject.getString("FontEnergia")
+                            val fontIngres = jsonObject.getString("FontIngres")
+                            val formaIngres = jsonObject.getString("FormaIngres")
                             try {
                                 val imatge = jsonObject.getString("Imatge")//potser no es fa servir
                             }catch (e: Exception) {
@@ -107,12 +97,8 @@ class carregaJson : AppCompatActivity() {
                                 val imatge = ""
                             }
                             //val imatge = jsonObject.getString("Imatge")//potser no es fa servir
-                            val llocFabricacioCA = jsonObject.getString("LlocFabricacioCA")
-                            val llocFabricacioES = jsonObject.getString("LlocFabricacioES")
-                            val llocFabricacioEN = jsonObject.getString("LlocFabricacioEN")
-                            val nomElementCA = jsonObject.getString("NomElementCA")
-                            val nomElementES  = jsonObject.getString("NomElementES")
-                            val nomElementEN  = jsonObject.getString("NomElementEN")
+                            val llocFabricacio = jsonObject.getString("LlocFabricacio")
+                            val nomElement = jsonObject.getString("NomElement")
                             val longitud  = jsonObject.getInt("Longitud")
                             val pes  = jsonObject.getInt("Pes")
                             val potencia  = jsonObject.getInt("Potencia")
@@ -128,19 +114,17 @@ class carregaJson : AppCompatActivity() {
                                 any,
                                 autonomia,
                                 capacitatDiposit,
-                                cicleCA,
-                                cicleES,
-                                cicleEN,
+                                cicle,
                                 cilindrada,
-                                descipcioCA, descripcioES, descripcioEN,
+                                descipcio,
                                 elementPerDefecte,
                                 envergadura,
-                                fontEnergiaCA, fontEnergiaES, fontEnergiaEN,
-                                fontIngresCA,fontIngresES,fontIngresEN,
-                                formaIngresCA,formaIngresES,formaIngresEN,
+                                fontEnergia,
+                                fontIngres,
+                                formaIngres,
                                 R.drawable.moto,//corregir, canviar per imatge definitiva
-                                llocFabricacioCA,llocFabricacioES,llocFabricacioEN,
-                                nomElementCA,nomElementES,nomElementEN,
+                                llocFabricacio,
+                                nomElement,
                                 longitud,
                                 pes,
                                 potencia,
@@ -153,7 +137,7 @@ class carregaJson : AppCompatActivity() {
                             // Aquí pots fer el que vulguis amb les dades llegides
                             // Per exemple, emmagatzemar-les en una llista, mostrar-les en un log, etc.
                             // println("Element $i: NumeroInventari=$numeroInventari, Any=$any, Autonomia=$autonomia")
-                            Toast.makeText(this,"Importat element " + (i+1) + ", número d'inventari " + numeroInventari + " amb denominació " + nomElementCA, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this,"Importat element " + (i+1) + ", número d'inventari " + numeroInventari + " amb denominació " + nomElement, Toast.LENGTH_SHORT).show()
                             elementsLlegitsJson++
                         }
                     } catch (e: Exception) {
