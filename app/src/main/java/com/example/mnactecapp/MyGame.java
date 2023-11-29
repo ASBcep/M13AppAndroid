@@ -44,7 +44,6 @@ public class MyGame extends ApplicationAdapter {
     private String language;
     private Array<Question>questions;
     public MyGame(Intent intent) {
-
         // Obtener dificultad desde la activity donde se elige la dificultad
         dificulty = intent.getIntExtra("dificulty", 1);
     }
@@ -180,7 +179,6 @@ public class MyGame extends ApplicationAdapter {
                     canMove = true;
                 }
             }
-
 
             if (canMove && !checkButtonBounds.contains(touchX, touchY)){
                 colision = true;

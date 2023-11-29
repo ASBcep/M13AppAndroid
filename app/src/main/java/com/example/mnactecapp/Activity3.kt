@@ -38,6 +38,9 @@ class Activity3 : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val shownElement: Element 
+
+
 
 // Simulación de datos para el adaptador (reemplaza esto con tus propios datos)
         val datos = arrayOf("Elemento 1", "Elemento 2", "Elemento 3","Elemento 1", "Elemento 2", "Elemento 3"

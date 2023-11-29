@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         val botonpasar: TextView = findViewById(R.id.botonpasar)
         val btnMesInfo: Button = findViewById(R.id.BtnMesInfo)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
+
         botonpasar.setOnClickListener {
             // Crear un Intent para abrir Activity3
             val intent = Intent(this@MainActivity, Activity3::class.java)

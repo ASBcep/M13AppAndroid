@@ -1,10 +1,10 @@
 package com.example.mnactecapp
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -26,11 +26,15 @@ class ElementAdapter(val elements: List<Element>) :
     override fun getItemCount(): Int = elements.size
 
     class ElementViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         fun bindElement(element: Element) {
             val imgElement = itemView.findViewById<ImageView>(R.id.ImgListElement)
-            imgElement.setImageResource(element.image)
+            val imgElementPath = itemView.context.getFilesDir().toString() + "/img/" + element.image
+            val bitmap = BitmapFactory.decodeFile(imgElementPath)
+            imgElement.setImageBitmap(bitmap)
+
             val elementNom = itemView.findViewById<TextView>(R.id.NomListElement)
-            elementNom.text = element.nomElement
+            elementNom.text = element.nameElement
         }
     }
 }

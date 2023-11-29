@@ -1,12 +1,15 @@
 package com.example.mnactecapp
 
+
 import android.content.Intent
 import android.os.Bundle
-import android.widget.GridView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.io.FileReader
 
 class Activity4 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,19 +32,7 @@ class Activity4 : AppCompatActivity() {
         }
 
 
-        var elements = mutableListOf(
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-            Element("MOTOCICLETA SANGLAS 400", R.drawable.moto),
-        )
+        var elements = getElements()
 
         val listAltresElements = findViewById<RecyclerView>(R.id.ListAltresElements)
         val layoutManager = GridLayoutManager(this, 3)
@@ -54,5 +45,14 @@ class Activity4 : AppCompatActivity() {
             val intent = Intent(this@Activity4, idiomas::class.java)
             startActivity(intent)
         }
+    }
+
+    fun getElements(): MutableList<Element> {
+
+        val jsonFilePath = getFilesDir().toString() + "/json/elements.json"
+        val jsonFile = FileReader(jsonFilePath)
+        val listElementsType = object : TypeToken<MutableList<Element>>() {}.type
+
+        return Gson().fromJson(jsonFile, listElementsType)
     }
 }
