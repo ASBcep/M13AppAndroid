@@ -21,6 +21,7 @@ import java.io.InputStreamReader
 class carregaJson : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
 
+    //declaro llistat d'elements LOCAL
     var elements = mutableListOf<Element>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +47,7 @@ class carregaJson : AppCompatActivity() {
     //inici codi chatgpt dialeg arxiu json part 1
     private lateinit var openFileButton: Button
 
-    //se li hauria de passar la variable jsonString per a que tota l'activity treballi amb la mateixa variable
+    //funció getContent que llegirà el JSON i el desarà
     private val getContent =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -61,17 +62,15 @@ class carregaJson : AppCompatActivity() {
                         stringBuilder.append(line).append("\n")
                     }
 
-                    val jsonString = stringBuilder.toString()//original, abans de declarar la variable a onCreate
-                    //jsonString = stringBuilder.toString()
+                    //l'arxiu json passa a l'string jsonString
+                    val jsonString = stringBuilder.toString()
 
-                    // Processa el contingut del fitxer JSON (jsonString) com desitgis
-                    // Aquí pots utilitzar libraries com Gson per a processar el JSON
-
+                    //intentem llegir l'string jsonString
                     try {
                         // Convertir el JSON string a un JSONArray
                         val jsonArray = JSONArray(jsonString)
                         llargadaJson = jsonArray.length()
-                        Toast.makeText(this, "el JSON conté" + llargadaJson + " elements", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "El JSON conté " + llargadaJson + " elements", Toast.LENGTH_SHORT).show()
 
                         // Iterar sobre cada objecte dins del JSONArray
                         for (i in 0 until llargadaJson) {
@@ -79,21 +78,82 @@ class carregaJson : AppCompatActivity() {
 
                             // Obtenir els valors de cada propietat
                             val numeroInventari = jsonObject.getInt("NumeroInventari")
-
+                            val ambit  = jsonObject.getString("Ambit")
                             val any = jsonObject.getInt("Any")
                             val autonomia = jsonObject.getInt("Autonomia")
+                            val capacitatDiposit = jsonObject.getInt("CapacitatDiposit")
+                            val cicleCA = jsonObject.getString("CicleCA")
+                            val cicleES = jsonObject.getString("CicleES")
+                            val cicleEN = jsonObject.getString("CicleEN")
+                            val cilindrada = jsonObject.getInt("Cilindrada")
+                            val descipcioCA =  jsonObject.getString("DescripcioCA")
+                            val descripcioES = jsonObject.getString("DescripcioES")
+                            val descripcioEN = jsonObject.getString("DescripcioEN")
+                            val elementPerDefecte = jsonObject.getBoolean("ElementPerDefecte")
+                            val envergadura = jsonObject.getInt("Envergadura")
+                            val fontEnergiaCA = jsonObject.getString("FontEnergiaCA")
+                            val fontEnergiaES = jsonObject.getString("FontEnergiaES")
+                            val fontEnergiaEN = jsonObject.getString("FontEnergiaEN")
+                            val fontIngresCA = jsonObject.getString("FontIngresCA")
+                            val fontIngresES = jsonObject.getString("FontIngresES")
+                            val fontIngresEN = jsonObject.getString("FontIngresEN")
+                            val formaIngresCA = jsonObject.getString("FormaIngresCA")
+                            val formaIngresES = jsonObject.getString("FormaIngresES")
+                            val formaIngresEN = jsonObject.getString("FormaIngresEN")
+                            try {
+                                val imatge = jsonObject.getString("Imatge")//potser no es fa servir
+                            }catch (e: Exception) {
+                                e.printStackTrace()
+                                val imatge = ""
+                            }
+                            //val imatge = jsonObject.getString("Imatge")//potser no es fa servir
+                            val llocFabricacioCA = jsonObject.getString("LlocFabricacioCA")
+                            val llocFabricacioES = jsonObject.getString("LlocFabricacioES")
+                            val llocFabricacioEN = jsonObject.getString("LlocFabricacioEN")
                             val nomElementCA = jsonObject.getString("NomElementCA")
-                            // Obté la resta de propietats de manera similar...
+                            val nomElementES  = jsonObject.getString("NomElementES")
+                            val nomElementEN  = jsonObject.getString("NomElementEN")
+                            val longitud  = jsonObject.getInt("Longitud")
+                            val pes  = jsonObject.getInt("Pes")
+                            val potencia  = jsonObject.getInt("Potencia")
+                            val kmsFets  = jsonObject.getInt("KmsFets")
+                            val sostreMaximDeVol  = jsonObject.getInt("SostreMaximDeVol")
+                            val velocitat  = jsonObject.getInt("Velocitat")
+                            val velocitatMax  = jsonObject.getInt("VelocitatMax")
 
-
-                            //FALTA afegir dades llegides al llistat d'elements
-                            elements.add(Element(numeroInventari,"",any,autonomia,0,"","","",0,"","","",false,0,"","","","","","","","","", R.drawable.moto,"","","",nomElementCA,"","",0,0,0,0,0,0,0))
+                            //afegeixo dades llegides al llistat d'elements LOCAL
+                            elements.add(Element(
+                                numeroInventari,
+                                ambit,
+                                any,
+                                autonomia,
+                                capacitatDiposit,
+                                cicleCA,
+                                cicleES,
+                                cicleEN,
+                                cilindrada,
+                                descipcioCA, descripcioES, descripcioEN,
+                                elementPerDefecte,
+                                envergadura,
+                                fontEnergiaCA, fontEnergiaES, fontEnergiaEN,
+                                fontIngresCA,fontIngresES,fontIngresEN,
+                                formaIngresCA,formaIngresES,formaIngresEN,
+                                R.drawable.moto,//corregir, canviar per imatge definitiva
+                                llocFabricacioCA,llocFabricacioES,llocFabricacioEN,
+                                nomElementCA,nomElementES,nomElementEN,
+                                longitud,
+                                pes,
+                                potencia,
+                                kmsFets,
+                                sostreMaximDeVol,
+                                velocitat,
+                                velocitatMax))
                             //FALTA assignar una imatge per defecte en cas que no en tingui una.
 
                             // Aquí pots fer el que vulguis amb les dades llegides
                             // Per exemple, emmagatzemar-les en una llista, mostrar-les en un log, etc.
                             // println("Element $i: NumeroInventari=$numeroInventari, Any=$any, Autonomia=$autonomia")
-                            Toast.makeText(this,"Importat element " + i + ", número d'inventari " + numeroInventari + " amb denominació " + nomElementCA, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this,"Importat element " + (i+1) + ", número d'inventari " + numeroInventari + " amb denominació " + nomElementCA, Toast.LENGTH_SHORT).show()
                             elementsLlegitsJson++
                         }
                     } catch (e: Exception) {
@@ -107,7 +167,9 @@ class carregaJson : AppCompatActivity() {
 
                 }
             }
+            //buido el llistat d'elements GLOBAL
             ElementManager.elements.clear()
+            //afegeixo el llistat d'elements LOCAL al llistat GLOBAL
             ElementManager.elements.addAll(elements)
         }
 //fi codi chatgpt dialeg arxiu json part 1

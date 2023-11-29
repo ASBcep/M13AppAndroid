@@ -13,6 +13,7 @@ class Activity4 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity4)
 
+        //carrego el llistat d'elements LOCAL des de la llista GLOBAL
         val elements = ElementManager.elements
 
         val botonpasar: TextView = findViewById(R.id.botonpasar)
