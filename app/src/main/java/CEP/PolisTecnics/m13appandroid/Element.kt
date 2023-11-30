@@ -27,5 +27,5 @@ data class Element(
     val velocitat: Int,
     val velocitatMax: Int
     //prova
-    ,val prova: String
+    //,val prova: String
 )
