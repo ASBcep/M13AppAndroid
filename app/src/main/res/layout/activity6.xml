@@ -4,11 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,13 +28,6 @@
                 android:textSize="30sp"
                 android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/botonpasar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="@string/fletxaEndavant"
-                android:textSize="30sp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,7 +42,7 @@
                 android:layout_weight="1"
                 android:layout_height="0dp"
                 android:text="FÀCIL"
-                android:textSize="64sp"
+                android:textSize="40sp"
                 android:background="@color/black"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
@@ -67,7 +55,7 @@
                 android:layout_height="0dp"
                 android:background="@color/black"
                 android:text="NORMAL"
-                android:textSize="64sp"
+                android:textSize="40sp"
                 android:padding="20dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"/>
@@ -77,11 +65,11 @@
                 android:layout_weight="1"
                 android:layout_height="0dp"
                 android:text="DIFÍCIL"
-                android:textSize="64sp"
+                android:textSize="40sp"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
                 android:background="@color/black"
-                android:padding="20dp"/>
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -96,9 +84,7 @@
                 android:id="@+id/botonidiomas1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left"
                 android:text="@string/btn_idioma" />
 
         </LinearLayout>
-    </LinearLayout>
 </LinearLayout>
