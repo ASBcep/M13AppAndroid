@@ -138,21 +138,24 @@ class carregaJson : AppCompatActivity() {
                         val sostreMaximDeVol = tryCatchJsonInt(jsonObject, "SostreMaximDeVol")
                         val velocitat = tryCatchJsonInt(jsonObject, "Velocitat")
                         val velocitatMax = tryCatchJsonInt(jsonObject, "VelocitatMax")
-
+/*
                         if (numeroInventari != -1){
                             if (elementPerDefecte == true){
                                 if(jaHiHaElementPerDefecte == false) {
                                     jaHiHaElementPerDefecte = true
                                 }else{
+                                    Toast.makeText(this, "break1", Toast.LENGTH_SHORT).show()
                                     break
                                 }
                             }else{
+                                Toast.makeText(this, "break2", Toast.LENGTH_SHORT).show()
                                 break
                             }
                         }else{
+                            Toast.makeText(this, "break3", Toast.LENGTH_SHORT).show()
                             break
                         }
-
+*/
                         //afegeixo dades llegides al llistat d'elements LOCAL
                         elements.add(Element(
                             numeroInventari,
