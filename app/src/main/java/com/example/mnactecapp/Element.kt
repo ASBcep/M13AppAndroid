@@ -1,5 +1,7 @@
 package com.example.mnactecapp
 
+import java.io.Serializable
+
 class Element (val numInventory: Int,
                val field: Int,
                val nameElement: String,
@@ -21,4 +23,4 @@ class Element (val numInventory: Int,
                val sostreMaximDeVol: Int,
                val speed: Int,
                val maxSpeed: Int,
-               val inicialElement: Boolean )
+               val inicialElement: Boolean ) : Serializable

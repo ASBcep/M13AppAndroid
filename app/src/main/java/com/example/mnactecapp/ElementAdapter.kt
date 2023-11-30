@@ -29,7 +29,7 @@ class ElementAdapter(val elements: List<Element>) :
 
         fun bindElement(element: Element) {
             val imgElement = itemView.findViewById<ImageView>(R.id.ImgListElement)
-            val imgElementPath = itemView.context.getFilesDir().toString() + "/img/" + element.image
+            val imgElementPath = itemView.context.getFilesDir().toString() + "/imgElements/" + element.image
             val bitmap = BitmapFactory.decodeFile(imgElementPath)
             imgElement.setImageBitmap(bitmap)
 

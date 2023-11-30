@@ -1,13 +1,25 @@
 package com.example.mnactecapp
 
+import ElementsList
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.media.Image
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-class Activity3 : AppCompatActivity() {
+class Activity3 : AppCompatActivity()
+{
+
+    object elementShownConstant
+    {
+        const val ELEMENT = "ELEMENT"
+        const val FIELD = "FIELD"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity3)
@@ -17,13 +29,20 @@ class Activity3 : AppCompatActivity() {
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         val txtVwDescripcio: TextView = findViewById(R.id.TxtVwDescripcio)
         val listView: ListView = findViewById(R.id.lvCaract1)
+        val imgElement: ImageView = findViewById(R.id.imgShownElement)
 
         //permetre scroll en el textview
         txtVwDescripcio.movementMethod = android.text.method.ScrollingMovementMethod.getInstance()
 
+
+        val intent = getIntent()
+        val elementShown = intent.getSerializableExtra(elementShownConstant.ELEMENT) as Element
+        val field = intent.getIntExtra(elementShownConstant.FIELD,1)
+
         botonpasar.setOnClickListener {
             // Crear un Intent para abrir Activity2
-            val intent = Intent(this@Activity3, Activity4::class.java)
+            val intent = Intent(this, Activity4::class.java)
+            intent.putExtra(Activity3.elementShownConstant.FIELD, field)
             startActivity(intent)
         }
 
@@ -38,21 +57,26 @@ class Activity3 : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val shownElement: Element 
 
 
 
-// Simulación de datos para el adaptador (reemplaza esto con tus propios datos)
-        val datos = arrayOf("Elemento 1", "Elemento 2", "Elemento 3","Elemento 1", "Elemento 2", "Elemento 3"
-        ,"Elemento 1", "Elemento 2", "Elemento 3","Elemento 1", "Elemento 2", "Elemento 3","Elemento 1", "Elemento 2", "Elemento 3")
 
-// Configurar el adaptador
+        txtVwDescripcio.setText(elementShown.description)
+        val imgElementPath = getFilesDir().toString() + "/imgElements/" + elementShown.image
+        val bitmap = BitmapFactory.decodeFile(imgElementPath)
+        imgElement.setImageBitmap(bitmap)
+
+
+
+        val elementsList = ElementsList(this)
+        // Simulación de datos para el adaptador (reemplaza esto con tus propios datos)
+        val datos = elementsList.filterAndMapElement(elementShown)
+
+        // Configurar el adaptador
         val adaptador = ArrayAdapter(this, android.R.layout.simple_list_item_1, datos)
 
-// Establecer el adaptador en el ListView
+        // Establecer el adaptador en el ListView
         listView.adapter = adaptador
     }
-
-
 
 }
