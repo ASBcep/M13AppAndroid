@@ -20,17 +20,14 @@ class MainActivity : AppCompatActivity() {
         val btnMesInfo: Button = findViewById(R.id.BtnMesInfo)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
 
-        val elementsList = ElementsList(this)
         val field = 1;
-        val elementsField = elementsList.elementsField1
+        val elementsList = ElementsList(this)
+        val elementsField = elementsList.loadField(field)
 
         val elementShown = elementsField.find { it.inicialElement }
 
         // Verificar si se encontró un elemento con inicialElement=true
         if (elementShown != null) {
-            // Utilizar el elemento encontrado
-            // Aquí puedes actualizar las vistas (ImageView, TextView, etc.) con la información del elemento
-            // Por ejemplo:
             val imgElementPath = getFilesDir().toString() + "/imgElements/" + elementShown.image
             val bitmap = BitmapFactory.decodeFile(imgElementPath)
             imgElement.setImageBitmap(bitmap)
@@ -49,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             btnMesInfo.setOnClickListener {
                 val intent = Intent(this, Activity3::class.java)
                 intent.putExtra(Activity3.elementShownConstant.ELEMENT, elementShown)
+                intent.putExtra(Activity3.elementShownConstant.FIELD, field)
                 startActivity(intent)
             }
 

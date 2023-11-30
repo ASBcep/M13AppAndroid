@@ -42,21 +42,21 @@ class Activity3 : AppCompatActivity()
         botonpasar.setOnClickListener {
             // Crear un Intent para abrir Activity2
             val intent = Intent(this, Activity4::class.java)
-            intent.putExtra(Activity3.elementShownConstant.FIELD, field)
+            intent.putExtra(Activity4.fieldConstant.FIELD, field)
             startActivity(intent)
         }
 
         botonatras.setOnClickListener {
             // Crear un Intent para abrir Activity1
-            val intent = Intent(this@Activity3, MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
+
             startActivity(intent)
         }
         botonidiomas1.setOnClickListener {
             // Crear un Intent para abrir idiomas
-            val intent = Intent(this@Activity3, idiomas::class.java)
+            val intent = Intent(this, idiomas::class.java)
             startActivity(intent)
         }
-
 
 
 

@@ -34,6 +34,19 @@ class ElementsList(context: Context) {
         elements.filter { it.field == 6 }
     }
 
+    fun loadField(field:Int,):List<Element>{
+
+        when(field){
+            1 -> return elementsField1
+            2 -> return elementsField2
+            3 -> return elementsField3
+            4 -> return elementsField4
+            5 -> return elementsField5
+            6 -> return elementsField6
+        }
+        return elementsField1
+    }
+
     // Función para filtrar y mapear un solo elemento según propiedades específicas
     fun filterAndMapElement(elementShown: Element): Array<String> {
         // Verificar si el elemento tiene todas las propiedades no nulas

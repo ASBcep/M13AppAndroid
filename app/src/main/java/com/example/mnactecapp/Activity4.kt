@@ -21,6 +21,7 @@ class Activity4 : AppCompatActivity() {
         val botonpasar: TextView = findViewById(R.id.botonpasar)
         val botonatras: TextView = findViewById(R.id.botonatras)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
+
         botonpasar.setOnClickListener {
             // Crear un Intent para abrir Activity2
             val intent = Intent(this, Activity5::class.java)
@@ -30,11 +31,15 @@ class Activity4 : AppCompatActivity() {
         botonatras.setOnClickListener {
             // Crear un Intent para abrir Activity2
             val intent = Intent(this, Activity3::class.java)
+
             startActivity(intent)
         }
 
+        val intent = getIntent()
+        val field = intent.getIntExtra(fieldConstant.FIELD,1)
+
         val elementsList = ElementsList(this)
-        val elementsField = elementsList.elementsField1
+        val elementsField = elementsList.loadField(field)
 
         val listAltresElements = findViewById<RecyclerView>(R.id.ListAltresElements)
         val layoutManager = GridLayoutManager(this, 3)
@@ -42,6 +47,7 @@ class Activity4 : AppCompatActivity() {
 
         val adapter = ElementAdapter(elementsField)
         listAltresElements.adapter = adapter
+
         botonidiomas1.setOnClickListener {
             // Crear un Intent para abrir idiomas
             val intent = Intent(this@Activity4, idiomas::class.java)
