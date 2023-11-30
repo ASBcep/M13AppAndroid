@@ -55,7 +55,6 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imgElementMain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -96,7 +95,12 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="@string/btn_idioma" />
-
+            <Button
+                android:id="@+id/BtnJsonShortcut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="Càrrega JSON" />
 
         </LinearLayout>
 
