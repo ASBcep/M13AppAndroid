@@ -41,6 +41,7 @@ class carregaJson : AppCompatActivity() {
         openFileButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
             intent.addCategory(Intent.CATEGORY_OPENABLE)
+            //filtre d'arxius tipus json
             intent.type = "application/json"
             getContent.launch(intent)
         }

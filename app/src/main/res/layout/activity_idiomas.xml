@@ -21,11 +21,11 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/castella"
+            android:id="@+id/btnCat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:text="castella " />
+            android:text="Català " />
 
     </LinearLayout>
 
@@ -37,11 +37,11 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/catala"
+            android:id="@+id/btnSpa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:text="Catala" />
+            android:text="Castellano" />
 
 
     </LinearLayout>
@@ -53,11 +53,11 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/angles"
+            android:id="@+id/btnEng"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:text="angles" />
+            android:text="English" />
 
 
     </LinearLayout>

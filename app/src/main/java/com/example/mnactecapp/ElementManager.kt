@@ -7,5 +7,5 @@ object ElementManager {
     //Índex per al llistat elements, per localitzar un Element en particular (p.e. per mostrar a la pantalla de detalls del vehicle)
     val indexElements = Int
     //Definició d'idioma: 0 cat, 1 spa, 2 eng
-    val idioma = Int
+    var idioma = Int
 }

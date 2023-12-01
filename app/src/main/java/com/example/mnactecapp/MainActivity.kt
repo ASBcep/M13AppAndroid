@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         val botonpasar: TextView = findViewById(R.id.botonpasar)
         val btnMesInfo: Button = findViewById(R.id.BtnMesInfo)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
+        val btnJsonShortcut = findViewById<Button>(R.id.BtnJsonShortcut)
 
         val field = 1;
         val elementsList = ElementsList(this)
@@ -53,6 +54,10 @@ class MainActivity : AppCompatActivity() {
             botonidiomas1.setOnClickListener {
                 // Crear un Intent para abrir idiomas
                 val intent = Intent(this, idiomas::class.java)
+                startActivity(intent)
+            }
+            btnJsonShortcut.setOnClickListener{
+                val intent = Intent(this@MainActivity, carregaJson::class.java)
                 startActivity(intent)
             }
         }
