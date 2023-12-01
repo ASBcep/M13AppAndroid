@@ -1,6 +1,7 @@
 package com.example.mnactecapp;
 
 import android.content.Intent;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -465,6 +466,8 @@ public class MyGame extends ApplicationAdapter {
             br.close();
         }catch (IOException e){
             System.out.println(e);
+            //si no aconsegueix llegir el json, carregarà preguntes per defecte
+            loadQuestions();
         }
 
 

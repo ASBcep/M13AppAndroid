@@ -25,6 +25,8 @@ class carregaJson : AppCompatActivity() {
 
     //declaro llistat d'elements LOCAL
     var elements = mutableListOf<Element>()
+    //variable per poder gestionar el json manualment quan es troba
+    private val FILE_PICK_REQUEST_CODE_jsonElements = 5766
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +37,7 @@ class carregaJson : AppCompatActivity() {
         val jsonString = String
         //val btnJson = findViewById<Button>(R.id.BtnJson)
 
-        //inici codi chatgpt dialeg arxiu json part 2
+        /*Obrir arxiu json manualment en androids moderns
         openFileButton = findViewById(R.id.openFileButton)
 
         openFileButton.setOnClickListener {
@@ -44,9 +46,28 @@ class carregaJson : AppCompatActivity() {
             //filtre d'arxius tipus json
             intent.type = "application/json"
             getContent.launch(intent)
+        }*/
+
+        openFileButton = findViewById(R.id.openFileButton)
+
+        openFileButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "application/json"
+            startActivityForResult(intent, FILE_PICK_REQUEST_CODE_jsonElements)
         }
 
+
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == FILE_PICK_REQUEST_CODE_jsonElements && resultCode == Activity.RESULT_OK) {
+            // Maneja aquí el archivo seleccionado utilizando data?.data
+            val selectedFileUri = data?.data
+            // Haz lo que necesites con el archivo seleccionado
+        }
+    }
+
     //inici codi chatgpt dialeg arxiu json part 1
     private lateinit var openFileButton: Button
 

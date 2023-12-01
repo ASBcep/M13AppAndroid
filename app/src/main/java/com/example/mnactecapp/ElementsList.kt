@@ -1,6 +1,7 @@
 import android.content.Context
 import android.widget.Toast
 import com.example.mnactecapp.Element
+import com.example.mnactecapp.ElementManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.FileReader
@@ -19,12 +20,14 @@ class ElementsList(context: Context) {
             val jsonFile = FileReader(jsonFilePath)
             val listElementsType = object : TypeToken<List<Element>>() {}.type
             Gson().fromJson(jsonFile, listElementsType)
+            //ElementManager.elements = listElementsType
         } catch (e: Exception) {
             // Mostra un missatge d'error en cas que es produeixi una excepció
             Toast.makeText(context, "Error en llegir el JSON: ${e.message}", Toast.LENGTH_LONG).show()
+            //carrego un element de mostra a la llista
             listOf(Element(12345,
             1,
-            "ExempleNom",
+            "Cotxe d'Exemple",
             "12345",
             "El cotxe, una innovació que ha transformant la societat i la manera en què ens desplacem, té els seus orígens en la tardor del segle XIX. Karl Benz és àmpliament reconegut com l'inventor del primer cotxe pràctic propulsat per un motor de gasolina el 1885. Aquesta innovació va marcar el naixement de la indústria automotriu moderna. Amb el temps, els cotxes han evolucionat des de vehicles rudimentaris fins a sofisticades màquines de transport amb una gamma diversa de funcionalitats i tecnologies integrades. La producció massiva, iniciada per Henry Ford amb la línia de muntatge, va democratitzar l'accés als vehicles, canviant la manera en què les persones viuen i treballen. La cultura del cotxe va créixer amb el pas del temps, convertint-se en un símbol de llibertat, aventura i autonomia. Ha influït profundament en el desenvolupament urbà, la planificació del transport i la mobilitat personal. Tanmateix, el seu impacte ambiental i els reptes relacionats amb la congestió del trànsit i la seguretat vial han estat temes clau. A mesura que la tecnologia avança, els cotxes elèctrics, autònoms i altres innovacions estan liderant el camí cap a una nova era de la mobilitat sostenible i connectada.",
             111,
@@ -44,7 +47,7 @@ class ElementsList(context: Context) {
             1000,
             2000,
             true,
-            2023)) // Retorna una llista buida en cas d'excepció per evitar valors nuls
+            2023)) // Retorna una llista amb 1 element per defecte en cas d'excepció per evitar valors nuls
         }
     }
 
