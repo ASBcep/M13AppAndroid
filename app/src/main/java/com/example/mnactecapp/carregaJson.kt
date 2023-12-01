@@ -60,7 +60,7 @@ class carregaJson : AppCompatActivity() {
                     var elementsLlegitsJson = 0
                     var llargadaJson = 0
                     var line: String?
-                    var jaHiHaElementPerDefecte = false
+                    var jaHiHainicialElement = false
                     while (reader.readLine().also { line = it } != null) {
                         stringBuilder.append(line).append("\n")
                     }
@@ -75,36 +75,36 @@ class carregaJson : AppCompatActivity() {
                         llargadaJson = jsonArray.length()
                         Toast.makeText(this, "El JSON conté " + llargadaJson + " elements", Toast.LENGTH_SHORT).show()
 
-                        //do while per verificar que només hi ha 1 elementPerDefecte=true
+                        //do while per verificar que només hi ha 1 inicialElement=true
                         //while{}
                         // Iterar sobre cada objecte dins del JSONArray
                         for (i in 0 until llargadaJson) {
                             val jsonObject = jsonArray.getJSONObject(i)
 
                             /*// Obtenir els valors de cada propietat
-                            val numeroInventari = jsonObject.getInt("NumeroInventari")
-                            val ambit  = jsonObject.getString("Ambit")
-                            val any = jsonObject.getInt("Any")
-                            val autonomia = jsonObject.getInt("Autonomia")
+                            val numInventory = jsonObject.getInt("numInventory")
+                            val field  = jsonObject.getString("field")
+                            val year = jsonObject.getInt("year")
+                            val autonomy = jsonObject.getInt("autonomy")
                             val capacitatDiposit = jsonObject.getInt("CapacitatDiposit")
                             val cicle = jsonObject.getString("Cicle")
                             val cilindrada = jsonObject.getInt("Cilindrada")
-                            val descipcio =  jsonObject.getString("Descripcio")
-                            val elementPerDefecte = jsonObject.getBoolean("ElementPerDefecte")
-                            val envergadura = jsonObject.getInt("Envergadura")
-                            val fontEnergia = jsonObject.getString("FontEnergia")
-                            val fontIngres = jsonObject.getString("FontIngres")
-                            val formaIngres = jsonObject.getString("FormaIngres")
+                            val description =  jsonObject.getString("Descripcio")
+                            val inicialElement = jsonObject.getBoolean("inicialElement")
+                            val wingspan = jsonObject.getInt("wingspan")
+                            val energyFont = jsonObject.getString("energyFont")
+                            val sourceIncome = jsonObject.getString("sourceIncome")
+                            val formIncome = jsonObject.getString("formIncome")
                             val imatge = jsonObject.getString("Imatge")//potser no es fa servir
-                            val llocFabricacio = jsonObject.getString("LlocFabricacio")
-                            val nomElement = jsonObject.getString("NomElement")
-                            val longitud  = jsonObject.getInt("Longitud")
-                            val pes  = jsonObject.getInt("Pes")
-                            val potencia  = jsonObject.getInt("Potencia")
-                            val kmsFets  = jsonObject.getInt("KmsFets")
+                            val manufacturingPlace = jsonObject.getString("manufacturingPlace")
+                            val nameElement = jsonObject.getString("nameElement")
+                            val length  = jsonObject.getInt("length")
+                            val weight  = jsonObject.getInt("weight")
+                            val potency  = jsonObject.getInt("potency")
+                            val kmsDone  = jsonObject.getInt("kmsDone")
                             val sostreMaximDeVol  = jsonObject.getInt("SostreMaximDeVol")
-                            val velocitat  = jsonObject.getInt("Velocitat")
-                            val velocitatMax  = jsonObject.getInt("VelocitatMax")*/ //importació sense comprovar
+                            val speed  = jsonObject.getInt("speed")
+                            val maxSpeed  = jsonObject.getInt("maxSpeed")*/ //importació sense comprovar
                             //amb try+catch podem donar valor "buit" ("") o (-1) a camps que no estiguin al json
                             /*try{
                                 prova = jsonObject.getString("prova")
@@ -114,35 +114,35 @@ class carregaJson : AppCompatActivity() {
                             }*/
                             //llegeixo camps del json en variables amb funcions que fan try+catch per si un camp no existeix al json
                             //en cas de no trobar el camp, el valor serà "" (string en blanc), -1 o false segons el tipus de variable.
-                            //val numeroInventari = jsonObject.getInt("NumeroInventari")//ens interessa que falli si la lectura json no té ID
-                            val numeroInventari = tryCatchJsonInt(jsonObject, "NumeroInventari")
-                            val ambit = tryCatchJsonString(jsonObject, "Ambit")
-                            val any = tryCatchJsonInt(jsonObject, "Any")
-                            val autonomia = tryCatchJsonInt(jsonObject, "Autonomia")
-                            val capacitatDiposit = tryCatchJsonInt(jsonObject, "CapacitatDiposit")
+                            //val numInventory = jsonObject.getInt("numInventory")//ens interessa que falli si la lectura json no té ID
+                            val numInventory = tryCatchJsonInt(jsonObject, "numInventory")
+                            val field = tryCatchJsonInt(jsonObject, "field")
+                            val year = tryCatchJsonInt(jsonObject, "year")
+                            val autonomy = tryCatchJsonInt(jsonObject, "autonomy")
+                            val disposalCapacity = tryCatchJsonInt(jsonObject, "disposalCapacity")
                             val cicle = tryCatchJsonString(jsonObject, "Cicle")
                             val cilindrada = tryCatchJsonInt(jsonObject, "Cilindrada")
-                            val descipcio = tryCatchJsonString(jsonObject, "Descripcio")
-                            val elementPerDefecte = tryCatchJsonBoolean(jsonObject, "ElementPerDefecte")
-                            val envergadura = tryCatchJsonInt(jsonObject, "Envergadura")
-                            val fontEnergia = tryCatchJsonString(jsonObject, "FontEnergia")
-                            val fontIngres = tryCatchJsonString(jsonObject, "FontIngres")
-                            val formaIngres = tryCatchJsonString(jsonObject, "FormaIngres")
-                            val imatge = tryCatchJsonString(jsonObject, "Imatge")//potser no es fa servir
-                            val llocFabricacio = tryCatchJsonString(jsonObject, "LlocFabricacio")
-                            val nomElement = tryCatchJsonString(jsonObject, "NomElement")
-                            val longitud = tryCatchJsonInt(jsonObject, "Longitud")
-                            val pes = tryCatchJsonInt(jsonObject, "Pes")
-                            val potencia = tryCatchJsonInt(jsonObject, "Potencia")
-                            val kmsFets = tryCatchJsonInt(jsonObject, "KmsFets")
+                            val description = tryCatchJsonString(jsonObject, "Descripcio")
+                            val inicialElement = tryCatchJsonBoolean(jsonObject, "inicialElement")
+                            val wingspan = tryCatchJsonInt(jsonObject, "wingspan")
+                            val energyFont = tryCatchJsonString(jsonObject, "energyFont")
+                            val sourceIncome = tryCatchJsonString(jsonObject, "sourceIncome")
+                            val formIncome = tryCatchJsonString(jsonObject, "formIncome")
+                            val image = tryCatchJsonString(jsonObject, "image")//potser no es fa servir
+                            val manufacturingPlace = tryCatchJsonString(jsonObject, "manufacturingPlace")
+                            val nameElement = tryCatchJsonString(jsonObject, "nameElement")
+                            val length = tryCatchJsonInt(jsonObject, "length")
+                            val weight = tryCatchJsonInt(jsonObject, "weight")
+                            val potency = tryCatchJsonInt(jsonObject, "potency")
+                            val kmsDone = tryCatchJsonInt(jsonObject, "kmsDone")
                             val sostreMaximDeVol = tryCatchJsonInt(jsonObject, "SostreMaximDeVol")
-                            val velocitat = tryCatchJsonInt(jsonObject, "Velocitat")
-                            val velocitatMax = tryCatchJsonInt(jsonObject, "VelocitatMax")
+                            val speed = tryCatchJsonInt(jsonObject, "speed")
+                            val maxSpeed = tryCatchJsonInt(jsonObject, "maxSpeed")
                             /*
-                                                    if (numeroInventari != -1){
-                                                        if (elementPerDefecte == true){
-                                                            if(jaHiHaElementPerDefecte == false) {
-                                                                jaHiHaElementPerDefecte = true
+                                                    if (numInventory != -1){
+                                                        if (inicialElement == true){
+                                                            if(jaHiHainicialElement == false) {
+                                                                jaHiHainicialElement = true
                                                             }else{
                                                                 Toast.makeText(this, "break1", Toast.LENGTH_SHORT).show()
                                                                 break
@@ -158,32 +158,33 @@ class carregaJson : AppCompatActivity() {
                             */
                             //afegeixo dades llegides al llistat d'elements LOCAL
                             elements.add(Element(
-                                numeroInventari,
-                                ambit,
-                                any,
-                                autonomia,
-                                capacitatDiposit,
+                                numInventory,
+                                field,
+                                nameElement,
+                                image,
+                                //R.drawable.moto,//corregir, canviar per imatge definitiva
+                                description,
+                                autonomy,
+                                disposalCapacity,
                                 cicle,
                                 cilindrada,
-                                descipcio,
-                                elementPerDefecte,
-                                envergadura,
-                                fontEnergia,
-                                fontIngres,
-                                formaIngres,
-                                R.drawable.moto,//corregir, canviar per imatge definitiva
-                                llocFabricacio,
-                                nomElement,
-                                longitud,
-                                pes,
-                                potencia,
-                                kmsFets,
+                                wingspan,
+                                energyFont,
+                                sourceIncome,
+                                formIncome,
+                                manufacturingPlace,
+                                length,
+                                weight,
+                                potency,
+                                kmsDone,
                                 sostreMaximDeVol,
-                                velocitat,
-                                velocitatMax))
+                                speed,
+                                maxSpeed,
+                                inicialElement,
+                                year,))
                             //FALTA assignar una imatge per defecte en cas que no en tingui una.
 
-                            //Toast.makeText(this,"Importat element " + (i+1) + ", número d'inventari " + numeroInventari + " amb denominació " + nomElement, Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(this,"Importat element " + (i+1) + ", número d'inventari " + numInventory + " amb denominació " + nameElement, Toast.LENGTH_SHORT).show()
                             elementsLlegitsJson++
 
                         }

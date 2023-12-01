@@ -23,7 +23,8 @@ class Element (val numInventory: Int,
                val sostreMaximDeVol: Int,
                val speed: Int,
                val maxSpeed: Int,
-               val inicialElement: Boolean ) : Serializable
+               val inicialElement: Boolean,
+               val year: Int) : Serializable
 
 /*codi branch main 30/11/2023
 //class Element (val nomElement: String, val image: Int)
