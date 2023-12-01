@@ -42,6 +42,9 @@
             android:name=".Activity6"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".carregaJson"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".idiomas"
             android:exported="false" />
         <activity
