@@ -103,22 +103,22 @@ class ElementsList(context: Context) {
         ) {
             // Mapear las variables específicas y convertirlas a un array de strings
             return arrayOf(
-                "${elementShown.autonomy}",
-                "${elementShown.disposalCapacity}",
-                "${elementShown.cicle}",
-                "${elementShown.cilindrada}",
-                "${elementShown.wingspan}",
-                "${elementShown.energyFont}",
-                "${elementShown.sourceIncome}",
-                "${elementShown.formIncome}",
-                "${elementShown.manufacturingPlace}",
-                "${elementShown.length}",
-                "${elementShown.weight}",
-                "${elementShown.potency}",
-                "${elementShown.kmsDone}",
-                "${elementShown.sostreMaximDeVol}",
-                "${elementShown.speed}",
-                "${elementShown.maxSpeed}"
+                "Autonomia: ${elementShown.autonomy} km",
+                "Capacitat de disposició: ${elementShown.disposalCapacity} kg",
+                "Cicle: ${elementShown.cicle}",
+                "Cilindrada: ${elementShown.cilindrada} cc",
+                "Envergadura: ${elementShown.wingspan} m",
+                "Font d'energia: ${elementShown.energyFont}",
+                "Font d'ingressos: ${elementShown.sourceIncome}",
+                "Forma d'ingressos: ${elementShown.formIncome}",
+                "Lloc de fabricació: ${elementShown.manufacturingPlace}",
+                "Longitud: ${elementShown.length} m",
+                "Pes: ${elementShown.weight} kg",
+                "Potència: ${elementShown.potency}",
+                "Kilòmetres recorreguts: ${elementShown.kmsDone} km",
+                "Sostre màxim de vol: ${elementShown.sostreMaximDeVol} km",
+                "Velocitat: ${elementShown.speed} km/h",
+                "Velocitat màxima: ${elementShown.maxSpeed} km/h"
             )
         } else {
             // Manejar el caso en el que el elemento no tenga todas las propiedades no nulas
