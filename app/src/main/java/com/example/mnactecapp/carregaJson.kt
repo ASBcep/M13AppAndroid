@@ -25,8 +25,8 @@ class carregaJson : AppCompatActivity() {
 
     //declaro llistat d'elements LOCAL
     var elements = mutableListOf<Element>()
-    //variable per poder gestionar el json manualment quan es troba
-    private val FILE_PICK_REQUEST_CODE_jsonElements = 5766
+    //variable per poder gestionar el json manualment quan es tria manualment
+    private val FILE_PICK_REQUEST_CODE_jsonElements = 5766//JSON
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,21 +52,150 @@ class carregaJson : AppCompatActivity() {
 
         openFileButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
             intent.type = "application/json"
             startActivityForResult(intent, FILE_PICK_REQUEST_CODE_jsonElements)
         }
-
-
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == FILE_PICK_REQUEST_CODE_jsonElements && resultCode == Activity.RESULT_OK) {
-            // Maneja aquí el archivo seleccionado utilizando data?.data
-            val selectedFileUri = data?.data
-            // Haz lo que necesites con el archivo seleccionado
+            val uri = data?.data
+            // Aquí pots gestionar la URI de l'arxiu seleccionat
+            // Per exemple, pots llegir l'arxiu, processar-lo, etc.
+            gestionarArxiuSeleccionat(uri)
         }
     }
+    private fun gestionarArxiuSeleccionat(fileUri: Uri?) {
+        // Aquí pots posar la lògica que necessites fer amb la URI de l'arxiu seleccionat
+        // Per exemple, pots llegir l'arxiu, processar-lo, etc.
+        // fileUri conté la Uri de l'arxiu seleccionat
+        // Però és important comprovar si fileUri no és null abans d'utilitzar-lo
+        fileUri?.let {
+            // Aquí pots continuar amb el teu codi, ja que ara tens la URI de l'arxiu seleccionat
+            // ...
+            val inputStream = contentResolver.openInputStream(it)
+            val reader = BufferedReader(InputStreamReader(inputStream))
+            val stringBuilder = StringBuilder()
+            var elementsLlegitsJson = 0
+            var llargadaJson = 0
+            var line: String?
+            var jaHiHainicialElement = false
+            while (reader.readLine().also { line = it } != null) {
+                stringBuilder.append(line).append("\n")
+            }
+
+            //l'arxiu json passa a l'string jsonString
+            val jsonString = stringBuilder.toString()
+
+            //intentem llegir l'string jsonString
+            try {
+                // Convertir el JSON string a un JSONArray
+                val jsonArray = JSONArray(jsonString)
+                llargadaJson = jsonArray.length()
+                Toast.makeText(this, "El JSON conté " + llargadaJson + " elements", Toast.LENGTH_SHORT).show()
+
+                //do while per verificar que només hi ha 1 inicialElement=true
+                //while{}
+                // Iterar sobre cada objecte dins del JSONArray
+                for (i in 0 until llargadaJson) {
+                    val jsonObject = jsonArray.getJSONObject(i)
+
+                    //llegeixo camps del json en variables amb funcions que fan try+catch per si un camp no existeix al json
+                    //en cas de no trobar el camp, el valor serà "" (string en blanc), -1 o false segons el tipus de variable.
+                    //val numInventory = jsonObject.getInt("numInventory")//ens interessa que falli si la lectura json no té ID
+                    val numInventory = tryCatchJsonInt(jsonObject, "numInventory")
+                    val field = tryCatchJsonInt(jsonObject, "field")
+                    val year = tryCatchJsonInt(jsonObject, "year")
+                    val autonomy = tryCatchJsonInt(jsonObject, "autonomy")
+                    val disposalCapacity = tryCatchJsonInt(jsonObject, "disposalCapacity")
+                    val cicle = tryCatchJsonString(jsonObject, "Cicle")
+                    val cilindrada = tryCatchJsonInt(jsonObject, "Cilindrada")
+                    val description = tryCatchJsonString(jsonObject, "Descripcio")
+                    val inicialElement = tryCatchJsonBoolean(jsonObject, "inicialElement")
+                    val wingspan = tryCatchJsonInt(jsonObject, "wingspan")
+                    val energyFont = tryCatchJsonString(jsonObject, "energyFont")
+                    val sourceIncome = tryCatchJsonString(jsonObject, "sourceIncome")
+                    val formIncome = tryCatchJsonString(jsonObject, "formIncome")
+                    val image = tryCatchJsonString(jsonObject, "image")//potser no es fa servir
+                    val manufacturingPlace = tryCatchJsonString(jsonObject, "manufacturingPlace")
+                    val nameElement = tryCatchJsonString(jsonObject, "nameElement")
+                    val length = tryCatchJsonInt(jsonObject, "length")
+                    val weight = tryCatchJsonInt(jsonObject, "weight")
+                    val potency = tryCatchJsonInt(jsonObject, "potency")
+                    val kmsDone = tryCatchJsonInt(jsonObject, "kmsDone")
+                    val sostreMaximDeVol = tryCatchJsonInt(jsonObject, "SostreMaximDeVol")
+                    val speed = tryCatchJsonInt(jsonObject, "speed")
+                    val maxSpeed = tryCatchJsonInt(jsonObject, "maxSpeed")
+                    /*
+                                            if (numInventory != -1){
+                                                if (inicialElement == true){
+                                                    if(jaHiHainicialElement == false) {
+                                                        jaHiHainicialElement = true
+                                                    }else{
+                                                        Toast.makeText(this, "break1", Toast.LENGTH_SHORT).show()
+                                                        break
+                                                    }
+                                                }else{
+                                                    Toast.makeText(this, "break2", Toast.LENGTH_SHORT).show()
+                                                    break
+                                                }
+                                            }else{
+                                                Toast.makeText(this, "break3", Toast.LENGTH_SHORT).show()
+                                                break
+                                            }
+                    */
+                    //afegeixo dades llegides al llistat d'elements LOCAL
+                    elements.add(Element(
+                        numInventory,
+                        field,
+                        nameElement,
+                        image,
+                        //R.drawable.moto,//corregir, canviar per imatge definitiva
+                        description,
+                        autonomy,
+                        disposalCapacity,
+                        cicle,
+                        cilindrada,
+                        wingspan,
+                        energyFont,
+                        sourceIncome,
+                        formIncome,
+                        manufacturingPlace,
+                        length,
+                        weight,
+                        potency,
+                        kmsDone,
+                        sostreMaximDeVol,
+                        speed,
+                        maxSpeed,
+                        inicialElement,
+                        year,))
+                    //FALTA assignar una imatge per defecte en cas que no en tingui una.
+
+                    //Toast.makeText(this,"Importat element " + (i+1) + ", número d'inventari " + numInventory + " amb denominació " + nameElement, Toast.LENGTH_SHORT).show()
+                    elementsLlegitsJson++
+
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(this,"Error de lectura del .JSON", Toast.LENGTH_LONG).show()
+                elements.clear()
+            }
+            // Exemple: mostra el contingut llegit en el Logcat
+            //println(jsonString)
+            //Toast.makeText(this, jsonString, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Importats " + elementsLlegitsJson + " de " + llargadaJson + " elements que conté el JSON", Toast.LENGTH_LONG).show()
+
+        }
+        //buido el llistat d'elements GLOBAL
+        ElementManager.elements.clear()
+        //afegeixo el llistat d'elements LOCAL al llistat GLOBAL
+        ElementManager.elements.addAll(elements)
+    }
+
+
 
     //inici codi chatgpt dialeg arxiu json part 1
     private lateinit var openFileButton: Button
@@ -103,37 +232,6 @@ class carregaJson : AppCompatActivity() {
                         for (i in 0 until llargadaJson) {
                             val jsonObject = jsonArray.getJSONObject(i)
 
-                            /*// Obtenir els valors de cada propietat
-                            val numInventory = jsonObject.getInt("numInventory")
-                            val field  = jsonObject.getString("field")
-                            val year = jsonObject.getInt("year")
-                            val autonomy = jsonObject.getInt("autonomy")
-                            val capacitatDiposit = jsonObject.getInt("CapacitatDiposit")
-                            val cicle = jsonObject.getString("Cicle")
-                            val cilindrada = jsonObject.getInt("Cilindrada")
-                            val description =  jsonObject.getString("Descripcio")
-                            val inicialElement = jsonObject.getBoolean("inicialElement")
-                            val wingspan = jsonObject.getInt("wingspan")
-                            val energyFont = jsonObject.getString("energyFont")
-                            val sourceIncome = jsonObject.getString("sourceIncome")
-                            val formIncome = jsonObject.getString("formIncome")
-                            val imatge = jsonObject.getString("Imatge")//potser no es fa servir
-                            val manufacturingPlace = jsonObject.getString("manufacturingPlace")
-                            val nameElement = jsonObject.getString("nameElement")
-                            val length  = jsonObject.getInt("length")
-                            val weight  = jsonObject.getInt("weight")
-                            val potency  = jsonObject.getInt("potency")
-                            val kmsDone  = jsonObject.getInt("kmsDone")
-                            val sostreMaximDeVol  = jsonObject.getInt("SostreMaximDeVol")
-                            val speed  = jsonObject.getInt("speed")
-                            val maxSpeed  = jsonObject.getInt("maxSpeed")*/ //importació sense comprovar
-                            //amb try+catch podem donar valor "buit" ("") o (-1) a camps que no estiguin al json
-                            /*try{
-                                prova = jsonObject.getString("prova")
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                                prova = "provaException"
-                            }*/
                             //llegeixo camps del json en variables amb funcions que fan try+catch per si un camp no existeix al json
                             //en cas de no trobar el camp, el valor serà "" (string en blanc), -1 o false segons el tipus de variable.
                             //val numInventory = jsonObject.getInt("numInventory")//ens interessa que falli si la lectura json no té ID

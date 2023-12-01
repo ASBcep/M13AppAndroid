@@ -14,6 +14,10 @@ class Activity4 : AppCompatActivity() {
     object fieldConstant{
         const val FIELD = "FIELD"
     }
+
+    //carrego el llistat d'elements LOCAL des de la llista GLOBAL
+    val elements = ElementManager.elements
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity4)
@@ -23,13 +27,13 @@ class Activity4 : AppCompatActivity() {
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
 
         botonpasar.setOnClickListener {
-            // Crear un Intent para abrir Activity2
+            // Crear un Intent para abrir Activity5
             val intent = Intent(this, Activity5::class.java)
             startActivity(intent)
         }
 
         botonatras.setOnClickListener {
-            // Crear un Intent para abrir Activity2
+            // Crear un Intent para abrir Activity3
             val intent = Intent(this, Activity3::class.java)
 
             startActivity(intent)
