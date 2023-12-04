@@ -1,6 +1,7 @@
 package com.example.mnactecapp
 
 import ElementsList
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -21,19 +23,34 @@ class MainActivity : AppCompatActivity() {
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         val btnJsonShortcut = findViewById<Button>(R.id.BtnJsonShortcut)
 
+
+        when (ElementManager.idioma){
+            0 -> {btnMesInfo.text = "Més informació envers l'element"}
+            1 -> {btnMesInfo.text = "Más información acerca del elemento"}
+            2 -> {btnMesInfo.text = "More information about this element"}
+        }
+
         val field = 1;
         val elementsList = ElementsList(this)
         val elementsField = elementsList.loadField(field)
 
         val elementShown = elementsField.find { it.inicialElement }
 
-        // Verificar si se encontró un elemento con inicialElement=true
-        if (elementShown != null) {
-            val imgElementPath = getFilesDir().toString() + "/imgElements/" + elementShown.image
-            val bitmap = BitmapFactory.decodeFile(imgElementPath)
-            imgElement.setImageBitmap(bitmap)
-            txtElement.text = elementShown.nameElement
+        //intento llegir l'element de la llista GLOBAL; si no s'aconsegueix el llegirà de la classe ElementList
+        try {
+            txtElement.text = ElementManager.elements[ElementManager.defaultElement].nameElement
+            //imgElement = ElementManager.elements[ElementManager.defaultElement].image
+        } catch (e: Exception) {
+            // Verificar si se encontró un elemento con inicialElement=true
+            if (elementShown != null) {
+                val imgElementPath = getFilesDir().toString() + "/imgElements/" + elementShown.image
+                val bitmap = BitmapFactory.decodeFile(imgElementPath)
+                imgElement.setImageBitmap(bitmap)
+                txtElement.text = elementShown.nameElement
+            }
         }
+
+
 
             botonpasar.setOnClickListener {
                 // Crear un Intent para abrir Activity3
