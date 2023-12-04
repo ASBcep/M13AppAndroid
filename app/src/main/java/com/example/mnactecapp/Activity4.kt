@@ -4,7 +4,9 @@ package com.example.mnactecapp
 import ElementsList
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +27,9 @@ class Activity4 : AppCompatActivity() {
         val botonpasar: TextView = findViewById(R.id.botonpasar)
         val botonatras: TextView = findViewById(R.id.botonatras)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
+        val btnChangeField: Button = findViewById(R.id.btnChangeField)
+        val btnMainScreen: Button = findViewById(R.id.btnMainScreen)
+
 
         botonpasar.setOnClickListener {
             // Crear un Intent para abrir Activity5
@@ -60,6 +65,15 @@ class Activity4 : AppCompatActivity() {
             val intent = Intent(this@Activity4, idiomas::class.java)
             startActivity(intent)
         }
+        //botón para cambiar de ámbito
+        btnChangeField.setOnClickListener{
+            fieldSelector()
+        }
+        btnMainScreen.setOnClickListener {
+            // Crear un Intent para abrir la pantalla principal
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun navigateToActivity3(selectedElement: Element) {
@@ -68,6 +82,14 @@ class Activity4 : AppCompatActivity() {
         intent.putExtra(Activity3.elementShownConstant.ELEMENT, selectedElement)
         intent.putExtra(Activity3.elementShownConstant.FIELD, selectedElement.field)
         startActivity(intent)
+    }
+    private fun fieldSelector() {
+        if (ElementManager.indexField < ElementManager.totalField){
+            ElementManager.indexField++
+        } else {
+            ElementManager.indexField = 1
+        }
+        Toast.makeText(this,"Es mostra: àmbit " + ElementManager.indexField, Toast.LENGTH_SHORT).show()
     }
 }
 

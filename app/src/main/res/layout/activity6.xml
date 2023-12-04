@@ -90,7 +90,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Opcions Avançades" />
-
+            <Button
+                android:id="@+id/btnMainScreen2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Torna a l'inici" />
 
         </LinearLayout>
 </LinearLayout>

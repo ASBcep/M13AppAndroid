@@ -12,7 +12,10 @@ object ElementManager {
     var defaultElement = 0
 
     //Índex global per conèixer Àmbit
-    var indexField = -1
+    var indexField = 1
+
+    //Índex global per conèixer Àmbit
+    var totalField: Int = 1
 
     //Definició d'idioma: 0 cat, 1 spa, 2 eng
     var idioma: Int = -1

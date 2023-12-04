@@ -12,6 +12,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="tria el json d'àmbits:"/>
+        <Button
+            android:id="@+id/openFileButtonAmbits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cercar arxiu json d'elements en català"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="tria els json d'elements:"/>
         <Button
             android:id="@+id/openFileButtonElementsCat"

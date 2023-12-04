@@ -114,10 +114,17 @@
             android:gravity="left"
             android:text="@string/btn_idioma" />
         <Button
+            android:id="@+id/btnPlay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="Jugar (NO PROGRAMAT)" />
+            android:text="Jugar" />
+        <Button
+            android:id="@+id/btnList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="Més elements" />
 
     </LinearLayout>
 </LinearLayout>

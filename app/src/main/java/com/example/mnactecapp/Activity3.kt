@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.media.Image
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
@@ -27,6 +28,8 @@ class Activity3 : AppCompatActivity()
         val botonpasar: TextView = findViewById(R.id.botonpasar)
         val botonatras: TextView = findViewById(R.id.botonatras)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
+        val btnPlay: Button = findViewById(R.id.btnPlay)
+        val btnList: Button = findViewById(R.id.btnList)
         val txtVwDescripcio: TextView = findViewById(R.id.TxtVwDescripcio)
         val listView: ListView = findViewById(R.id.lvCaract1)
         val imgElement: ImageView = findViewById(R.id.imgShownElement)
@@ -55,6 +58,16 @@ class Activity3 : AppCompatActivity()
         botonidiomas1.setOnClickListener {
             // Crear un Intent para abrir idiomas
             val intent = Intent(this, idiomas::class.java)
+            startActivity(intent)
+        }
+        btnList.setOnClickListener {
+            // Crear un Intent para abrir Activity4 (llistat d'elements)
+            val intent = Intent(this, Activity4::class.java)
+            startActivity(intent)
+        }
+        btnPlay.setOnClickListener {
+            // Crear un Intent para abrir Activity6 (dificultat joc)
+            val intent = Intent(this, Activity6::class.java)
             startActivity(intent)
         }
 

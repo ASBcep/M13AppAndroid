@@ -72,6 +72,12 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:text="Canviar Àmbit" />
+        <Button
+            android:id="@+id/btnMainScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Torna a l'inici" />
 
     </LinearLayout>
 </LinearLayout>
