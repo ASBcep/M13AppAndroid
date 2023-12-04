@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 
 class Activity4 : AppCompatActivity() {
 
-    object fieldConstant{
+    object fieldConstant {
         const val FIELD = "FIELD"
     }
 
-    //carrego el llistat d'elements LOCAL des de la llista GLOBAL
+    // carrego el llistat d'elements LOCAL des de la llista GLOBAL
     val elements = ElementManager.elements
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,12 +35,11 @@ class Activity4 : AppCompatActivity() {
         botonatras.setOnClickListener {
             // Crear un Intent para abrir Activity3
             val intent = Intent(this, Activity3::class.java)
-
             startActivity(intent)
         }
 
         val intent = getIntent()
-        val field = intent.getIntExtra(fieldConstant.FIELD,1)
+        val field = intent.getIntExtra(fieldConstant.FIELD, 1)
 
         val elementsList = ElementsList(this)
         val elementsField = elementsList.loadField(field)
@@ -49,7 +48,11 @@ class Activity4 : AppCompatActivity() {
         val layoutManager = GridLayoutManager(this, 3)
         listAltresElements.layoutManager = layoutManager
 
-        val adapter = ElementAdapter(elementsField)
+        val adapter = ElementAdapter(elementsField) { selectedElement ->
+            // Manejar el clic del elemento aquí
+            navigateToActivity3(selectedElement)
+        }
+
         listAltresElements.adapter = adapter
 
         botonidiomas1.setOnClickListener {
@@ -58,7 +61,16 @@ class Activity4 : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    private fun navigateToActivity3(selectedElement: Element) {
+        // Crear un Intent para abrir Activity3
+        val intent = Intent(this, Activity3::class.java)
+        intent.putExtra(Activity3.elementShownConstant.ELEMENT, selectedElement)
+        intent.putExtra(Activity3.elementShownConstant.FIELD, selectedElement.field)
+        startActivity(intent)
+    }
 }
+
 /*codi branch main 30/11/2023
 
 import android.content.Intent

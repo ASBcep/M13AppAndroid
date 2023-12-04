@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-
-class ElementAdapter(val elements: List<Element>) :
+class ElementAdapter(val elements: List<Element>, val onItemClick: (Element) -> Unit) :
     RecyclerView.Adapter<ElementAdapter.ElementViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ElementViewHolder {
@@ -21,6 +20,11 @@ class ElementAdapter(val elements: List<Element>) :
     override fun onBindViewHolder(holder: ElementViewHolder, position: Int) {
         val element = elements[position]
         holder.bindElement(element)
+
+        // Configurar el clic del elemento
+        holder.itemView.setOnClickListener {
+            onItemClick(element)
+        }
     }
 
     override fun getItemCount(): Int = elements.size
@@ -38,6 +42,7 @@ class ElementAdapter(val elements: List<Element>) :
         }
     }
 }
+
 /*codi branch main 30/11/2023
 
 import android.content.Context
