@@ -134,4 +134,68 @@ class ElementsList(context: Context) {
             return arrayOf("Datos incompletos")
         }
     }
+    fun filterAndMapElementV2(elementShown: Element): Array<String> {
+        val resultArray = mutableListOf<String>()
+
+        // Verificar cada propiedad y agregarla al array solo si no es nula y no está vacía
+        if (elementShown.autonomy != null && elementShown.autonomy != 0) {
+            resultArray.add("Autonomia: ${elementShown.autonomy} km")
+        }
+        if (elementShown.disposalCapacity != null && elementShown.disposalCapacity != 0) {
+            resultArray.add("Capacitat de disposició: ${elementShown.disposalCapacity} kg")
+        }
+        if (!elementShown.cicle.isNullOrBlank()) {
+            resultArray.add("Cicle: ${elementShown.cicle}")
+        }
+        if (elementShown.cilindrada != null && elementShown.cilindrada != 0) {
+            resultArray.add("Cilindrada: ${elementShown.cilindrada} cc")
+        }
+        if (elementShown.wingspan != null && elementShown.wingspan != 0) {
+            resultArray.add("Envergadura: ${elementShown.wingspan} m")
+        }
+        if (!elementShown.energyFont.isNullOrBlank()) {
+            resultArray.add("Font d'energia: ${elementShown.energyFont}")
+        }
+        if (!elementShown.sourceIncome.isNullOrBlank()) {
+            resultArray.add("Font d'ingressos: ${elementShown.sourceIncome}")
+        }
+        if (!elementShown.formIncome.isNullOrBlank()) {
+            resultArray.add("Forma d'ingressos: ${elementShown.formIncome}")
+        }
+        if (!elementShown.manufacturingPlace.isNullOrBlank()) {
+            resultArray.add("Lloc de fabricació: ${elementShown.manufacturingPlace}")
+        }
+        if (elementShown.length != null && elementShown.length != 0) {
+            resultArray.add("Longitud: ${elementShown.length} m")
+        }
+        if (elementShown.weight != null && elementShown.weight != 0) {
+            resultArray.add("Pes: ${elementShown.weight} kg")
+        }
+        if (elementShown.potency != null && elementShown.potency != 0) {
+            resultArray.add("Potència: ${elementShown.potency}")
+        }
+        if (elementShown.kmsDone != null && elementShown.kmsDone != 0) {
+            resultArray.add("Kilòmetres recorreguts: ${elementShown.kmsDone} km")
+        }
+        if (elementShown.sostreMaximDeVol != null && elementShown.sostreMaximDeVol != 0) {
+            resultArray.add("Sostre màxim de vol: ${elementShown.sostreMaximDeVol} km")
+        }
+        if (elementShown.speed != null && elementShown.speed != 0) {
+            resultArray.add("Velocitat: ${elementShown.speed} km/h")
+        }
+        if (elementShown.maxSpeed != null && elementShown.maxSpeed != 0) {
+            resultArray.add("Velocitat màxima: ${elementShown.maxSpeed} km/h")
+        }
+
+        // Verificar si se agregó al menos una propiedad al array
+        if (resultArray.isNotEmpty()) {
+            return resultArray.toTypedArray()
+        } else {
+            return arrayOf("Datos incompletos")
+        }
+    }
+
+
+
+
 }
