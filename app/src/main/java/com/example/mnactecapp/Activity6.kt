@@ -15,6 +15,7 @@ class Activity6 : AppCompatActivity() {
         val btnEasy: Button = findViewById(R.id.BtnFacil)
         val btnNormal: Button = findViewById(R.id.BtnNormal)
         val btnHard: Button = findViewById(R.id.BtnDificil)
+        val btnConfigAdmin: Button = findViewById(R.id.btnConfigAdmin)
 
 
         botonatras.setOnClickListener {
@@ -43,6 +44,11 @@ class Activity6 : AppCompatActivity() {
             val dificulty = 3;
             val intent = Intent(this, Launcher::class.java)
             intent.putExtra(Launcher.launcher.DIFICULTY, dificulty)
+            startActivity(intent)
+        }
+        btnConfigAdmin.setOnClickListener{
+            // Crear un Intent para abrir ConfigAdmin
+            val intent = Intent(this@Activity6, ConfigAdmin::class.java)
             startActivity(intent)
         }
     }

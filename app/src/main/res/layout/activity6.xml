@@ -85,6 +85,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_idioma" />
+            <Button
+                android:id="@+id/btnConfigAdmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Opcions Avançades" />
+
 
         </LinearLayout>
 </LinearLayout>

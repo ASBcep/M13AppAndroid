@@ -66,6 +66,12 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:text="@string/btn_idioma" />
+        <Button
+            android:id="@+id/btnChangeField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Canviar Àmbit" />
 
     </LinearLayout>
 </LinearLayout>
