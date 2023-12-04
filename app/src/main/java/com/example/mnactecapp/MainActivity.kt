@@ -1,6 +1,7 @@
 package com.example.mnactecapp
 
 import ElementsList
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,12 +30,20 @@ class MainActivity : AppCompatActivity() {
         val elementShown = elementsField.find { it.inicialElement }
 
         // Verificar si se encontró un elemento con inicialElement=true
-        if (elementShown != null) {
-            val imgElementPath = getFilesDir().toString() + "/imgElements/" + elementShown.image
-            val bitmap = BitmapFactory.decodeFile(imgElementPath)
-            imgElement.setImageBitmap(bitmap)
-            txtElement.text = elementShown.nameElement
+        try {
+
+            txtElement.text = ElementManager.elements[ElementManager.defaultElement].nameElement
+            //imgElement = ElementManager.elements[ElementManager.defaultElement].image
+        } catch (e: Exception) {
+            if (elementShown != null) {
+                val imgElementPath = getFilesDir().toString() + "/imgElements/" + elementShown.image
+                val bitmap = BitmapFactory.decodeFile(imgElementPath)
+                imgElement.setImageBitmap(bitmap)
+                txtElement.text = elementShown.nameElement
+            }
         }
+
+
 
             botonpasar.setOnClickListener {
                 // Crear un Intent para abrir Activity3

@@ -49,7 +49,13 @@ class ElementsList(context: Context) {
             true,
             2023)) // Retorna una llista amb 1 element per defecte en cas d'excepció per evitar valors nuls
         }
+        /*
+        var eleMut = MutableList<Element>
+        eleMut = elements.getValue.toMutableList()
+        ElementManager.elements = eleMut
+        */
     }
+
 
     // Listas filtradas por el campo "field"(ambito)
     val elementsField1: List<Element> by lazy {

@@ -6,7 +6,9 @@ object ElementManager {
     val elements = mutableListOf<Element>()
 
     //Índex per al llistat elements, per localitzar un Element en particular (p.e. per mostrar a la pantalla de detalls del vehicle)
-    val indexElements: Int = -1
+    var indexElements: Int = -1
+
+    var defaultElement = 0
 
     //Definició d'idioma: 0 cat, 1 spa, 2 eng
     var idioma: Int = -1
