@@ -23,18 +23,25 @@ class MainActivity : AppCompatActivity() {
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         val btnJsonShortcut = findViewById<Button>(R.id.BtnJsonShortcut)
 
+
+        when (ElementManager.idioma){
+            0 -> {btnMesInfo.text = "Més informació envers l'element"}
+            1 -> {btnMesInfo.text = "Más información acerca del elemento"}
+            2 -> {btnMesInfo.text = "More information about this element"}
+        }
+
         val field = 1;
         val elementsList = ElementsList(this)
         val elementsField = elementsList.loadField(field)
 
         val elementShown = elementsField.find { it.inicialElement }
 
-        // Verificar si se encontró un elemento con inicialElement=true
+        //intento llegir l'element de la llista GLOBAL; si no s'aconsegueix el llegirà de la classe ElementList
         try {
-
             txtElement.text = ElementManager.elements[ElementManager.defaultElement].nameElement
             //imgElement = ElementManager.elements[ElementManager.defaultElement].image
         } catch (e: Exception) {
+            // Verificar si se encontró un elemento con inicialElement=true
             if (elementShown != null) {
                 val imgElementPath = getFilesDir().toString() + "/imgElements/" + elementShown.image
                 val bitmap = BitmapFactory.decodeFile(imgElementPath)

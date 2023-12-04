@@ -139,6 +139,8 @@ class carregaJson : AppCompatActivity() {
                         val speed = tryCatchJsonInt(jsonObject, "speed")
                         val maxSpeed = tryCatchJsonInt(jsonObject, "maxSpeed")
 
+                        if (isValidElement(numInventory, field, year)) {}
+
                         //EVITAR QUE HI HAGI 2 ELEMENTS PER DEFECTE
                         if (numInventory > -1) {
                             //nou if que busqui el numInventory al llistat
@@ -165,10 +167,7 @@ class carregaJson : AppCompatActivity() {
                                         anularLectura = true
 
                                     }
-                                } /*else {//no fa falta ja que si no és element principal no hem de comprovar si n'hi ha un altre
-                                            Toast.makeText(this,"Aquest element no és l'element per defecte",Toast.LENGTH_SHORT).show()
-                                            anularLectura = true
-                                        }*/
+                                }
                             }
                         } else {
                             Toast.makeText(this,"El número d'inventari no compleix els requisits",Toast.LENGTH_SHORT).show()
@@ -263,6 +262,7 @@ class carregaJson : AppCompatActivity() {
             false // Retorna el valor per defecte en cas d'error
         }
     }
+    private fun isValidElement(numInventory: Int, field: Int, year: Int): Boolean {
+        return numInventory != -1 && field != -1 && year != -1
+    }
 }
-
-
