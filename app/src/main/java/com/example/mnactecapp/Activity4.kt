@@ -89,7 +89,7 @@ class Activity4 : AppCompatActivity() {
         botonidiomas1.setOnClickListener {
             // Crear un Intent para abrir idiomas
             val intent = Intent(this, idiomas::class.java)
-            startActivity(intent)
+            getResult.launch(intent)
         }
         //botón para cambiar de ámbito
         btnChangeField.setOnClickListener{
