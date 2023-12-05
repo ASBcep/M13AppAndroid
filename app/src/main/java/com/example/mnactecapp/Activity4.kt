@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +26,16 @@ class Activity4 : AppCompatActivity() {
     val totalField = ElementManager.totalField
 
     //val act1FrameText: TextView = findViewById(R.id.act1FrameText)
+
+    private val getResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult())
+        {
+            if(it.resultCode == RESULT_OK){
+                reiniciarActividad()
+            }else if(it.resultCode == RESULT_CANCELED){
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,6 +120,13 @@ class Activity4 : AppCompatActivity() {
         ElementManager.indexField = indexField
         Toast.makeText(this,"Es mostra: àmbit " + indexField, Toast.LENGTH_SHORT).show()
         return "Àmbit: $indexField"
+    }
+    fun reiniciarActividad() {
+        // Cerrar la actividad actual
+        finish()
+        // Crear un nuevo Intent para reiniciar la actividad
+        val intent = Intent(this, this::class.java)
+        startActivity(intent)
     }
 }
 
