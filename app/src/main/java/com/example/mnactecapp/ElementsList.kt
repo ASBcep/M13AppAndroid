@@ -7,13 +7,34 @@ import com.google.gson.reflect.TypeToken
 import java.io.FileReader
 
 class ElementsList(context: Context) {
-    private val jsonFilePath = context.filesDir.toString() + "/json/elements.json"
-    /*prova try/catch
-    // Lista completa de elementos
-    private val elements: List<Element> by lazy {
-        val jsonFile = FileReader(jsonFilePath)
-        val listElementsType = object : TypeToken<List<Element>>() {}.type
-        Gson().fromJson(jsonFile, listElementsType)*/
+
+
+    private var routeJsonLang = ""
+    //cribo por idiomas para leer un json u otro
+
+    init {
+        when (ElementManager.idioma) {
+            0 -> routeJsonLang = "/json/elements_cat.json"
+            1 -> routeJsonLang = "/json/elements_spa.json"
+            2 -> routeJsonLang = "/json/elements_eng.json"
+        }
+
+        /*
+        elements = try {
+            // Código para cargar los elementos usando la ruta 'routeJsonLang'
+            // ...
+        } catch (e: Exception) {
+            // Manejo de excepciones
+            // ...
+        }*/
+    }
+    private val jsonFilePath = context.filesDir.toString() + routeJsonLang
+            /*prova try/catch
+            // Lista completa de elementos
+            private val elements: List<Element> by lazy {
+                val jsonFile = FileReader(jsonFilePath)
+                val listElementsType = object : TypeToken<List<Element>>() {}.type
+                Gson().fromJson(jsonFile, listElementsType)*/
     //
     // private val elements: List<Element> by lazy
 

@@ -2,18 +2,28 @@ package com.example.mnactecapp;
 
 import android.annotation.SuppressLint;
 
+import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-public class AssetsManager {
+public class AssetsManager extends ApplicationAdapter {
 
     public Texture Tbackground,userCar, colisionCar,buttonCheck,life,gameOver,congrats,felicidades,felicitats,
             buttonJugar,buttonPlay,buttonBack,buttonHome,assignedVehicle,A,B,C,D;
     public FileHandle FTbackground,FuserCar, FcolisionCar,FbuttonCheck,Flife,FgameOver,Fcongrats,Ffelicidades,Ffelicitats,
             FbuttonJugar,FbuttonPlay,FbuttonBack,FbuttonHome,FassignedVehicle,FA,FB,FC,FD;
     public TextureRegion background;
+    //ia des d'aquí
+    private AssetManager assetManager;
+    public void create() {
+        assetManager = new AssetManager();
+        loadAssets();
+    }
+    //fi ia
     public void loadAssets(){
+
         /*provar a carregar img directament de drawable
         Tbackground = new Texture(Gdx.files.internal("drawable/imggame/background.png"));
         userCar = new Texture(Gdx.files.internal("drawable/imggame/userCar.png"));
@@ -35,8 +45,11 @@ public class AssetsManager {
         D = new Texture(Gdx.files.internal("drawable/imggame/D.png"));
         */
         //comentat per provar a carregar img directament de drawable
+
         loadFileHandle();
 
+
+        //cargar textura en variables
         Tbackground = new Texture(FTbackground);
         userCar = new Texture(FuserCar);
         colisionCar = new Texture(FcolisionCar);
@@ -57,6 +70,41 @@ public class AssetsManager {
         assignedVehicle = new Texture(FassignedVehicle);
         background = new TextureRegion(Tbackground,0,0,Tbackground.getWidth(),Tbackground.getHeight());
 
+        //by ia from here
+        //assetManager = new AssetManager();
+        /*
+        try {
+            assetManager.load("drawable/imggame/background.png", Texture.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try {
+            assetManager.finishLoading(); // Esperar hasta que todas las texturas estén cargadas
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        */
+        /*new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    assetManager.load("drawable/background.png", Texture.class);
+                    // Carga de otras texturas...
+                    assetManager.finishLoading(); // Espera a que todas las texturas estén cargadas
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        // Obtener las texturas una vez cargadas
+
+        try {
+            Tbackground = assetManager.get("drawable/background.png", Texture.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //end ia*/
     }
     public void loadFileHandle(){
 
