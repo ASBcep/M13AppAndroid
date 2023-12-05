@@ -6,11 +6,22 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 
 class MainActivity : AppCompatActivity() {
+    private val getResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult())
+        {
+            if(it.resultCode == RESULT_OK){
+                reiniciarActividad()
+            }else if(it.resultCode == RESULT_CANCELED){
+            }
+        }
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +62,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
             botonpasar.setOnClickListener {
                 // Crear un Intent para abrir Activity3
                 val intent = Intent(this, Activity3::class.java)
@@ -71,14 +81,21 @@ class MainActivity : AppCompatActivity() {
             botonidiomas1.setOnClickListener {
                 // Crear un Intent para abrir idiomas
                 val intent = Intent(this, idiomas::class.java)
-                startActivity(intent)
+                getResult.launch(intent)
             }
             btnJsonShortcut.setOnClickListener{
                 val intent = Intent(this@MainActivity, carregaJson::class.java)
                 startActivity(intent)
             }
         }
+    fun reiniciarActividad() {
+        // Cerrar la actividad actual
+        finish()
+        // Crear un nuevo Intent para reiniciar la actividad
+        val intent = Intent(this, this::class.java)
+        startActivity(intent)
     }
+}
 /*codi branch main 30/11/2023
 
 import android.content.Intent

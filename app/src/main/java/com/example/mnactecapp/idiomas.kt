@@ -20,16 +20,22 @@ class idiomas : AppCompatActivity() {
         btnCat.setOnClickListener {
             ElementManager.idioma = 0
             Toast.makeText(this,"Idioma canviat a català", Toast.LENGTH_LONG).show()
+            //val intent = Intent(this,MainActivity::class.java)
+            setResult(RESULT_OK,intent)
             finish()
         }
         btnSpa.setOnClickListener {
             ElementManager.idioma = 1
             Toast.makeText(this,"Idioma cambiado a castellano", Toast.LENGTH_LONG).show()
+            //val intent = Intent(this,MainActivity::class.java)
+            setResult(RESULT_OK,intent)
             finish()
         }
         btnEng.setOnClickListener {
             ElementManager.idioma = 2
             Toast.makeText(this,"Language changed to English", Toast.LENGTH_LONG).show()
+            //val intent = Intent(this,MainActivity::class.java)
+            setResult(RESULT_OK,intent)
             finish()
         }
     }
