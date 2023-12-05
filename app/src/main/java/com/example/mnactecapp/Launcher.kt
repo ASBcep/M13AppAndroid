@@ -23,6 +23,6 @@ class Launcher : AndroidApplication() {
         val intentGame = Intent(this, Launcher::class.java)
         intentGame.putExtra("dificulty",dificulty )
 
-        initialize(MyGame(intentGame), config)
+        initialize(MyGame(intentGame,context), config)
     }
 }

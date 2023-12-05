@@ -1,5 +1,6 @@
 package com.example.mnactecapp;
 
+import android.content.Context;
 import android.content.Intent;
 
 import com.badlogic.gdx.ApplicationAdapter;
@@ -44,9 +45,12 @@ public class MyGame extends ApplicationAdapter {
     private int score, questionsAnswered;
     private String language;
     private Array<Question>questions;
-    public MyGame(Intent intent) {
+    private Context context;
+    public MyGame(Intent intent, Context context) {
         // Obtener dificultad desde la activity donde se elige la dificultad
         dificulty = intent.getIntExtra("dificulty", 1);
+        this.context = context;
+
     }
 
     @Override
@@ -570,7 +574,12 @@ public class MyGame extends ApplicationAdapter {
         batch.dispose();
         assets.disposeAssets();
         shrend.dispose();
+        startNewActivity(Activity4.class);
+    }
 
+    public void startNewActivity(Class<?> cls) {
+        Intent intent = new Intent(context, cls);
+        context.startActivity(intent);
     }
 
 }
