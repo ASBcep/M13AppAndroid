@@ -43,7 +43,7 @@ class Activity3 : AppCompatActivity()
         val field = intent.getIntExtra(elementShownConstant.FIELD,1)
 
         botonpasar.setOnClickListener {
-            // Crear un Intent para abrir Activity2
+            // Crear un Intent para abrir Activity4
             val intent = Intent(this, Activity4::class.java)
             intent.putExtra(Activity4.fieldConstant.FIELD, field)
             startActivity(intent)

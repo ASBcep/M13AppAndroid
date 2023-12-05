@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.w3c.dom.Text
 
 class Activity4 : AppCompatActivity() {
 
@@ -19,6 +20,11 @@ class Activity4 : AppCompatActivity() {
 
     // carrego el llistat d'elements LOCAL des de la llista GLOBAL
     val elements = ElementManager.elements
+    // carrego les dades d'àmbit a mostrar LOCAL des de la llista GLOBAL
+    var indexField = ElementManager.indexField
+    val totalField = ElementManager.totalField
+
+    //val act1FrameText: TextView = findViewById(R.id.act1FrameText)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,14 +32,17 @@ class Activity4 : AppCompatActivity() {
 
         val botonpasar: TextView = findViewById(R.id.botonpasar)
         val botonatras: TextView = findViewById(R.id.botonatras)
+
+        val act1FrameText: TextView = findViewById(R.id.act1FrameText)
+
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         val btnChangeField: Button = findViewById(R.id.btnChangeField)
         val btnMainScreen: Button = findViewById(R.id.btnMainScreen)
 
 
         botonpasar.setOnClickListener {
-            // Crear un Intent para abrir Activity5
-            val intent = Intent(this, Activity5::class.java)
+            // Crear un Intent para abrir Activity6
+            val intent = Intent(this, Activity6::class.java)
             startActivity(intent)
         }
 
@@ -42,12 +51,18 @@ class Activity4 : AppCompatActivity() {
             val intent = Intent(this, Activity3::class.java)
             startActivity(intent)
         }
-
+        //inici programació amb llista GLOBAL
+        //prova sense cribar per àmbit
+        val elementsField = elements
+        //final programació amb llista GLOBAL
+        /*prova sense usar la classe ElementsList
         val intent = getIntent()
         val field = intent.getIntExtra(fieldConstant.FIELD, 1)
 
         val elementsList = ElementsList(this)
         val elementsField = elementsList.loadField(field)
+        */
+
 
         val listAltresElements = findViewById<RecyclerView>(R.id.ListAltresElements)
         val layoutManager = GridLayoutManager(this, 3)
@@ -62,12 +77,13 @@ class Activity4 : AppCompatActivity() {
 
         botonidiomas1.setOnClickListener {
             // Crear un Intent para abrir idiomas
-            val intent = Intent(this@Activity4, idiomas::class.java)
+            val intent = Intent(this, idiomas::class.java)
             startActivity(intent)
         }
         //botón para cambiar de ámbito
         btnChangeField.setOnClickListener{
             fieldSelector()
+            act1FrameText.text = "Àmbit: " + indexField
         }
         btnMainScreen.setOnClickListener {
             // Crear un Intent para abrir la pantalla principal
@@ -83,13 +99,16 @@ class Activity4 : AppCompatActivity() {
         intent.putExtra(Activity3.elementShownConstant.FIELD, selectedElement.field)
         startActivity(intent)
     }
-    private fun fieldSelector() {
-        if (ElementManager.indexField < ElementManager.totalField){
-            ElementManager.indexField++
+    private fun fieldSelector(): String {
+        if (indexField < totalField){
+            indexField++
         } else {
-            ElementManager.indexField = 1
+            indexField = 0
         }
-        Toast.makeText(this,"Es mostra: àmbit " + ElementManager.indexField, Toast.LENGTH_SHORT).show()
+        //FALTA canviar que l'àmbit es mostri com a string i no com a enter.
+        ElementManager.indexField = indexField
+        Toast.makeText(this,"Es mostra: àmbit " + indexField, Toast.LENGTH_SHORT).show()
+        return "Àmbit: $indexField"
     }
 }
 
