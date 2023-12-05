@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import java.io.File
 
 class Activity3 : AppCompatActivity()
 {
@@ -32,15 +33,17 @@ class Activity3 : AppCompatActivity()
         val btnList: Button = findViewById(R.id.btnList)
         val txtVwDescripcio: TextView = findViewById(R.id.TxtVwDescripcio)
         val listView: ListView = findViewById(R.id.lvCaract1)
-        val imgElement: ImageView = findViewById(R.id.imgShownElement)
+        val imgVwElement: ImageView = findViewById(R.id.imgShownElement)
+        val act3FrameText: TextView = findViewById(R.id.act3FrameText)
 
         //permetre scroll en el textview
         txtVwDescripcio.movementMethod = android.text.method.ScrollingMovementMethod.getInstance()
 
-
         val intent = getIntent()
         val elementShown = intent.getSerializableExtra(elementShownConstant.ELEMENT) as Element
         val field = intent.getIntExtra(elementShownConstant.FIELD,1)
+        act3FrameText.text = elementShown.nameElement
+
 
         botonpasar.setOnClickListener {
             // Crear un Intent para abrir Activity4
@@ -71,13 +74,15 @@ class Activity3 : AppCompatActivity()
             startActivity(intent)
         }
 
-
-
-
         txtVwDescripcio.setText(elementShown.description)
         val imgElementPath = getFilesDir().toString() + "/imgElements/" + elementShown.image
-        val bitmap = BitmapFactory.decodeFile(imgElementPath)
-        imgElement.setImageBitmap(bitmap)
+        //val bitmap = BitmapFactory.decodeFile(imgElementPath)
+        if (File(imgElementPath).exists()) {
+            val bitmap = BitmapFactory.decodeFile(imgElementPath)
+            imgVwElement.setImageBitmap(bitmap)
+        } else {
+            imgVwElement.setImageResource(R.drawable.defaultelement)
+        }
 
 
 

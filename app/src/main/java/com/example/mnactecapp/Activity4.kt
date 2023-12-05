@@ -52,8 +52,8 @@ class Activity4 : AppCompatActivity() {
             startActivity(intent)
         }
         //inici programació amb llista GLOBAL
-        //prova sense cribar per àmbit
-        val elementsField = elements
+
+        val elementsField = elements//prova sense cribar per àmbit
         //final programació amb llista GLOBAL
         /*prova sense usar la classe ElementsList
         val intent = getIntent()

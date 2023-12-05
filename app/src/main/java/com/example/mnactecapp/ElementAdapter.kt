@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.io.File
+
 class ElementAdapter(val elements: List<Element>, val onItemClick: (Element) -> Unit) :
     RecyclerView.Adapter<ElementAdapter.ElementViewHolder>() {
 
@@ -32,10 +34,18 @@ class ElementAdapter(val elements: List<Element>, val onItemClick: (Element) -> 
     class ElementViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindElement(element: Element) {
-            val imgElement = itemView.findViewById<ImageView>(R.id.ImgListElement)
+            val imgVwElement = itemView.findViewById<ImageView>(R.id.ImgListElement)
             val imgElementPath = itemView.context.getFilesDir().toString() + "/imgElements/" + element.image
-            val bitmap = BitmapFactory.decodeFile(imgElementPath)
-            imgElement.setImageBitmap(bitmap)
+            //val bitmap = BitmapFactory.decodeFile(imgElementPath)
+            //val bitmap = BitmapFactory.decodeResource(itemView.resources, R.drawable.defaultelement)
+
+            val bitmap = if (File(imgElementPath).exists()) {
+                BitmapFactory.decodeFile(imgElementPath)
+            } else {
+                BitmapFactory.decodeResource(itemView.resources, R.drawable.defaultelement)
+            }
+            imgVwElement.setImageBitmap(bitmap)
+
 
             val elementNom = itemView.findViewById<TextView>(R.id.NomListElement)
             elementNom.text = element.nameElement
