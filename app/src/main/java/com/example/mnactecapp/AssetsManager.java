@@ -14,7 +14,27 @@ public class AssetsManager {
             FbuttonJugar,FbuttonPlay,FbuttonBack,FbuttonHome,FassignedVehicle,FA,FB,FC,FD;
     public TextureRegion background;
     public void loadAssets(){
-
+        /*provar a carregar img directament de drawable
+        Tbackground = new Texture(Gdx.files.internal("drawable/imggame/background.png"));
+        userCar = new Texture(Gdx.files.internal("drawable/imggame/userCar.png"));
+        colisionCar = new Texture(Gdx.files.internal("drawable/imggame/colisionCar.png"));
+        buttonCheck = new Texture(Gdx.files.internal("drawable/imggame/buttonCheck.png"));
+        life = new Texture(Gdx.files.internal("drawable/imggame/life.png"));
+        gameOver = new Texture(Gdx.files.internal("drawable/imggame/game_over.png"));
+        congrats = new Texture(Gdx.files.internal("drawable/imggame/congrats.png"));
+        felicidades = new Texture(Gdx.files.internal("drawable/imggame/felicidades.png"));
+        felicitats = new Texture(Gdx.files.internal("drawable/imggame/felicitats.png"));
+        buttonJugar = new Texture(Gdx.files.internal("drawable/imggame/buttonJugar.png"));
+        buttonPlay = new Texture(Gdx.files.internal("drawable/imggame/buttonPlay.png"));
+        buttonBack = new Texture(Gdx.files.internal("drawable/imggame/buttonBack.png"));
+        buttonHome = new Texture(Gdx.files.internal("drawable/imggame/buttonHome.png"));
+        assignedVehicle = new Texture(Gdx.files.internal("drawable/imggame/assignedVehicle.png"));
+        A = new Texture(Gdx.files.internal("drawable/imggame/A.png"));
+        B = new Texture(Gdx.files.internal("drawable/imggame/B.png"));
+        C = new Texture(Gdx.files.internal("drawable/imggame/C.png"));
+        D = new Texture(Gdx.files.internal("drawable/imggame/D.png"));
+        */
+        //comentat per provar a carregar img directament de drawable
         loadFileHandle();
 
         Tbackground = new Texture(FTbackground);
@@ -36,8 +56,10 @@ public class AssetsManager {
         felicitats = new Texture(Ffelicitats);
         assignedVehicle = new Texture(FassignedVehicle);
         background = new TextureRegion(Tbackground,0,0,Tbackground.getWidth(),Tbackground.getHeight());
+
     }
     public void loadFileHandle(){
+
 
          FTbackground = new FileHandle(Gdx.files.getLocalStoragePath() + "img/background.png");
          FuserCar = new FileHandle(Gdx.files.getLocalStoragePath() + "img/userCar.png");
