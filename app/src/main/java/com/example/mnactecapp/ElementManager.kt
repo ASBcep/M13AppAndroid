@@ -18,6 +18,6 @@ object ElementManager {
     var totalField: Int = 1
 
     //Definició d'idioma: 0 cat, 1 spa, 2 eng
-    var idioma: Int = -1
+    var idioma: Int = 0
     //var idioma = String
 }

@@ -43,7 +43,7 @@ public class MyGame extends ApplicationAdapter {
     private int lives;
     private int dificulty;
     private int score, questionsAnswered;
-    private String language;
+    private int language;
     private Array<Question>questions;
     private Context context;
     public MyGame(Intent intent, Context context) {
@@ -85,7 +85,7 @@ public class MyGame extends ApplicationAdapter {
         }
 
         // Idioma que se obtendrá del app de android
-        language = "ES";
+        language = ElementManager.INSTANCE.getIdioma();
 
         // Posiciones de los carriles para inicializar los colisionCars
         laneA = 405;
@@ -278,15 +278,15 @@ public class MyGame extends ApplicationAdapter {
     public void drawEndgame(){
         if(currentScreen == Screen.GAME_OVER){
             switch (language){
-                case "CAT":
+                case 0:
                     font.draw(batch,"Se t'ha assignat el següent vehicle.", ScreenWidth / 4.5f, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
                     break;
-                case "ES":
+                case 1:
                     font.draw(batch,"Se te ha asignado el siguiente vehiculo.", ScreenWidth / 4.5f, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
                     break;
-                case "EN":
+                case 2:
                     font.draw(batch,"You have been assigned the following vehicle.", ScreenWidth / 4.5f, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
                     break;
@@ -294,17 +294,17 @@ public class MyGame extends ApplicationAdapter {
             }
         }else if(currentScreen == Screen.WIN){
             switch (language){
-                case "CAT":
+                case 0:
                     batch.draw(assets.felicitats, ScreenWidth / 2 - 800, ScreenHeight - 440,1600,415);
                     font.draw(batch,"Se t'ha assignat el següent vehicle.", ScreenWidth / 4.5f, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
                     break;
-                case "ES":
+                case 1:
                     batch.draw(assets.felicidades, ScreenWidth / 2 - 600, ScreenHeight - 440, 1200, 415);
                     font.draw(batch,"Se te ha asignado el siguiente vehiculo.", ScreenWidth / 4.5f, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
                     break;
-                case "EN":
+                case 2:
                     batch.draw(assets.congrats, ScreenWidth / 2 - assets.congrats.getWidth()/2f, ScreenHeight - 415);
                     font.draw(batch,"You have been assigned the following vehicle.", ScreenWidth / 4.5f, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
@@ -333,7 +333,7 @@ public class MyGame extends ApplicationAdapter {
     public void drawExplanation()
     {
         switch (language){
-            case "CAT":
+            case 0:
                 font.draw(batch,
                         "Aquest joc consisteix en un qüestionari de 4 opcions. Tindràs 4 carrils" +
                                 "\nels quals representen cadascun les opcions." +
@@ -345,7 +345,7 @@ public class MyGame extends ApplicationAdapter {
                 batch.draw(assets.buttonJugar, playButtonBounds.x, playButtonBounds.y);
 
                 break;
-            case "ES":
+            case 1:
                 font.draw(batch,
                         "Este juego consiste en un quiz de 4 opciones. Tendrás 4 raíles" +
                                 "\nlos cuales reprensentan cada uno las opciones." +
@@ -356,7 +356,7 @@ public class MyGame extends ApplicationAdapter {
                 //font.draw(batch, "Si estás preparado dal al botón 'Jugar'.", 15, ScreenHeight - 700);
                 batch.draw(assets.buttonJugar, playButtonBounds.x, playButtonBounds.y);
                 break;
-            case "EN":
+            case 2:
                 font.draw(batch,
                         "This game consists of a quiz with 4 options. You will have 4 lanes" +
                                 "\neach representing one of the options." +
@@ -372,20 +372,20 @@ public class MyGame extends ApplicationAdapter {
     }
     public String finalScore(){
         switch (language){
-            case "CAT":
+            case 0:
                 if (score > 1 || score == 0){
                     return "Has respost bé " + score + " preguntes de " + questionsAnswered + ".";
                 }else{
                     return "Has respost bé " + score + " pregunta de " + questionsAnswered + ".";
                 }
 
-            case "ES":
+            case 1:
                 if (score > 1 || score == 0){
                     return "Has contestado bien " + score + " preguntas de " + questionsAnswered + ".";
                 }else{
                     return "Has contestado bien " + score + " pregunta de " + questionsAnswered + ".";
                 }
-            case "EN":
+            case 2:
                 if (score > 1 || score == 0){
                     return "You answered " + score + " questions out of " + questionsAnswered + " correctly.";
                 }else{
