@@ -67,7 +67,6 @@ public class AssetsManager extends ApplicationAdapter {
         congrats = new Texture(Fcongrats);
         felicidades = new Texture(Ffelicidades);
         felicitats = new Texture(Ffelicitats);
-        assignedVehicle = new Texture(FassignedVehicle);
         background = new TextureRegion(Tbackground,0,0,Tbackground.getWidth(),Tbackground.getHeight());
 
         //by ia from here
@@ -122,12 +121,41 @@ public class AssetsManager extends ApplicationAdapter {
          FbuttonPlay = new FileHandle(Gdx.files.getLocalStoragePath() + "img/buttonPlay.png");
          FbuttonBack = new FileHandle(Gdx.files.getLocalStoragePath() + "img/buttonBack.png");
          FbuttonHome = new FileHandle(Gdx.files.getLocalStoragePath() + "img/buttonHome.png");
-         FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "img/assignedVehicle.png");
          FA = new FileHandle(Gdx.files.getLocalStoragePath() + "img/A.png");
          FB = new FileHandle(Gdx.files.getLocalStoragePath() + "img/B.png");
          FC = new FileHandle(Gdx.files.getLocalStoragePath() + "img/C.png");
          FD = new FileHandle(Gdx.files.getLocalStoragePath() + "img/D.png");
 
+    }
+
+    public void loadAssignedVehicle(int difficulty, int score) {
+        String difficultyPrefix = "";
+
+        switch (difficulty) {
+            case 1:
+                difficultyPrefix = "EASY";
+                break;
+            case 2:
+                difficultyPrefix = "NORMAL";
+                break;
+            case 3:
+                difficultyPrefix = "HARD";
+                break;
+        }
+
+        if (score >= 17 && score <= 20) {
+            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "img/assignedVehicle1720" + difficultyPrefix + ".png");
+        } else if (score >= 13 && score <= 16) {
+            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "img/assignedVehicle1316" + difficultyPrefix + ".png");
+        } else if (score >= 9 && score <= 12) {
+            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "img/assignedVehicle912" + difficultyPrefix + ".png");
+        } else if (score >= 5 && score <= 8) {
+            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "img/assignedVehicle58" + difficultyPrefix + ".png");
+        } else if (score >= 0 && score <= 4) {
+            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "img/assignedVehicle04" + difficultyPrefix + ".png");
+        }
+
+        assignedVehicle = new Texture(FassignedVehicle);
     }
     public void disposeAssets(){
         Tbackground.dispose();

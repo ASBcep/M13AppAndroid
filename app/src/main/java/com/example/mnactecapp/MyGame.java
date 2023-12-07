@@ -69,8 +69,10 @@ public class MyGame extends ApplicationAdapter {
         assets = new AssetsManager();
         assets.loadAssets();
 
+
         shrend = new ShapeRenderer();
 
+        //1 = easy; 2 = normal; 3 = hard;
         switch(dificulty){
             case 1:
                 lives = 5;
@@ -214,6 +216,11 @@ public class MyGame extends ApplicationAdapter {
             batch.draw(assets.D, laneD + 30,16,100,100);
             // Vidas
             showLives();
+            // Score
+            String scoreTXT = String.valueOf(score);
+            font.getData().setScale(3.5F);
+            font.setColor(Color.BLACK);
+            font.draw(batch, "Score: " + scoreTXT, 16, ScreenHeight - 16);
 
 
             drawBackButton();
@@ -279,14 +286,17 @@ public class MyGame extends ApplicationAdapter {
         if(currentScreen == Screen.GAME_OVER){
             switch (language){
                 case 0:
+                    assets.loadAssignedVehicle(dificulty,score);
                     font.draw(batch,"Se t'ha assignat el següent vehicle.", ScreenWidth / 4.5f, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
                     break;
                 case 1:
+                    assets.loadAssignedVehicle(dificulty,score);
                     font.draw(batch,"Se te ha asignado el siguiente vehiculo.", ScreenWidth / 4.5f, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
                     break;
                 case 2:
+                    assets.loadAssignedVehicle(dificulty,score);
                     font.draw(batch,"You have been assigned the following vehicle.", ScreenWidth / 4.5f, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
                     break;
@@ -455,8 +465,18 @@ public class MyGame extends ApplicationAdapter {
 
 
     public void loadQuestionsJSON() {
-
-        String filepath = Gdx.files.getLocalStoragePath() + "json/questions.json";
+        String filepath = "";
+        switch (language){
+            case 0:
+                filepath = Gdx.files.getLocalStoragePath() + "json/questionsCAT.json";
+                break;
+            case 1:
+                filepath = Gdx.files.getLocalStoragePath() + "json/questionsES.json";
+                break;
+            case 2:
+                filepath = Gdx.files.getLocalStoragePath() + "json/questionsEN.json";
+                break;
+        }
 
         try{
             FileReader fr = new FileReader(filepath);
@@ -562,7 +582,7 @@ public class MyGame extends ApplicationAdapter {
     }
 
     public void checkIndexQuestion(){
-        if (indexQuestion < 4){
+        if (indexQuestion < questions.size){
             indexQuestion += 1;
         }else{
             currentScreen = Screen.WIN;
