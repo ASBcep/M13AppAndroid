@@ -34,14 +34,19 @@ class MainActivity : AppCompatActivity() {
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         val btnJsonShortcut = findViewById<Button>(R.id.BtnJsonShortcut)
 
-
+        //mostrar text segons idioma
         when (ElementManager.idioma){
             0 -> {btnMesInfo.text = "Més informació envers l'element"}
             1 -> {btnMesInfo.text = "Más información acerca del elemento"}
             2 -> {btnMesInfo.text = "More information about this element"}
         }
 
+        /* creo que esto no hace falta
         val field = 1;
+        val elementsList = ElementsList(this)
+        val elementsField = elementsList.loadField(field)
+        */
+        val field = ElementManager.indexField
         val elementsList = ElementsList(this)
         val elementsField = elementsList.loadField(field)
 

@@ -109,6 +109,7 @@ class ElementsList(context: Context) {
         elements.filter { it.field == 6 }
     }
 
+    //esta función qué hace??
     fun loadField(field:Int,):List<Element>{
 
         when(field){

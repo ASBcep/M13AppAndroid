@@ -17,7 +17,7 @@
             android:id="@+id/openFileButtonAmbits"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cercar arxiu json d'elements en català"/>
+            android:text="Cercar arxiu json d'àmbits"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

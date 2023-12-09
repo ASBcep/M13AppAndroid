@@ -70,11 +70,9 @@ class carregaJson : AppCompatActivity() {
             gestionarArxiuSeleccionat(uri)
         }
     }
+    //funció per llegir el json
     private fun gestionarArxiuSeleccionat(fileUri: Uri?) {
-        // Aquí pots posar la lògica que necessites fer amb la URI de l'arxiu seleccionat
-        // Per exemple, pots llegir l'arxiu, processar-lo, etc.
-        // fileUri conté la Uri de l'arxiu seleccionat
-        // Però és important comprovar si fileUri no és null abans d'utilitzar-lo
+
         fileUri?.let {
             // Aquí pots continuar amb el teu codi, ja que ara tens la URI de l'arxiu seleccionat
             // ...
