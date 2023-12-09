@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         val botonpasar: TextView = findViewById(R.id.botonpasar)
         val btnMesInfo: Button = findViewById(R.id.BtnMesInfo)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
-        val btnJsonShortcut = findViewById<Button>(R.id.BtnJsonShortcut)
+        //val btnJsonShortcut = findViewById<Button>(R.id.BtnJsonShortcut)
 
         //mostrar text segons idioma
         when (ElementManager.idioma){
@@ -88,10 +88,12 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, idiomas::class.java)
                 getResult.launch(intent)
             }
+            /*
             btnJsonShortcut.setOnClickListener{
                 val intent = Intent(this@MainActivity, carregaJson::class.java)
                 startActivity(intent)
             }
+            */
         }
     fun reiniciarActividad() {
         // Cerrar la actividad actual

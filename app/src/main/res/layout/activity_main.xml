@@ -96,12 +96,12 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="@string/btn_idioma" />
-            <Button
+            <!--Button
                 android:id="@+id/BtnJsonShortcut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="Càrrega JSON" />
+                android:text="Càrrega JSON" /-->
 
         </LinearLayout>
 

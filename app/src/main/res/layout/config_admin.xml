@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="tria el json d'àmbits:"/>
+            android:text="tria el json d'àmbits:NO PROGRAMAT"/>
         <Button
             android:id="@+id/openFileButtonAmbits"
             android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Triar àmbit i element per defecte"/>
+            android:text="Triar àmbit i element per defecte NO PROGRAMAT"/>
         />
         <TextView
             android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="cercar json de preguntes"/>
+            android:text="cercar json de preguntes NO PRORGRAMAT"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
