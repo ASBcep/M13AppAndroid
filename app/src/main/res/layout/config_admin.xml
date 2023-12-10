@@ -9,19 +9,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
+        <!--TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="tria el json d'àmbits:NO PROGRAMAT"/>
+            android:text="tria el json d'àmbits:"/-->
         <Button
             android:id="@+id/openFileButtonAmbits"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cercar arxiu json d'àmbits NO PROGRAMAT"/>
-        <TextView
+        <!--TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="tria els json d'elements:"/>
+            android:text="tria els json d'elements:"/-->
         <Button
             android:id="@+id/openFileButtonElementsCat"
             android:layout_width="wrap_content"
@@ -42,35 +42,45 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Importar imatges d'elements des d'una carpeta"/>
-        <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tria l'àmbit que es mostrarà per defecte NO PROGRAMAT"/>
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tria l'element que es mostrarà per defecte NO PROGRAMAT"/>
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+        <!--Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="tria l'àmbit que es mostrarà per defecte"/>
-        <Spinner
+            android:text="Triar àmbit i element per defecte NO PROGRAMAT"/-->
+
+        <!--TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="tria l'element que es mostrarà per defecte"/>
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:text="tria el json de preguntes:"/-->
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Triar àmbit i element per defecte NO PROGRAMAT"/>
-        />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="tria el json de preguntes:"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="cercar json de preguntes NO PRORGRAMAT"/>
+            android:text="cercar json de preguntes NO PROGRAMAT"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

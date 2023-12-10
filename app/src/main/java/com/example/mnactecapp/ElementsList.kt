@@ -18,27 +18,8 @@ class ElementsList(context: Context) {
             1 -> routeJsonLang = "/json/elements_spa.json"
             2 -> routeJsonLang = "/json/elements_eng.json"
         }
-
-        /*
-        elements = try {
-            // Código para cargar los elementos usando la ruta 'routeJsonLang'
-            // ...
-        } catch (e: Exception) {
-            // Manejo de excepciones
-            // ...
-        }*/
     }
     private val jsonFilePath = context.filesDir.toString() + routeJsonLang
-            /*prova try/catch
-            // Lista completa de elementos
-            private val elements: List<Element> by lazy {
-                val jsonFile = FileReader(jsonFilePath)
-                val listElementsType = object : TypeToken<List<Element>>() {}.type
-                Gson().fromJson(jsonFile, listElementsType)*/
-    //
-    // private val elements: List<Element> by lazy
-
-
     private val elements: MutableList<Element>
 
     //inicialitzo la llista LOCAL d'elements
@@ -141,83 +122,241 @@ class ElementsList(context: Context) {
             elementShown.kmsDone != null &&
             elementShown.sostreMaximDeVol != null &&
             elementShown.speed != null &&
-            elementShown.maxSpeed != null
+            elementShown.maxSpeed != null &&
+            elementShown.year != null
         ) {
             // Mapear las variables específicas y convertirlas a un array de strings
-            return arrayOf(
-                "Autonomia: ${elementShown.autonomy} km",
-                "Capacitat de disposició: ${elementShown.disposalCapacity} kg",
-                "Cicle: ${elementShown.cicle}",
-                "Cilindrada: ${elementShown.cilindrada} cc",
-                "Envergadura: ${elementShown.wingspan} m",
-                "Font d'energia: ${elementShown.energyFont}",
-                "Font d'ingressos: ${elementShown.sourceIncome}",
-                "Forma d'ingressos: ${elementShown.formIncome}",
-                "Lloc de fabricació: ${elementShown.manufacturingPlace}",
-                "Longitud: ${elementShown.length} m",
-                "Pes: ${elementShown.weight} kg",
-                "Potència: ${elementShown.potency}",
-                "Kilòmetres recorreguts: ${elementShown.kmsDone} km",
-                "Sostre màxim de vol: ${elementShown.sostreMaximDeVol} km",
-                "Velocitat: ${elementShown.speed} km/h",
-                "Velocitat màxima: ${elementShown.maxSpeed} km/h"
-            )
+            when (ElementManager.idioma){
+                0 -> {return arrayOf(
+                    "Autonomia: ${elementShown.autonomy} km",
+                    "Any: ${elementShown.year}",
+                    "Capacitat del dipòsit: ${elementShown.disposalCapacity} L",
+                    "Cicle: ${elementShown.cicle}",
+                    "Cilindrada: ${elementShown.cilindrada} cc",
+                    "Envergadura: ${elementShown.wingspan} m",
+                    "Font d'energia: ${elementShown.energyFont}",
+                    "Font d'ingrés: ${elementShown.sourceIncome}",
+                    "Forma d'ingrés: ${elementShown.formIncome}",
+                    "Lloc de fabricació: ${elementShown.manufacturingPlace}",
+                    "Longitud: ${elementShown.length} m",
+                    "Pes: ${elementShown.weight} kg",
+                    "Potència: ${elementShown.potency}",
+                    "Kilòmetres recorreguts: ${elementShown.kmsDone} km",
+                    "Sostre màxim de vol: ${elementShown.sostreMaximDeVol} km",
+                    "Velocitat: ${elementShown.speed} km/h",
+                    "Velocitat màxima: ${elementShown.maxSpeed} km/h"
+                )}
+                1 -> {return arrayOf(
+                    "Autonomía: ${elementShown.autonomy} km",
+                    "Año: ${elementShown.year}",
+                    "Capacidad del depósito: ${elementShown.disposalCapacity} L",
+                    "Ciclo: ${elementShown.cicle}",
+                    "Cilindrada: ${elementShown.cilindrada} cc",
+                    "Envergadura: ${elementShown.wingspan} m",
+                    "Fuente de energía: ${elementShown.energyFont}",
+                    "Fuente de ingreso: ${elementShown.sourceIncome}",
+                    "Forma de ingreso: ${elementShown.formIncome}",
+                    "Lugar de fabricación: ${elementShown.manufacturingPlace}",
+                    "Longitud: ${elementShown.length} m",
+                    "Peso: ${elementShown.weight} kg",
+                    "Potencia: ${elementShown.potency}",
+                    "Kilómetres recorridos: ${elementShown.kmsDone} km",
+                    "Techo máximo de vuelo: ${elementShown.sostreMaximDeVol} km",
+                    "Velocidad: ${elementShown.speed} km/h",
+                    "Velocidad máxima: ${elementShown.maxSpeed} km/h"
+                )}
+                2 -> {return arrayOf(
+                    "Autonomy: ${elementShown.autonomy} km",
+                    "Year: ${elementShown.year}",
+                    "Tank capacity: ${elementShown.disposalCapacity} L",
+                    "Cicle: ${elementShown.cicle}",
+                    "Cilindrada: ${elementShown.cilindrada} cc",
+                    "Wingspan: ${elementShown.wingspan} m",
+                    "Energy source: ${elementShown.energyFont}",
+                    "Income source: ${elementShown.sourceIncome}",
+                    "Income way: ${elementShown.formIncome}",
+                    "Place of making: ${elementShown.manufacturingPlace}",
+                    "Length: ${elementShown.length} m",
+                    "Weight: ${elementShown.weight} kg",
+                    "Potency: ${elementShown.potency}",
+                    "Kilometers made: ${elementShown.kmsDone} km",
+                    "Highest height of fly: ${elementShown.sostreMaximDeVol} km",
+                    "Speed: ${elementShown.speed} km/h",
+                    "Maximum speed: ${elementShown.maxSpeed} km/h"
+                )}
+            }
+
         } else {
             // Manejar el caso en el que el elemento no tenga todas las propiedades no nulas
-            return arrayOf("Datos incompletos")
+            when (ElementManager.idioma){
+                0 -> {return arrayOf("Falten dades")}
+                1 -> {return arrayOf("Datos incompletos")}
+                2 -> {return arrayOf("Missing data")}
+                else -> {return arrayOf("Falten dades")}
+            }
         }
+        return arrayOf("Falten dades")
     }
     fun filterAndMapElementV2(elementShown: Element): Array<String> {
         val resultArray = mutableListOf<String>()
 
-        // Verificar cada propiedad y agregarla al array solo si no es nula y no está vacía
-        if (elementShown.autonomy != null && elementShown.autonomy != 0) {
+        // Verificar cada propiedad y agregarla al array solo si no es nula y no está vacía y cribada según idioma
+/*        if (elementShown.autonomy != null && elementShown.autonomy != 0) {
             resultArray.add("Autonomia: ${elementShown.autonomy} km")
+
+        }*/
+        if (elementShown.year != null && elementShown.year != 0) {
+            resultArray.add(when (ElementManager.idioma){
+                0 -> {"Any: ${elementShown.year}"}
+                1 -> {"Año: ${elementShown.year}"}
+                2 -> {"Year: ${elementShown.year}"}
+                else -> {""}
+                }
+            )
+        }
+        if (elementShown.autonomy != null && elementShown.autonomy != 0) {
+            resultArray.add(when (ElementManager.idioma){
+                0 -> {"Autonomia: ${elementShown.autonomy} km"}
+                1 -> {"Autonomía: ${elementShown.autonomy} km"}
+                2 -> {"Autonomy: ${elementShown.autonomy} km"}
+                else -> {""}
+                }
+            )
         }
         if (elementShown.disposalCapacity != null && elementShown.disposalCapacity != 0) {
-            resultArray.add("Capacitat de disposició: ${elementShown.disposalCapacity} kg")
+            resultArray.add(when (ElementManager.idioma){
+                0 -> {"Capacitat del dipòsit: ${elementShown.disposalCapacity} litres"}
+                1 -> {"Capacidad del depósito: ${elementShown.disposalCapacity} litros"}
+                2 -> {"Tank capacity: ${elementShown.disposalCapacity} liter"}
+                else -> {""}
+                }
+            )
         }
         if (!elementShown.cicle.isNullOrBlank()) {
-            resultArray.add("Cicle: ${elementShown.cicle}")
+            resultArray.add(when (ElementManager.idioma){
+                0, 2 -> {"Cicle: ${elementShown.cicle}"}
+                1 -> {"Ciclo: ${elementShown.cicle}"}
+                //2 -> {"Cicle: ${elementShown.cicle}"}
+                else -> {""}
+                }
+            )
         }
         if (elementShown.cilindrada != null && elementShown.cilindrada != 0) {
-            resultArray.add("Cilindrada: ${elementShown.cilindrada} cc")
+            resultArray.add(when (ElementManager.idioma){
+                0, 1 -> {"Cilindrada: ${elementShown.cilindrada} cc"}
+                //1 -> {"Cilindrada: ${elementShown.cilindrada} cc"}
+                2 -> {"Engine capacity: ${elementShown.cilindrada} cc"}
+                else -> {""}
+                }
+            )
         }
         if (elementShown.wingspan != null && elementShown.wingspan != 0) {
-            resultArray.add("Envergadura: ${elementShown.wingspan} m")
+            resultArray.add(when (ElementManager.idioma){
+                0, 1 -> {"Envergadura: ${elementShown.wingspan} m"}
+                //1 -> {"Envergadura: ${elementShown.wingspan} m"}
+                2 -> {"Wingspan: ${elementShown.wingspan} m"}
+                else -> {""}
+                }
+            )
         }
         if (!elementShown.energyFont.isNullOrBlank()) {
-            resultArray.add("Font d'energia: ${elementShown.energyFont}")
+            resultArray.add(when (ElementManager.idioma){
+                0 -> {"Font d'energia: ${elementShown.energyFont}"}
+                1 -> {"Fuente de energía: ${elementShown.energyFont}"}
+                2 -> {"Energy source: ${elementShown.energyFont}"}
+                else -> {""}
+                }
+            )
         }
         if (!elementShown.sourceIncome.isNullOrBlank()) {
-            resultArray.add("Font d'ingressos: ${elementShown.sourceIncome}")
+            resultArray.add(when (ElementManager.idioma){
+                0 -> {"Font d'ingrés: ${elementShown.sourceIncome}"}
+                1 -> {"Fuente de ingreso: ${elementShown.sourceIncome}"}
+                2 -> {"Admission source: ${elementShown.sourceIncome}"}
+                else -> {""}
+                }
+            )
         }
         if (!elementShown.formIncome.isNullOrBlank()) {
-            resultArray.add("Forma d'ingressos: ${elementShown.formIncome}")
+            resultArray.add(when (ElementManager.idioma){
+                0 -> {"Forma d'ingrés: ${elementShown.formIncome}"}
+                1 -> {"Forma de ingreso: ${elementShown.formIncome}"}
+                2 -> {"Admission way: ${elementShown.formIncome}"}
+                else -> {""}
+                }
+            )
         }
         if (!elementShown.manufacturingPlace.isNullOrBlank()) {
-            resultArray.add("Lloc de fabricació: ${elementShown.manufacturingPlace}")
+            resultArray.add(when (ElementManager.idioma){
+                0 -> {"Lloc de fabricació: ${elementShown.manufacturingPlace}"}
+                1 -> {"Lugar de fabricación: ${elementShown.manufacturingPlace}"}
+                2 -> {"Manufacturing place: ${elementShown.manufacturingPlace}"}
+                else -> {""}
+                }
+            )
         }
         if (elementShown.length != null && elementShown.length != 0) {
-            resultArray.add("Longitud: ${elementShown.length} m")
+            resultArray.add(when (ElementManager.idioma){
+                0, 1 -> {"Longitud: ${elementShown.length} m"}
+                //1 -> {"Longitud: ${elementShown.length} m"}
+                2 -> {"Length: ${elementShown.length} m"}
+                else -> {""}
+                }
+            )
         }
         if (elementShown.weight != null && elementShown.weight != 0) {
-            resultArray.add("Pes: ${elementShown.weight} kg")
+            resultArray.add(when (ElementManager.idioma){
+                0 -> {"Pes: ${elementShown.weight} kg"}
+                1 -> {"Peso: ${elementShown.weight} kg"}
+                2 -> {"Weight: ${elementShown.weight} kg"}
+                else -> {""}
+                }
+            )
         }
         if (elementShown.potency != null && elementShown.potency != 0) {
-            resultArray.add("Potència: ${elementShown.potency}")
+            resultArray.add(when (ElementManager.idioma){
+                0 -> {"Potència: ${elementShown.potency} kW"}
+                1 -> {"Potencia: ${elementShown.potency} kW"}
+                2 -> {"Power output: ${elementShown.potency} kW"}
+                else -> {""}
+                }
+            )
         }
         if (elementShown.kmsDone != null && elementShown.kmsDone != 0) {
-            resultArray.add("Kilòmetres recorreguts: ${elementShown.kmsDone} km")
+            resultArray.add(when (ElementManager.idioma){
+                0 -> {"Quilòmetres recorreguts: ${elementShown.kmsDone} km"}
+                1 -> {"Quilómetros recorridos: ${elementShown.kmsDone} km"}
+                2 -> {"Kilometers made: ${elementShown.kmsDone} km"}
+                else -> {""}
+                }
+            )
         }
         if (elementShown.sostreMaximDeVol != null && elementShown.sostreMaximDeVol != 0) {
-            resultArray.add("Sostre màxim de vol: ${elementShown.sostreMaximDeVol} km")
+            resultArray.add(when (ElementManager.idioma){
+                0 -> {"Sostre màxim de vol: ${elementShown.sostreMaximDeVol} km"}
+                1 -> {"Techo máximo de vuelo: ${elementShown.sostreMaximDeVol} km"}
+                2 -> {"Highest height of flight: ${elementShown.sostreMaximDeVol} km"}
+                else -> {""}
+                }
+            )
         }
         if (elementShown.speed != null && elementShown.speed != 0) {
-            resultArray.add("Velocitat: ${elementShown.speed} km/h")
+            resultArray.add(when (ElementManager.idioma){
+                0 -> {"Velocitat: ${elementShown.speed} km/h"}
+                1 -> {"Velocidad: ${elementShown.speed} km/h"}
+                2 -> {"Speed: ${elementShown.speed} km/h"}
+                else -> {""}
+                }
+            )
         }
         if (elementShown.maxSpeed != null && elementShown.maxSpeed != 0) {
-            resultArray.add("Velocitat màxima: ${elementShown.maxSpeed} km/h")
+            resultArray.add(when (ElementManager.idioma){
+                0 -> {"Velocitat màxima: ${elementShown.maxSpeed} km/h"}
+                1 -> {"Velocidad máxima: ${elementShown.maxSpeed} km/h"}
+                2 -> {"Maximum speed: ${elementShown.maxSpeed} km/h"}
+                else -> {""}
+                }
+            )
         }
 
         // Verificar si se agregó al menos una propiedad al array
