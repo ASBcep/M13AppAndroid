@@ -67,7 +67,7 @@ class Activity4 : AppCompatActivity() {
         }
         //inici programació amb llista GLOBAL
 
-        val elementsField = elements//prova sense cribar per àmbit
+        //val elementsField = elements//prova sense cribar per àmbit
         //final programació amb llista GLOBAL
         /*prova sense usar la classe ElementsList
         val intent = getIntent()
@@ -76,6 +76,18 @@ class Activity4 : AppCompatActivity() {
         val elementsList = ElementsList(this)
         val elementsField = elementsList.loadField(field)
         */
+        var elementsField = mutableListOf<Element>()
+
+        //cribo per àmbit els elements a mostrar a la llista
+        if (indexField > 0){
+            for(i in 0 until elements.count()) {
+                if(elements[i].field == indexField){
+                    elementsField.add(elements[i])
+                }
+            }
+        } else {
+            elementsField = elements
+        }
 
 
         val listAltresElements = findViewById<RecyclerView>(R.id.ListAltresElements)
@@ -98,6 +110,7 @@ class Activity4 : AppCompatActivity() {
         btnChangeField.setOnClickListener{
             fieldSelector()
             act1FrameText.text = fields[indexField].nameField
+            reiniciarActividad()
         }
         btnMainScreen.setOnClickListener {
             // Crear un Intent para abrir la pantalla principal

@@ -37,6 +37,5 @@ class FieldsList(context: Context) {
         }
         //carrego la llista d'àmbits a l'objecte GLOBAL
         ElementManager.fields = fields
-        ElementManager.indexField = 0
     }
 }

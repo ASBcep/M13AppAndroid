@@ -62,8 +62,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="tria l'element que es mostrarà per defecte NO PROGRAMAT"/>
+                android:text="tria l'element que es mostrarà per defecte"/>
             <Spinner
+                android:id="@+id/spinnerField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />

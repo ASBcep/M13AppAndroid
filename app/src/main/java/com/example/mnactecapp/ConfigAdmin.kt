@@ -8,7 +8,11 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.documentfile.provider.DocumentFile
 import org.json.JSONArray
@@ -38,7 +42,21 @@ class ConfigAdmin : AppCompatActivity() {
         val btnSpa = findViewById<Button>(R.id.openFileButtonElementsSpa)
         val btnEng = findViewById<Button>(R.id.openFileButtonElementsEng)
         val btnImgElements = findViewById<Button>(R.id.openFolderImagesElements)
+        val spinnerFields = findViewById<Spinner>(R.id.spinnerField)
         FieldsList(this)
+
+        //afegeixo àmbits a un array per mostrar-ho a l'spinner d'àmbit
+        val arrayFields = ArrayList<String>()
+        ElementManager.fields.forEach { field ->
+            val nameField = field.nameField
+            arrayFields.add(nameField)
+        }
+        // Crear un adaptador per al Spinner utilitzant l'array d'strings
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayFields)
+        // Especificar el disseny de la llista desplegable
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Assignar l'adaptador al Spinner
+        spinnerFields.adapter = adapter
 
         //segons idioma canvio el valor global d'idioma per poder executar la lectura del json; després es restaura
         btnCat.setOnClickListener {
@@ -59,6 +77,23 @@ class ConfigAdmin : AppCompatActivity() {
         btnImgElements.setOnClickListener{
             destinyFolder = "imgelements"
             chooseFolder()
+        }
+        spinnerFields.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                // Accions que es realitzaran quan es seleccioni un element
+                val selectedOption = arrayFields[position]
+                ElementManager.defaultField = position
+                ElementManager.indexField = position
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
         }
     }
 
