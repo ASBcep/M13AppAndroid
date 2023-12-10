@@ -55,11 +55,16 @@ class MainActivity : AppCompatActivity() {
         //intento llegir l'element de la llista GLOBAL; si no s'aconsegueix el llegirà de la classe ElementList
         try {
             txtElement.text = ElementManager.elements[ElementManager.defaultElement].nameElement
+            val imgElementPath = getFilesDir().toString() + "/imgelements/" + ElementManager.elements[ElementManager.defaultElement].image
+            val bitmap = BitmapFactory.decodeFile(imgElementPath)
+            if(bitmap != null) {
+                imgElement.setImageBitmap(bitmap)
+            }
             //imgElement = ElementManager.elements[ElementManager.defaultElement].image
         } catch (e: Exception) {
             // Verificar si se encontró un elemento con inicialElement=true
             if (elementShown != null) {
-                val imgElementPath = getFilesDir().toString() + "/imgElements/" + elementShown.image
+                val imgElementPath = getFilesDir().toString() + "/imgelements/" + elementShown.image
                 val bitmap = BitmapFactory.decodeFile(imgElementPath)
                 imgElement.setImageBitmap(bitmap)
                 txtElement.text = elementShown.nameElement

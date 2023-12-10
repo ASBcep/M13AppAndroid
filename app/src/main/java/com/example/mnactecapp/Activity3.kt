@@ -75,7 +75,7 @@ class Activity3 : AppCompatActivity()
         }
 
         txtVwDescripcio.setText(elementShown.description)
-        val imgElementPath = getFilesDir().toString() + "/imgElements/" + elementShown.image
+        val imgElementPath = getFilesDir().toString() + "/imgelements/" + elementShown.image
         //val bitmap = BitmapFactory.decodeFile(imgElementPath)
         if (File(imgElementPath).exists()) {
             val bitmap = BitmapFactory.decodeFile(imgElementPath)
