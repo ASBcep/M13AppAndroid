@@ -17,8 +17,8 @@ object ElementManager {
     //Índex global per conèixer Àmbit
     var indexField = 1
 
-    //Índex global per conèixer Àmbit (s'hauria d'esborrar i calcular amb una funció de mutablelist)
-    var totalField: Int = 1
+    //Índex global per conèixer el total d'àmbits (s'hauria d'esborrar i calcular amb una funció de mutablelist)
+    //var totalField: Int = 1
 
     //Definició d'idioma: 0 cat, 1 spa, 2 eng
     var idioma: Int = 0

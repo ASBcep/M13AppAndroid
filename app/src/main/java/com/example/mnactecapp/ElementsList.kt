@@ -35,7 +35,7 @@ class ElementsList(context: Context) {
             elementsList.toMutableList()
         } catch (e: Exception) {
             // Manejar la excepción aquí
-            Toast.makeText(context, "Error en llegir el JSON: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Error en llegir el JSON d'elements: ${e.message}", Toast.LENGTH_LONG).show()
 
             // Retorna una lista con un elemento de muestra en caso de excepción para evitar valores nulos
             mutableListOf(
@@ -103,101 +103,8 @@ class ElementsList(context: Context) {
         }
         return elementsField1
     }
-
     // Función para filtrar y mapear un solo elemento según propiedades específicas
     fun filterAndMapElement(elementShown: Element): Array<String> {
-        // Verificar si el elemento tiene todas las propiedades no nulas
-        if (elementShown.autonomy != null &&
-            elementShown.disposalCapacity != null &&
-            elementShown.cicle != null &&
-            elementShown.cilindrada != null &&
-            elementShown.wingspan != null &&
-            elementShown.energyFont != null &&
-            elementShown.sourceIncome != null &&
-            elementShown.formIncome != null &&
-            elementShown.manufacturingPlace != null &&
-            elementShown.length != null &&
-            elementShown.weight != null &&
-            elementShown.potency != null &&
-            elementShown.kmsDone != null &&
-            elementShown.sostreMaximDeVol != null &&
-            elementShown.speed != null &&
-            elementShown.maxSpeed != null &&
-            elementShown.year != null
-        ) {
-            // Mapear las variables específicas y convertirlas a un array de strings
-            when (ElementManager.idioma){
-                0 -> {return arrayOf(
-                    "Autonomia: ${elementShown.autonomy} km",
-                    "Any: ${elementShown.year}",
-                    "Capacitat del dipòsit: ${elementShown.disposalCapacity} L",
-                    "Cicle: ${elementShown.cicle}",
-                    "Cilindrada: ${elementShown.cilindrada} cc",
-                    "Envergadura: ${elementShown.wingspan} m",
-                    "Font d'energia: ${elementShown.energyFont}",
-                    "Font d'ingrés: ${elementShown.sourceIncome}",
-                    "Forma d'ingrés: ${elementShown.formIncome}",
-                    "Lloc de fabricació: ${elementShown.manufacturingPlace}",
-                    "Longitud: ${elementShown.length} m",
-                    "Pes: ${elementShown.weight} kg",
-                    "Potència: ${elementShown.potency}",
-                    "Kilòmetres recorreguts: ${elementShown.kmsDone} km",
-                    "Sostre màxim de vol: ${elementShown.sostreMaximDeVol} km",
-                    "Velocitat: ${elementShown.speed} km/h",
-                    "Velocitat màxima: ${elementShown.maxSpeed} km/h"
-                )}
-                1 -> {return arrayOf(
-                    "Autonomía: ${elementShown.autonomy} km",
-                    "Año: ${elementShown.year}",
-                    "Capacidad del depósito: ${elementShown.disposalCapacity} L",
-                    "Ciclo: ${elementShown.cicle}",
-                    "Cilindrada: ${elementShown.cilindrada} cc",
-                    "Envergadura: ${elementShown.wingspan} m",
-                    "Fuente de energía: ${elementShown.energyFont}",
-                    "Fuente de ingreso: ${elementShown.sourceIncome}",
-                    "Forma de ingreso: ${elementShown.formIncome}",
-                    "Lugar de fabricación: ${elementShown.manufacturingPlace}",
-                    "Longitud: ${elementShown.length} m",
-                    "Peso: ${elementShown.weight} kg",
-                    "Potencia: ${elementShown.potency}",
-                    "Kilómetres recorridos: ${elementShown.kmsDone} km",
-                    "Techo máximo de vuelo: ${elementShown.sostreMaximDeVol} km",
-                    "Velocidad: ${elementShown.speed} km/h",
-                    "Velocidad máxima: ${elementShown.maxSpeed} km/h"
-                )}
-                2 -> {return arrayOf(
-                    "Autonomy: ${elementShown.autonomy} km",
-                    "Year: ${elementShown.year}",
-                    "Tank capacity: ${elementShown.disposalCapacity} L",
-                    "Cicle: ${elementShown.cicle}",
-                    "Cilindrada: ${elementShown.cilindrada} cc",
-                    "Wingspan: ${elementShown.wingspan} m",
-                    "Energy source: ${elementShown.energyFont}",
-                    "Income source: ${elementShown.sourceIncome}",
-                    "Income way: ${elementShown.formIncome}",
-                    "Place of making: ${elementShown.manufacturingPlace}",
-                    "Length: ${elementShown.length} m",
-                    "Weight: ${elementShown.weight} kg",
-                    "Potency: ${elementShown.potency}",
-                    "Kilometers made: ${elementShown.kmsDone} km",
-                    "Highest height of fly: ${elementShown.sostreMaximDeVol} km",
-                    "Speed: ${elementShown.speed} km/h",
-                    "Maximum speed: ${elementShown.maxSpeed} km/h"
-                )}
-            }
-
-        } else {
-            // Manejar el caso en el que el elemento no tenga todas las propiedades no nulas
-            when (ElementManager.idioma){
-                0 -> {return arrayOf("Falten dades")}
-                1 -> {return arrayOf("Datos incompletos")}
-                2 -> {return arrayOf("Missing data")}
-                else -> {return arrayOf("Falten dades")}
-            }
-        }
-        return arrayOf("Falten dades")
-    }
-    fun filterAndMapElementV2(elementShown: Element): Array<String> {
         val resultArray = mutableListOf<String>()
 
         // Verificar cada propiedad y agregarla al array solo si no es nula y no está vacía y cribada según idioma
@@ -356,6 +263,15 @@ class ElementsList(context: Context) {
                 2 -> {"Maximum speed: ${elementShown.maxSpeed} km/h"}
                 else -> {""}
                 }
+            )
+        }
+        if (elementShown.field != null && elementShown.field != 0) {
+            resultArray.add(when (ElementManager.idioma){
+                0 -> {"Àmbit: ${elementShown.field}"}
+                1 -> {"Ámbito: ${elementShown.field}"}
+                2 -> {"Field: ${elementShown.field}"}
+                else -> {""}
+            }
             )
         }
 

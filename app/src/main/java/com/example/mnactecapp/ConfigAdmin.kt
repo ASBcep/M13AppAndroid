@@ -38,6 +38,7 @@ class ConfigAdmin : AppCompatActivity() {
         val btnSpa = findViewById<Button>(R.id.openFileButtonElementsSpa)
         val btnEng = findViewById<Button>(R.id.openFileButtonElementsEng)
         val btnImgElements = findViewById<Button>(R.id.openFolderImagesElements)
+        FieldsList(this)
 
         //segons idioma canvio el valor global d'idioma per poder executar la lectura del json; després es restaura
         btnCat.setOnClickListener {

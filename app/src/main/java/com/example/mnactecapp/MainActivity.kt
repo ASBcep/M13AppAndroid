@@ -41,6 +41,8 @@ class MainActivity : AppCompatActivity() {
             2 -> {btnMesInfo.text = "More information about this element"}
         }
 
+        //carrego àmbits
+        FieldsList(this)
         /* creo que esto no hace falta
         val field = 1;
         val elementsList = ElementsList(this)
@@ -48,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         */
         val field = ElementManager.indexField
         val elementsList = ElementsList(this)
+
         val elementsField = elementsList.loadField(field)
 
         val elementShown = elementsField.find { it.inicialElement }

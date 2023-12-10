@@ -22,8 +22,9 @@ class Activity4 : AppCompatActivity() {
     // carrego el llistat d'elements LOCAL des de la llista GLOBAL
     val elements = ElementManager.elements
     // carrego les dades d'àmbit a mostrar LOCAL des de la llista GLOBAL
+    val fields = ElementManager.fields
     var indexField = ElementManager.indexField
-    val totalField = ElementManager.totalField
+    val totalField = ElementManager.fields.count() - 1//resto 1 ja que començem pel 0
 
     //val act1FrameText: TextView = findViewById(R.id.act1FrameText)
 
@@ -49,6 +50,8 @@ class Activity4 : AppCompatActivity() {
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         val btnChangeField: Button = findViewById(R.id.btnChangeField)
         val btnMainScreen: Button = findViewById(R.id.btnMainScreen)
+
+        act1FrameText.text = fields[indexField].nameField
 
 
         botonpasar.setOnClickListener {
@@ -94,7 +97,7 @@ class Activity4 : AppCompatActivity() {
         //botón para cambiar de ámbito
         btnChangeField.setOnClickListener{
             fieldSelector()
-            act1FrameText.text = "Àmbit: " + indexField
+            act1FrameText.text = fields[indexField].nameField
         }
         btnMainScreen.setOnClickListener {
             // Crear un Intent para abrir la pantalla principal
@@ -110,7 +113,7 @@ class Activity4 : AppCompatActivity() {
         intent.putExtra(Activity3.elementShownConstant.FIELD, selectedElement.field)
         startActivity(intent)
     }
-    private fun fieldSelector(): String {
+    private fun fieldSelector() {
         if (indexField < totalField){
             indexField++
         } else {
@@ -118,8 +121,7 @@ class Activity4 : AppCompatActivity() {
         }
         //FALTA canviar que l'àmbit es mostri com a string i no com a enter.
         ElementManager.indexField = indexField
-        Toast.makeText(this,"Es mostra: àmbit " + indexField, Toast.LENGTH_SHORT).show()
-        return "Àmbit: $indexField"
+        Toast.makeText(this,"Es canvia d'àmbit a " + indexField + ": " + fields[indexField].nameField, Toast.LENGTH_SHORT).show()
     }
     fun reiniciarActividad() {
         // Cerrar la actividad actual

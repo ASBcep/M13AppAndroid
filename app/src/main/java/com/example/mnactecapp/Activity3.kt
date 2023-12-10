@@ -87,8 +87,8 @@ class Activity3 : AppCompatActivity()
 
 
         val elementsList = ElementsList(this)
-        // Simulación de datos para el adaptador (reemplaza esto con tus propios datos)
-        val datos = elementsList.filterAndMapElementV2(elementShown)
+
+        val datos = elementsList.filterAndMapElement(elementShown)
 
         // Configurar el adaptador
         val adaptador = ArrayAdapter(this, android.R.layout.simple_list_item_1, datos)
