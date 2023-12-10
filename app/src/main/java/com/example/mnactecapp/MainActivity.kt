@@ -33,13 +33,10 @@ class MainActivity : AppCompatActivity() {
         val btnMesInfo: Button = findViewById(R.id.BtnMesInfo)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         //val btnJsonShortcut = findViewById<Button>(R.id.BtnJsonShortcut)
+        val btnField: Button = findViewById(R.id.btnField)
+        val TvAct1Field: TextView = findViewById(R.id.TvAct1Field)
 
-        //mostrar text segons idioma
-        when (ElementManager.idioma){
-            0 -> {btnMesInfo.text = "Més informació envers l'element"}
-            1 -> {btnMesInfo.text = "Más información acerca del elemento"}
-            2 -> {btnMesInfo.text = "More information about this element"}
-        }
+
 
         //carrego àmbits
         FieldsList(this)
@@ -63,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             if(bitmap != null) {
                 imgElement.setImageBitmap(bitmap)
             }
-            //imgElement = ElementManager.elements[ElementManager.defaultElement].image
+            TvAct1Field.text = ElementManager.fields[field].nameField
         } catch (e: Exception) {
             // Verificar si se encontró un elemento con inicialElement=true
             if (elementShown != null) {
@@ -71,7 +68,14 @@ class MainActivity : AppCompatActivity() {
                 val bitmap = BitmapFactory.decodeFile(imgElementPath)
                 imgElement.setImageBitmap(bitmap)
                 txtElement.text = elementShown.nameElement
+                TvAct1Field.text = ElementManager.fields[field].nameField
             }
+        }
+        //mostrar text segons idioma
+        when (ElementManager.idioma){
+            0 -> {btnMesInfo.text = "Veure'n més detalls"}
+            1 -> {btnMesInfo.text = "Ver más detalles"}
+            2 -> {btnMesInfo.text = "See details"}
         }
 
 
@@ -102,6 +106,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             */
+            btnField.setOnClickListener {
+                val intent = Intent(this, Activity4::class.java)
+                startActivity(intent)
+            }
         }
     fun reiniciarActividad() {
         // Cerrar la actividad actual

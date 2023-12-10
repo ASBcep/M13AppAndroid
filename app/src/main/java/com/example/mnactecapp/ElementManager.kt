@@ -15,7 +15,7 @@ object ElementManager {
     var fields = mutableListOf<Field>()
 
     //Índex global per conèixer Àmbit
-    var indexField = 1
+    var indexField = 0
 
     //Índex global per conèixer el total d'àmbits (s'hauria d'esborrar i calcular amb una funció de mutablelist)
     //var totalField: Int = 1

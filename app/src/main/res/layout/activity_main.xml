@@ -48,6 +48,13 @@
             android:orientation="vertical"
             tools:ignore="MissingConstraints">
 
+            <TextView
+                android:id="@+id/TvAct1Field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nom de l'àmbit"
+                android:gravity="center"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -102,6 +109,12 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="Càrrega JSON" /-->
+            <Button
+                android:id="@+id/btnField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="Veure elements de l'àmbit" />
 
         </LinearLayout>
 

@@ -17,7 +17,7 @@
     <string name="fletxaEnrere" translatable="false">👈</string>
     <string name="fletxaEndavant" translatable="false">👉</string>
     <string name="midaTextHead">50sp</string>
-    <string name="HeadActMain">ÀMBIT MÉS PRÒXIM</string>
+    <string name="HeadActMain">ELEMENT ALEATORI DE L\'ÀMBIT</string>
     <string name="HeadAct1">ELEMENT MÉS PRÒXIM I TAL I PASQUAL</string>
     <string name="HeadAct2">NOM ELEMENT</string>
     <string name="HeadAct3">NOM ELEMENT</string>
@@ -25,7 +25,6 @@
     <string name="HeadAct5">DEMOSTRA ELS TEUS CONEIXEMENTS</string>
     <string name="HeadAct6">TRIA UN NIVELL DE DIFICULTAT</string>
     <string name="HeadAct8">FI DE LA PARTIDA</string>
-
     <string name="btn_idioma">🌍 IDIOMA</string>
 
 </resources>
