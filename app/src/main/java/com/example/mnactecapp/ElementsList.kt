@@ -101,7 +101,7 @@ class ElementsList(context: Context) {
             5 -> return elementsField5
             6 -> return elementsField6
         }
-        return elementsField1
+        return elements
     }
     // Función para filtrar y mapear un solo elemento según propiedades específicas
     fun filterAndMapElement(elementShown: Element): Array<String> {
