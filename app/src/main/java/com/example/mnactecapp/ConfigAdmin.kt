@@ -41,6 +41,8 @@ class ConfigAdmin : AppCompatActivity() {
         setContentView(R.layout.config_admin)
 
         val btnImgElements = findViewById<Button>(R.id.openFolderImagesElements)
+        val btnImgGame = findViewById<Button>(R.id.openFolderImagesGame)
+        val btnField = findViewById<Button>(R.id.btnField)
         val btnJson = findViewById<Button>(R.id.openFolderJson)
         val spinnerFields = findViewById<Spinner>(R.id.spinnerField)
         FieldsList(this)
@@ -65,6 +67,11 @@ class ConfigAdmin : AppCompatActivity() {
         btnJson.setOnClickListener {
             destinyFolder = "json"
             chooseFolderJson()
+        }
+        btnField.setOnClickListener {
+            // Crear un Intent para abrir Activity4 (llistat d'elements)
+            val intent = Intent(this, Activity4::class.java)
+            startActivity(intent)
         }
         spinnerFields.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(

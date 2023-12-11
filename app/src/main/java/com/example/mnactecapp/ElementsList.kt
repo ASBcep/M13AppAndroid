@@ -68,8 +68,7 @@ class ElementsList(context: Context) {
         }
         ElementManager.elements = elements
     }
-
-
+    /*ELIMINAR SI NO DA ERROR
     // Listas filtradas por el campo "field"(ambito)
     val elementsField1: List<Element> by lazy {
         elements.filter { it.field == 1 }
@@ -90,8 +89,7 @@ class ElementsList(context: Context) {
         elements.filter { it.field == 6 }
     }
 
-    //esta función qué hace??
-    fun loadField(field:Int,):List<Element>{
+    fun loadFieldV1(field:Int,):List<Element>{
 
         when(field){
             1 -> return elementsField1
@@ -102,6 +100,22 @@ class ElementsList(context: Context) {
             6 -> return elementsField6
         }
         return elements
+    }*/
+    //Función para filtrar una lista de elementos según ámbito
+    fun loadField (field: Int): List<Element>{
+        var elementsField = mutableListOf<Element>()
+
+        //cribo per àmbit els elements a mostrar a la llista
+        if (field > 0){
+            for(i in 0 until elements.count()) {
+                if(elements[i].field == field){
+                    elementsField.add(elements[i])
+                }
+            }
+        } else {
+            elementsField = elements
+        }
+        return elementsField
     }
     // Función para filtrar y mapear un solo elemento según propiedades específicas
     fun filterAndMapElement(elementShown: Element): Array<String> {

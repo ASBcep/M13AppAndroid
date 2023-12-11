@@ -38,8 +38,8 @@ class Activity4 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity4)
 
-        val botonpasar: TextView = findViewById(R.id.botonpasar)
-        val botonatras: TextView = findViewById(R.id.botonatras)
+        //val botonpasar: TextView = findViewById(R.id.botonpasar)
+        //val botonatras: TextView = findViewById(R.id.botonatras)
 
         val act1FrameText: TextView = findViewById(R.id.act1FrameText)
 
@@ -50,17 +50,17 @@ class Activity4 : AppCompatActivity() {
         act1FrameText.text = fields[indexField].nameField
 
 
-        botonpasar.setOnClickListener {
+        /*botonpasar.setOnClickListener {
             // Crear un Intent para abrir Activity6
             val intent = Intent(this, Activity6::class.java)
             startActivity(intent)
-        }
+        }*/
 
-        botonatras.setOnClickListener {
+        /*botonatras.setOnClickListener {
             // Crear un Intent para abrir Activity3
             val intent = Intent(this, Activity3::class.java)
             startActivity(intent)
-        }
+        }*/
         //inici programació amb llista GLOBAL
 
         //val elementsField = elements//prova sense cribar per àmbit

@@ -28,13 +28,13 @@
                 android:textSize="30sp"
                 android:textStyle="bold"/>
 
-            <TextView
+            <!--TextView
                 android:id="@+id/botonpasar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="@string/fletxaEndavant"
-                android:textSize="30sp" />
+                android:textSize="30sp" /-->
         </LinearLayout>
 
 

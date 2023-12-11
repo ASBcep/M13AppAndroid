@@ -25,9 +25,9 @@ class Activity3 : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity3)
 
-        val botonpasar: TextView = findViewById(R.id.botonpasar)
-        val botonatras: TextView = findViewById(R.id.botonatras)
-        val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
+        //val botonpasar: TextView = findViewById(R.id.botonpasar)
+        //val botonatras: TextView = findViewById(R.id.botonatras)
+        //val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         val btnPlay: Button = findViewById(R.id.btnPlay)
         val btnList: Button = findViewById(R.id.btnList)
         val txtVwDescripcio: TextView = findViewById(R.id.TxtVwDescripcio)
@@ -43,23 +43,23 @@ class Activity3 : AppCompatActivity()
         act3FrameText.text = elementShown.nameElement
 
 
-        botonpasar.setOnClickListener {
+        /*botonpasar.setOnClickListener {
             // Crear un Intent para abrir Activity4
             val intent = Intent(this, Activity4::class.java)
             startActivity(intent)
-        }
+        }*/
 
-        botonatras.setOnClickListener {
+        /*botonatras.setOnClickListener {
             // Crear un Intent para abrir Activity1
             val intent = Intent(this, MainActivity::class.java)
 
             startActivity(intent)
-        }
-        botonidiomas1.setOnClickListener {
+        }*/
+        /*botonidiomas1.setOnClickListener {
             // Crear un Intent para abrir idiomas
             val intent = Intent(this, idiomas::class.java)
             startActivity(intent)
-        }
+        }*/
         btnList.setOnClickListener {
             // Crear un Intent para abrir Activity4 (llistat d'elements)
             val intent = Intent(this, Activity4::class.java)
