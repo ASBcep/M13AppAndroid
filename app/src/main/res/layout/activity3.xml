@@ -91,7 +91,8 @@
                 android:textStyle="bold"
                 android:textSize="24sp"
                 android:layout_margin="4dp"
-                android:scrollbars = "vertical"/>
+                android:scrollbars = "vertical"
+                android:padding="20dp"/>
             <!--Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -43,17 +43,21 @@
                     android:id="@+id/openFolderJson"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Importar arxius .JSON des d'una carpeta"/>
+                    android:text="Importar arxius .JSON des d'una carpeta"
+                    />
                 <Button
                     android:id="@+id/openFolderImagesElements"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Importar imatges d'elements des d'una carpeta"/>
+                    android:text="Importar imatges d'elements des d'una carpeta"
+                    android:layout_marginVertical="20dp"
+                    />
                 <Button
                     android:id="@+id/openFolderImagesGame"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Importar imatges del joc des d'una carpeta"/>
+                    android:text="Importar imatges del joc des d'una carpeta"
+                    />
 
                 <!--TextView
                     android:layout_width="wrap_content"
@@ -149,12 +153,12 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="@string/btn_idioma" />
-            <!--Button
-                android:id="@+id/BtnJsonShortcut"
+            <Button
+                android:id="@+id/btnMainScreen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="Càrrega JSON" /-->
+                android:gravity="left"
+                android:text="Torna a l'inici" />
             <Button
                 android:id="@+id/btnField"
                 android:layout_width="wrap_content"

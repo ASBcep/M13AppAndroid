@@ -5,60 +5,70 @@
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_margin="0dp"
-        android:gravity="top"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
 
-
-
+        <TextView
+            android:id="@+id/act1FrameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="@string/btn_idioma"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
+        android:layout_weight="1"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="20dp">
 
         <Button
             android:id="@+id/btnCat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:text="Català " />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
+            android:text="Català "/>
         <Button
             android:id="@+id/btnSpa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:text="Castellano" />
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
+            android:text="Castellano"
+            android:layout_marginHorizontal="20dp"/>
         <Button
             android:id="@+id/btnEng"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:text="English" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:layout_weight="0"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnMainScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Torna a l'inici" />
+        <Button
+            android:id="@+id/btnField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Veure elements de l'àmbit" />
 
     </LinearLayout>
 

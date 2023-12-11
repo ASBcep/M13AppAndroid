@@ -28,11 +28,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val imgElement: ImageView = findViewById(R.id.imgElementMain)
-        val txtElement: TextView = findViewById(R.id.act1FrameText)
+        val act1FrameText: TextView = findViewById(R.id.act1FrameText)
         //val botonpasar: TextView = findViewById(R.id.botonpasar)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         val btnField: Button = findViewById(R.id.btnField)
-        val TvAct1Field: TextView = findViewById(R.id.TvAct1Field)
+        val TvAct1ElementName: TextView = findViewById(R.id.TvAct1ElementName)
 
         FieldsList(this)
 
@@ -43,13 +43,13 @@ class MainActivity : AppCompatActivity() {
         val elementToShow = elementsField.random()
 
         try {
-            txtElement.text = elementToShow.nameElement
+            TvAct1ElementName.text = elementToShow.nameElement
             val imgElementPath = filesDir.toString() + "/imgelements/" + elementToShow.image
             val bitmap = BitmapFactory.decodeFile(imgElementPath)
             if (bitmap != null) {
                 imgElement.setImageBitmap(bitmap)
             }
-            TvAct1Field.text = ElementManager.fields[field].nameField
+            act1FrameText.text = ElementManager.fields[field].nameField
         } catch (e: Exception) {
             // Manejar la excepción si es necesario
         }
