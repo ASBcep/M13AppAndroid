@@ -79,10 +79,10 @@
                 android:paddingTop="25dp">
 
                 <Button
-                    android:id="@+id/BtnMesInfo"
+                    android:id="@+id/btnField"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Més informació envers l'element"
+                    android:text="Veure elements de l'àmbit"
                     android:textSize="20dp"/>
             </LinearLayout>
 
@@ -109,12 +109,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="Càrrega JSON" /-->
-            <Button
-                android:id="@+id/btnField"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text="Veure elements de l'àmbit" />
 
         </LinearLayout>
 
