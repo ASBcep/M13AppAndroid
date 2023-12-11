@@ -78,7 +78,7 @@ class Activity3 : AppCompatActivity()
             val bitmap = BitmapFactory.decodeFile(imgElementPath)
             imgVwElement.setImageBitmap(bitmap)
         } else {
-            imgVwElement.setImageResource(R.drawable.simpsonscarherb)
+            imgVwElement.setImageResource(R.drawable.defaultelement)
         }
 
 

@@ -13,7 +13,9 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.documentfile.provider.DocumentFile
 import org.json.JSONArray
 import org.json.JSONException
@@ -36,6 +38,8 @@ class ConfigAdmin : AppCompatActivity() {
     private var originalLang = -1
     private var jsonLang = -1
     private var destinyFolder = ""
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.config_admin)
@@ -44,6 +48,7 @@ class ConfigAdmin : AppCompatActivity() {
         val btnImgGame = findViewById<Button>(R.id.openFolderImagesGame)
         val btnField = findViewById<Button>(R.id.btnField)
         val btnJson = findViewById<Button>(R.id.openFolderJson)
+        val btnMainScreen: Button = findViewById(R.id.btnMainScreen)
         val spinnerFields = findViewById<Spinner>(R.id.spinnerField)
         FieldsList(this)
 
@@ -59,6 +64,7 @@ class ConfigAdmin : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         // Assignar l'adaptador al Spinner
         spinnerFields.adapter = adapter
+        spinnerFields.setSelection(ElementManager.indexField)
 
         btnImgElements.setOnClickListener{
             destinyFolder = "imgelements"
@@ -68,9 +74,18 @@ class ConfigAdmin : AppCompatActivity() {
             destinyFolder = "json"
             chooseFolderJson()
         }
+        btnImgGame.setOnClickListener {
+            destinyFolder = "gameimg"
+            chooseFolderJson()
+        }
         btnField.setOnClickListener {
             // Crear un Intent para abrir Activity4 (llistat d'elements)
             val intent = Intent(this, Activity4::class.java)
+            startActivity(intent)
+        }
+        btnMainScreen.setOnClickListener {
+            // Crear un Intent para abrir la pantalla principal
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
         spinnerFields.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
