@@ -49,7 +49,7 @@ class ConfigAdmin : AppCompatActivity() {
                 btnImgGame.text = getString(R.string.btnImportImgGameCAT)
                 btnMainScreen.text = getString(R.string.btnIniciCAT)
                 btnList.text = getString(R.string.btnFieldCAT)
-                btnJson.text = getString(R.string.btnImportImgGameCAT)
+                btnJson.text = getString(R.string.btnImportJsonCAT)
                 TvCredits.text = getString(R.string.creditsCAT)
                 actConAdmFrameText.text = getString(R.string.HeadActConAdmCAT)
                 TvChooseField.text = getString(R.string.DefaultFieldCAT)}
@@ -57,7 +57,7 @@ class ConfigAdmin : AppCompatActivity() {
                 btnImgGame.text = getString(R.string.btnImportImgGameSPA)
                 btnMainScreen.text = getString(R.string.btnIniciSPA)
                 btnList.text = getString(R.string.btnFieldSPA)
-                btnJson.text = getString(R.string.btnImportImgGameSPA)
+                btnJson.text = getString(R.string.btnImportJsonSPA)
                 TvCredits.text = getString(R.string.creditsSPA)
                 actConAdmFrameText.text = getString(R.string.HeadActConAdmSPA)
                 TvChooseField.text = getString(R.string.DefaultFieldSPA)}
@@ -65,7 +65,7 @@ class ConfigAdmin : AppCompatActivity() {
                 btnImgGame.text = getString(R.string.btnImportImgGameENG)
                 btnMainScreen.text = getString(R.string.btnIniciENG)
                 btnList.text = getString(R.string.btnFieldENG)
-                btnJson.text = getString(R.string.btnImportImgGameENG)
+                btnJson.text = getString(R.string.btnImportJsonENG)
                 TvCredits.text = getString(R.string.creditsENG)
                 actConAdmFrameText.text = getString(R.string.HeadActConAdmENG)
                 TvChooseField.text = getString(R.string.DefaultFieldENG)}
