@@ -1,4 +1,5 @@
 package com.example.mnactecapp
+
 import ElementsList
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -8,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mnactecapp.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -54,6 +54,15 @@ class MainActivity : AppCompatActivity() {
             // Manejar la excepción si es necesario
         }
 
+        // Agregar OnClickListener a la imagen
+        imgElement.setOnClickListener {
+            // Lanzar Activity3 al tocar la imagen
+            val intent = Intent(this, Activity3::class.java)
+            intent.putExtra(Activity3.elementShownConstant.ELEMENT, elementToShow)
+            intent.putExtra(Activity3.elementShownConstant.FIELD, field)
+            startActivity(intent)
+        }
+
         botonpasar.setOnClickListener {
             val intent = Intent(this, Activity3::class.java)
             intent.putExtra(Activity3.elementShownConstant.ELEMENT, elementToShow)
@@ -78,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 }
+
 /* backup 11/12/2023 pre canvi "element per defecte" a "element random de l'àmbit"
 package com/.example.mnactecapp
 
