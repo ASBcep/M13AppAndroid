@@ -40,9 +40,6 @@ class ConfigAdmin : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.config_admin)
 
-        val btnCat = findViewById<Button>(R.id.openFileButtonElementsCat)
-        val btnSpa = findViewById<Button>(R.id.openFileButtonElementsSpa)
-        val btnEng = findViewById<Button>(R.id.openFileButtonElementsEng)
         val btnImgElements = findViewById<Button>(R.id.openFolderImagesElements)
         val btnJson = findViewById<Button>(R.id.openFolderJson)
         val spinnerFields = findViewById<Spinner>(R.id.spinnerField)
@@ -61,22 +58,6 @@ class ConfigAdmin : AppCompatActivity() {
         // Assignar l'adaptador al Spinner
         spinnerFields.adapter = adapter
 
-        //segons idioma canvio el valor global d'idioma per poder executar la lectura del json; després es restaura
-        btnCat.setOnClickListener {
-            originalLang = ElementManager.idioma
-            jsonLang = 0
-            btnLoadJson()
-        }
-        btnSpa.setOnClickListener {
-            originalLang = ElementManager.idioma
-            jsonLang = 1
-            btnLoadJson()
-        }
-        btnEng.setOnClickListener {
-            originalLang = ElementManager.idioma
-            jsonLang = 2
-            btnLoadJson()
-        }
         btnImgElements.setOnClickListener{
             destinyFolder = "imgelements"
             chooseFolderImg()
