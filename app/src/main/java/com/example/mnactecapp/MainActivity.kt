@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         val imgElement: ImageView = findViewById(R.id.imgElementMain)
         val txtElement: TextView = findViewById(R.id.act1FrameText)
-        val botonpasar: TextView = findViewById(R.id.botonpasar)
+        //val botonpasar: TextView = findViewById(R.id.botonpasar)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         val btnField: Button = findViewById(R.id.btnField)
         val TvAct1Field: TextView = findViewById(R.id.TvAct1Field)
@@ -62,11 +62,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        botonpasar.setOnClickListener {
+        /*botonpasar.setOnClickListener {
             val intent = Intent(this, Activity3::class.java)
             intent.putExtra(Activity3.elementShownConstant.ELEMENT, elementToShow)
             startActivity(intent)
-        }
+        }*/
 
         botonidiomas1.setOnClickListener {
             val intent = Intent(this, idiomas::class.java)
