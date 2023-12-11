@@ -74,6 +74,8 @@ class MainActivity : AppCompatActivity() {
         finish()
         val intent = Intent(this, this::class.java)
         startActivity(intent)
+
+
     }
 }
 /*codi branch main 30/11/2023
