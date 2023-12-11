@@ -13,7 +13,6 @@ import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.documentfile.provider.DocumentFile
 import java.io.File
 import java.io.FileOutputStream
@@ -37,11 +36,43 @@ class ConfigAdmin : AppCompatActivity() {
 
         val btnImgElements = findViewById<Button>(R.id.openFolderImagesElements)
         val btnImgGame = findViewById<Button>(R.id.openFolderImagesGame)
-        val btnField = findViewById<Button>(R.id.btnField)
+        val btnList = findViewById<Button>(R.id.btnList)
         val btnJson = findViewById<Button>(R.id.openFolderJson)
         val btnMainScreen: Button = findViewById(R.id.btnMainScreen)
         val spinnerFields = findViewById<Spinner>(R.id.spinnerField)
+        val actConAdmFrameText = findViewById<TextView>(R.id.actConAdmFrameText)
+        val TvCredits = findViewById<TextView>(R.id.TvCredits)
+        val TvChooseField = findViewById<TextView>(R.id.TvChooseField)
+
+        when (ElementManager.idioma){
+            0 -> {btnImgElements.text = getString(R.string.btnImportImgElemCAT)
+                btnImgGame.text = getString(R.string.btnImportImgGameCAT)
+                btnMainScreen.text = getString(R.string.btnIniciCAT)
+                btnList.text = getString(R.string.btnFieldCAT)
+                btnJson.text = getString(R.string.btnImportImgGameCAT)
+                TvCredits.text = getString(R.string.creditsCAT)
+                actConAdmFrameText.text = getString(R.string.HeadActConAdmCAT)
+                TvChooseField.text = getString(R.string.DefaultFieldCAT)}
+            1 -> {btnImgElements.text = getString(R.string.btnImportImgElemSPA)
+                btnImgGame.text = getString(R.string.btnImportImgGameSPA)
+                btnMainScreen.text = getString(R.string.btnIniciSPA)
+                btnList.text = getString(R.string.btnFieldSPA)
+                btnJson.text = getString(R.string.btnImportImgGameSPA)
+                TvCredits.text = getString(R.string.creditsSPA)
+                actConAdmFrameText.text = getString(R.string.HeadActConAdmSPA)
+                TvChooseField.text = getString(R.string.DefaultFieldSPA)}
+            2 -> {btnImgElements.text = getString(R.string.btnImportImgElemENG)
+                btnImgGame.text = getString(R.string.btnImportImgGameENG)
+                btnMainScreen.text = getString(R.string.btnIniciENG)
+                btnList.text = getString(R.string.btnFieldENG)
+                btnJson.text = getString(R.string.btnImportImgGameENG)
+                TvCredits.text = getString(R.string.creditsENG)
+                actConAdmFrameText.text = getString(R.string.HeadActConAdmENG)
+                TvChooseField.text = getString(R.string.DefaultFieldENG)}
+        }
+
         FieldsList(this)
+
 
         //afegeixo àmbits a un array per mostrar-ho a l'spinner d'àmbit
         val arrayFields = ArrayList<String>()
@@ -67,9 +98,9 @@ class ConfigAdmin : AppCompatActivity() {
         }
         btnImgGame.setOnClickListener {
             destinyFolder = "gameimg"
-            chooseFolderJson()
+            chooseFolderImg()
         }
-        btnField.setOnClickListener {
+        btnList.setOnClickListener {
             // Crear un Intent para abrir Activity4 (llistat d'elements)
             val intent = Intent(this, Activity4::class.java)
             startActivity(intent)
@@ -139,7 +170,8 @@ class ConfigAdmin : AppCompatActivity() {
             // Utilitza la URI seleccionada per accedir a la carpeta
             if (uri != null) {
                 //comprovo si existeix o creo la carpeta imgelements, per emmagatzemar les imatges dels elements
-                val imgElementsFolder = folderCheck("imgelements")
+                //val imgElementsFolder = folderCheck("imgelements")
+                val imgElementsFolder = folderCheck(destinyFolder)
                 if (imgElementsFolder)
                 {
                     //copiar imatges d'elements
@@ -154,7 +186,8 @@ class ConfigAdmin : AppCompatActivity() {
             // Utilitza la URI seleccionada per accedir a la carpeta
             if (uri != null) {
                 //comprovo si existeix o creo la carpeta imgelements, per emmagatzemar les imatges dels elements
-                val jsonFolder = folderCheck("json")
+                //val jsonFolder = folderCheck("json")
+                val jsonFolder = folderCheck(destinyFolder)
                 if (jsonFolder)
                 {
                     //copiar imatges d'elements

@@ -19,12 +19,12 @@
                 android:textSize="30sp" /-->
 
             <TextView
-                android:id="@+id/act1FrameText"
+                android:id="@+id/act6FrameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAlignment="center"
-                android:text="@string/HeadAct6"
+                android:text="@string/HeadAct6CAT"
                 android:textSize="30sp"
                 android:textStyle="bold"/>
 
@@ -41,7 +41,7 @@
                 android:layout_width="377dp"
                 android:layout_weight="1"
                 android:layout_height="0dp"
-                android:text="FÀCIL"
+                android:text="@string/btnEasyCAT"
                 android:textSize="40sp"
                 android:background="@color/black"
                 android:layout_marginTop="25dp"
@@ -54,7 +54,7 @@
                 android:layout_weight="1"
                 android:layout_height="0dp"
                 android:background="@color/black"
-                android:text="MITJÀ"
+                android:text="@string/btnMediumCAT"
                 android:textSize="40sp"
                 android:padding="20dp"
                 android:layout_marginTop="25dp"
@@ -64,7 +64,7 @@
                 android:layout_width="377dp"
                 android:layout_weight="1"
                 android:layout_height="0dp"
-                android:text="DIFÍCIL"
+                android:text="@string/btnDificil"
                 android:textSize="40sp"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
@@ -91,13 +91,13 @@
                 android:id="@+id/btnConfigAdmin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Opcions Avançades" />
+                android:text="@string/btnAdvOptCAT" />
             <Button
-                android:id="@+id/btnMainScreen2"
+                android:id="@+id/btnMainScreen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:text="Torna a l'inici" />
+                android:text="@string/btnIniciCAT" />
 
         </LinearLayout>
 </LinearLayout>

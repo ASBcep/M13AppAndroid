@@ -83,10 +83,10 @@
                     android:paddingBottom="10dp"/>
 
                 <Button
-                    android:id="@+id/btnField"
+                    android:id="@+id/btnList"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Veure elements de l'àmbit"
+                    android:text="Veure tots els elements de l'àmbit"
                     android:textSize="20dp"/>
             </LinearLayout>
 

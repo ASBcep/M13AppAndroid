@@ -17,7 +17,7 @@ class idiomas : AppCompatActivity() {
         val btnSpa = findViewById<Button>(R.id.btnSpa)
         val btnEng = findViewById<Button>(R.id.btnEng)
         val btnMainScreen: Button = findViewById(R.id.btnMainScreen)
-        val btnField: Button = findViewById(R.id.btnField)
+        val btnList: Button = findViewById(R.id.btnList)
 
         btnCat.setOnClickListener {
             ElementManager.idioma = 0
@@ -45,7 +45,7 @@ class idiomas : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-        btnField.setOnClickListener {
+        btnList.setOnClickListener {
             // Crear un Intent para abrir Activity4 (llistat d'elements)
             val intent = Intent(this, Activity4::class.java)
             startActivity(intent)

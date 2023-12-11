@@ -17,12 +17,12 @@
             android:paddingTop="10dp">
 
             <TextView
-                android:id="@+id/act1FrameText"
+                android:id="@+id/actConAdmFrameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAlignment="center"
-                android:text="Opcions de l'aplicació"
+                android:text="@string/HeadActConAdmCAT"
                 android:textSize="30sp"
                 android:textStyle="bold"/>
         </LinearLayout>
@@ -43,20 +43,20 @@
                     android:id="@+id/openFolderJson"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Importar arxius .JSON des d'una carpeta"
+                    android:text="@string/btnImportJsonCAT"
                     />
                 <Button
                     android:id="@+id/openFolderImagesElements"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Importar imatges d'elements des d'una carpeta"
+                    android:text="@string/btnImportImgElemCAT"
                     android:layout_marginVertical="20dp"
                     />
                 <Button
                     android:id="@+id/openFolderImagesGame"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Importar imatges del joc des d'una carpeta"
+                    android:text="@string/btnImportImgGameCAT"
                     />
 
                 <!--TextView
@@ -115,10 +115,11 @@
                     android:layout_weight="10"
                         android:padding="20dp">
                     <TextView
+                        android:id="@+id/TvChooseField"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="Tria l'àmbit que es mostrarà per defecte: "/>
+                        android:text="@string/DefaultFieldCAT"/>
                     <Spinner
                         android:id="@+id/spinnerField"
                         android:layout_width="wrap_content"
@@ -133,9 +134,10 @@
                     android:layout_weight="1"
                     android:padding="20dp">
                     <TextView
+                        android:id="@+id/TvCredits"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/credits"/>
+                        android:text="@string/creditsCAT"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -153,13 +155,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:text="Torna a l'inici" />
+                android:text="@string/btnIniciCAT" />
             <Button
-                android:id="@+id/btnField"
+                android:id="@+id/btnList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:text="Veure elements de l'àmbit" />
+                android:text="@string/btnFieldCAT" />
 
         </LinearLayout>
     </LinearLayout>

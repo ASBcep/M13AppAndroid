@@ -42,6 +42,16 @@ class Activity3 : AppCompatActivity()
         val elementShown = intent.getSerializableExtra(elementShownConstant.ELEMENT) as Element
         act3FrameText.text = elementShown.nameElement
 
+        //mostrar text segons idioma
+        when (ElementManager.idioma){
+            0 -> {btnPlay.text = getString(R.string.btnPlayCAT)
+                btnList.text = getString(R.string.btnFieldCAT)}
+            1 -> {btnPlay.text = getString(R.string.btnPlaySPA)
+                btnList.text = getString(R.string.btnFieldSPA)}
+            2 -> {btnPlay.text = getString(R.string.btnPlayENG)
+                btnList.text = getString(R.string.btnFieldSPA)}
+        }
+
 
         /*botonpasar.setOnClickListener {
             // Crear un Intent para abrir Activity4

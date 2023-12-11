@@ -49,6 +49,19 @@ class Activity4 : AppCompatActivity() {
 
         act1FrameText.text = fields[indexField].nameField
 
+        //mostrar text segons idioma
+        when (ElementManager.idioma){
+            0 -> {btnChangeField.text = getString(R.string.btnChangeFieldCAT)
+                botonidiomas1.text = getString(R.string.btn_idioma)
+                btnMainScreen.text = getString(R.string.btnIniciCAT)}
+            1 -> {btnChangeField.text = getString(R.string.btnChangeFieldSPA)
+                botonidiomas1.text = getString(R.string.btn_idioma)
+                btnMainScreen.text = getString(R.string.btnIniciSPA)}
+            2 -> {btnChangeField.text = getString(R.string.btnChangeFieldENG)
+                botonidiomas1.text = getString(R.string.btn_language)
+                btnMainScreen.text = getString(R.string.btnIniciENG)}
+        }
+
 
         /*botonpasar.setOnClickListener {
             // Crear un Intent para abrir Activity6

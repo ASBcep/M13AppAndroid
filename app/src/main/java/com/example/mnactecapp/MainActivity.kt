@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private val getResult =
@@ -31,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         val act1FrameText: TextView = findViewById(R.id.act1FrameText)
         //val botonpasar: TextView = findViewById(R.id.botonpasar)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
-        val btnField: Button = findViewById(R.id.btnField)
+        val btnList: Button = findViewById(R.id.btnList)
         val TvAct1ElementName: TextView = findViewById(R.id.TvAct1ElementName)
 
         FieldsList(this)
@@ -41,6 +40,16 @@ class MainActivity : AppCompatActivity() {
         val elementsField = elementsList.loadField(field)
 
         val elementToShow = elementsField.random()
+
+        //mostrar text segons idioma
+        when (ElementManager.idioma){
+            0 -> {btnList.text = getString(R.string.act1BtnFieldCAT)
+                botonidiomas1.text = getString(R.string.btn_idioma)}
+            1 -> {btnList.text = getString(R.string.act1BtnFieldSPA)
+                botonidiomas1.text = getString(R.string.btn_idioma)}
+            2 -> {btnList.text = getString(R.string.act1BtnFieldENG)
+                botonidiomas1.text = getString(R.string.btn_language)}
+        }
 
         try {
             TvAct1ElementName.text = elementToShow.nameElement
@@ -73,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             getResult.launch(intent)
         }
 
-        btnField.setOnClickListener {
+        btnList.setOnClickListener {
             val intent = Intent(this, Activity4::class.java)
             startActivity(intent)
         }
