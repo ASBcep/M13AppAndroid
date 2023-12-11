@@ -82,7 +82,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
             <TextView
                 android:id="@+id/TxtVwDescripcio"
                 android:layout_width="match_parent"
@@ -92,12 +93,26 @@
                 android:textSize="24sp"
                 android:layout_margin="4dp"
                 android:scrollbars = "vertical"
-                android:padding="20dp"/>
+                android:padding="20dp"
+                android:layout_weight="1"/>
             <!--Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="Jugar (NO PROGRAMAT)" /-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:layout_gravity="right">
+                <Button
+                    android:id="@+id/btnPlay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:text="Demostra els teus coneixements" />
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -105,26 +120,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
         android:layout_weight="0"
-        android:gravity="bottom"
-        android:orientation="horizontal">
+        android:gravity="bottom|center"
+        android:orientation="horizontal"
+        android:paddingVertical="15dp"
+        >
 
-        <!--Button
-            android:id="@+id/botonidiomas1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="@string/btn_idioma" /-->
-        <Button
-            android:id="@+id/btnPlay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="Jugar" />
         <Button
             android:id="@+id/btnList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="right"
+            android:layout_marginHorizontal="20dp"
             android:text="Més elements" />
 
     </LinearLayout>

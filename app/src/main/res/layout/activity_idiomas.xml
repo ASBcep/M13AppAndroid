@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
-        android:layout_weight="1"
+        android:layout_weight="100"
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="20dp">
@@ -54,20 +54,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
-        android:layout_weight="0"
-        android:gravity="bottom"
-        android:orientation="horizontal">
+        android:layout_weight="1"
+        android:gravity="bottom|center"
+        android:orientation="horizontal"
+        android:layout_marginVertical="15dp">
         <Button
             android:id="@+id/btnMainScreen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="left"
+            android:layout_marginHorizontal="20dp"
             android:text="Torna a l'inici" />
         <Button
             android:id="@+id/btnField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="left"
+            android:gravity="right"
+            android:layout_marginRight="20dp"
             android:text="Veure elements de l'àmbit" />
 
     </LinearLayout>
