@@ -15,10 +15,6 @@ import org.w3c.dom.Text
 
 class Activity4 : AppCompatActivity() {
 
-    object fieldConstant {
-        const val FIELD = "FIELD"
-    }
-
     // carrego el llistat d'elements LOCAL des de la llista GLOBAL
     val elements = ElementManager.elements
     // carrego les dades d'àmbit a mostrar LOCAL des de la llista GLOBAL
@@ -76,10 +72,13 @@ class Activity4 : AppCompatActivity() {
         val elementsList = ElementsList(this)
         val elementsField = elementsList.loadField(field)
         */
-        var elementsField = mutableListOf<Element>()
+
+        val elementsList = ElementsList(this)
+        var elementsField = elementsList.loadField(indexField)
+
 
         //cribo per àmbit els elements a mostrar a la llista
-        if (indexField > 0){
+       /* if (indexField > 0){
             for(i in 0 until elements.count()) {
                 if(elements[i].field == indexField){
                     elementsField.add(elements[i])
@@ -88,7 +87,7 @@ class Activity4 : AppCompatActivity() {
         } else {
             elementsField = elements
         }
-
+*/
 
         val listAltresElements = findViewById<RecyclerView>(R.id.ListAltresElements)
         val layoutManager = GridLayoutManager(this, 3)
@@ -123,7 +122,6 @@ class Activity4 : AppCompatActivity() {
         // Crear un Intent para abrir Activity3
         val intent = Intent(this, Activity3::class.java)
         intent.putExtra(Activity3.elementShownConstant.ELEMENT, selectedElement)
-        intent.putExtra(Activity3.elementShownConstant.FIELD, selectedElement.field)
         startActivity(intent)
     }
     private fun fieldSelector() {

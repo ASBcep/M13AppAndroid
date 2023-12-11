@@ -3,7 +3,6 @@ package com.example.mnactecapp
 import ElementsList
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.media.Image
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -19,8 +18,8 @@ class Activity3 : AppCompatActivity()
     object elementShownConstant
     {
         const val ELEMENT = "ELEMENT"
-        const val FIELD = "FIELD"
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,14 +40,12 @@ class Activity3 : AppCompatActivity()
 
         val intent = getIntent()
         val elementShown = intent.getSerializableExtra(elementShownConstant.ELEMENT) as Element
-        val field = intent.getIntExtra(elementShownConstant.FIELD,1)
         act3FrameText.text = elementShown.nameElement
 
 
         botonpasar.setOnClickListener {
             // Crear un Intent para abrir Activity4
             val intent = Intent(this, Activity4::class.java)
-            intent.putExtra(Activity4.fieldConstant.FIELD, field)
             startActivity(intent)
         }
 
@@ -81,7 +78,7 @@ class Activity3 : AppCompatActivity()
             val bitmap = BitmapFactory.decodeFile(imgElementPath)
             imgVwElement.setImageBitmap(bitmap)
         } else {
-            imgVwElement.setImageResource(R.drawable.defaultelement)
+            imgVwElement.setImageResource(R.drawable.simpsonscarherb)
         }
 
 

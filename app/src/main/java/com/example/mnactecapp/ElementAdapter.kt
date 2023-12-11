@@ -42,7 +42,7 @@ class ElementAdapter(val elements: List<Element>, val onItemClick: (Element) -> 
             val bitmap = if (File(imgElementPath).exists()) {
                 BitmapFactory.decodeFile(imgElementPath)
             } else {
-                BitmapFactory.decodeResource(itemView.resources, R.drawable.defaultelement)
+                BitmapFactory.decodeResource(itemView.resources, R.drawable.simpsonscarherb)
             }
             imgVwElement.setImageBitmap(bitmap)
 

@@ -59,14 +59,12 @@ class MainActivity : AppCompatActivity() {
             // Lanzar Activity3 al tocar la imagen
             val intent = Intent(this, Activity3::class.java)
             intent.putExtra(Activity3.elementShownConstant.ELEMENT, elementToShow)
-            intent.putExtra(Activity3.elementShownConstant.FIELD, field)
             startActivity(intent)
         }
 
         botonpasar.setOnClickListener {
             val intent = Intent(this, Activity3::class.java)
             intent.putExtra(Activity3.elementShownConstant.ELEMENT, elementToShow)
-            intent.putExtra(Activity3.elementShownConstant.FIELD, field)
             startActivity(intent)
         }
 
@@ -175,7 +173,6 @@ class MainActivity : AppCompatActivity() {
                 // Crear un Intent para abrir Activity3
                 val intent = Intent(this, Activity3::class.java)
                 intent.putExtra(Activity3.elementShownConstant.ELEMENT, elementShown)
-                intent.putExtra(Activity3.elementShownConstant.FIELD, field)
                 startActivity(intent)
 
             }
@@ -183,7 +180,6 @@ class MainActivity : AppCompatActivity() {
             btnMesInfo.setOnClickListener {
                 val intent = Intent(this, Activity3::class.java)
                 intent.putExtra(Activity3.elementShownConstant.ELEMENT, elementShown)
-                intent.putExtra(Activity3.elementShownConstant.FIELD, field)
                 startActivity(intent)
             }
 
