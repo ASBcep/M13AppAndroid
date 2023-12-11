@@ -25,78 +25,115 @@
                 android:text="Opcions de l'aplicació"
                 android:textSize="30sp"
                 android:textStyle="bold"/>
-
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="2">
-            <!--TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="tria el json d'àmbits:"/-->
-            <Button
-                android:id="@+id/openFileButtonAmbits"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cercar arxiu json d'àmbits NO PROGRAMAT"/>
-            <!--TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="tria els json d'elements:"/-->
-            <Button
-                android:id="@+id/openFileButtonElementsCat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cercar arxiu json d'elements en català"/>
-            <Button
-                android:id="@+id/openFileButtonElementsSpa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cercar arxiu json d'elements en castellà"/>
-            <Button
-                android:id="@+id/openFileButtonElementsEng"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cercar arxiu json d'elements en anglès"/>
-            <Button
-                android:id="@+id/openFolderImagesElements"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Importar imatges d'elements des d'una carpeta"/>
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            >
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="tria l'àmbit que es mostrarà per defecte: "/>
-                <Spinner
-                    android:id="@+id/spinnerField"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                />
-            </LinearLayout>
-            <!--Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Triar àmbit i element per defecte NO PROGRAMAT"/-->
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:padding="20dp"
+                >
+                <Button
+                    android:id="@+id/openFolderJson"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Importar arxius .JSON des d'una carpeta"/>
+                <Button
+                    android:id="@+id/openFolderImagesElements"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Importar imatges d'elements des d'una carpeta"/>
+                <Button
+                    android:id="@+id/openFolderImagesGame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Importar imatges del joc des d'una carpeta"/>
 
-            <!--TextView
+                <!--TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tria el json d'àmbits:"/-->
+                <!--Button
+                    android:id="@+id/openFileButtonAmbits"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cercar arxiu json d'àmbits NO PROGRAMAT"/-->
+                <!--TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tria els json d'elements:"/-->
+                <!--Button
+                    android:id="@+id/openFileButtonElementsCat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cercar arxiu json d'elements en català"/-->
+                <!--Button
+                    android:id="@+id/openFileButtonElementsSpa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cercar arxiu json d'elements en castellà"/-->
+                <!--Button
+                    android:id="@+id/openFileButtonElementsEng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cercar arxiu json d'elements en anglès"/-->
+
+                <!--Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Triar àmbit i element per defecte NO PROGRAMAT"/-->
+
+                <!--TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tria el json de preguntes:"/-->
+                <!--Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="cercar json de preguntes NO PROGRAMAT"/-->
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="tria el json de preguntes:"/-->
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="cercar json de preguntes NO PROGRAMAT"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/credits"/>
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="20dp">
+                    <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="10"
+                        android:padding="20dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="Tria l'àmbit que es mostrarà per defecte: "/>
+                    <Spinner
+                        android:id="@+id/spinnerField"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:padding="20dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/credits"/>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

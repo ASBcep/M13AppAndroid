@@ -30,6 +30,8 @@ class ConfigAdmin : AppCompatActivity() {
     //variable per poder gestionar el json quan es tria manualment
     private val FILE_PICK_REQUEST_CODE_jsonElements = 5766//JSON
     private val PICK_DIRECTORY_REQUEST_CODE_imgFolder = 365337//carpeta d'imatges
+    private val PICK_DIRECTORY_REQUEST_CODE_jsonFolder = 5766337//carpeta de json
+
 
     private var originalLang = -1
     private var jsonLang = -1
@@ -38,10 +40,8 @@ class ConfigAdmin : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.config_admin)
 
-        val btnCat = findViewById<Button>(R.id.openFileButtonElementsCat)
-        val btnSpa = findViewById<Button>(R.id.openFileButtonElementsSpa)
-        val btnEng = findViewById<Button>(R.id.openFileButtonElementsEng)
         val btnImgElements = findViewById<Button>(R.id.openFolderImagesElements)
+        val btnJson = findViewById<Button>(R.id.openFolderJson)
         val spinnerFields = findViewById<Spinner>(R.id.spinnerField)
         FieldsList(this)
 
@@ -58,25 +58,13 @@ class ConfigAdmin : AppCompatActivity() {
         // Assignar l'adaptador al Spinner
         spinnerFields.adapter = adapter
 
-        //segons idioma canvio el valor global d'idioma per poder executar la lectura del json; després es restaura
-        btnCat.setOnClickListener {
-            originalLang = ElementManager.idioma
-            jsonLang = 0
-            btnLoadJson()
-        }
-        btnSpa.setOnClickListener {
-            originalLang = ElementManager.idioma
-            jsonLang = 1
-            btnLoadJson()
-        }
-        btnEng.setOnClickListener {
-            originalLang = ElementManager.idioma
-            jsonLang = 2
-            btnLoadJson()
-        }
         btnImgElements.setOnClickListener{
             destinyFolder = "imgelements"
-            chooseFolder()
+            chooseFolderImg()
+        }
+        btnJson.setOnClickListener {
+            destinyFolder = "json"
+            chooseFolderJson()
         }
         spinnerFields.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -97,13 +85,15 @@ class ConfigAdmin : AppCompatActivity() {
         }
     }
 
-    private fun chooseFolder() {
+    private fun chooseFolderImg() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
         startActivityForResult(intent, PICK_DIRECTORY_REQUEST_CODE_imgFolder)    }
+    private fun chooseFolderJson() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+        startActivityForResult(intent, PICK_DIRECTORY_REQUEST_CODE_jsonFolder)    }
 
     //private fun btnLoadJson(originalLang: Int)
     private fun btnLoadJson()
-
     {
         //ElementManager.idioma = 0
         //l'usuari tria json
@@ -141,6 +131,21 @@ class ConfigAdmin : AppCompatActivity() {
                 {
                     //copiar imatges d'elements
                     copyImages(uri, destinyFolder)
+                }
+
+                // La URI apunta a la carpeta seleccionada
+                // Aquí pots utilitzar la URI per accedir als fitxers d'aquesta carpeta
+            }
+        } else if (requestCode == PICK_DIRECTORY_REQUEST_CODE_jsonFolder && resultCode == Activity.RESULT_OK){
+            val uri: Uri? = data?.data
+            // Utilitza la URI seleccionada per accedir a la carpeta
+            if (uri != null) {
+                //comprovo si existeix o creo la carpeta imgelements, per emmagatzemar les imatges dels elements
+                val jsonFolder = folderCheck("json")
+                if (jsonFolder)
+                {
+                    //copiar imatges d'elements
+                    copyJsons(uri, destinyFolder)
                 }
 
                 // La URI apunta a la carpeta seleccionada
@@ -235,7 +240,35 @@ class ConfigAdmin : AppCompatActivity() {
             }
         }
 
-        Toast.makeText(this, "Imatges copiades a la carpeta $folder", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Images copiades a la carpeta $folder", Toast.LENGTH_LONG).show()
+    }
+    private fun copyJsons(selectedFolderUri: Uri, folder: String) {
+        val documentTree = DocumentFile.fromTreeUri(this, selectedFolderUri)
+
+        val jsonFolder = File(filesDir, folder)
+
+        documentTree?.listFiles()?.forEach { file ->
+            if (file.isFile && isJsonFile(file.name)) {
+                val inputStream = contentResolver.openInputStream(file.uri)
+                val outputFile = File(jsonFolder, file.name ?: "")
+
+                try {
+                    inputStream?.use { input ->
+                        FileOutputStream(outputFile).use { output ->
+                            val buffer = ByteArray(4 * 1024)
+                            var read: Int
+                            while (input.read(buffer).also { read = it } != -1) {
+                                output.write(buffer, 0, read)
+                            }
+                        }
+                    }
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+
+        Toast.makeText(this, "Jsons copiats a la carpeta $folder", Toast.LENGTH_LONG).show()
     }
     //funció que comprova si un fitxer és una imatge
     private fun isImageFile(fileName: String?): Boolean {
@@ -243,6 +276,13 @@ class ConfigAdmin : AppCompatActivity() {
             return fileName?.endsWith(".jpg", true) == true ||
                     fileName.endsWith(".jpeg", true) ||
                     fileName.endsWith(".png", true)
+        } else {
+            return false
+        }
+    }
+    private fun isJsonFile(fileName: String?): Boolean {
+        if (fileName != null) {
+            return fileName?.endsWith(".json", true) == true
         } else {
             return false
         }
