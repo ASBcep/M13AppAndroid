@@ -7,6 +7,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -64,7 +65,7 @@ public class MyGame extends ApplicationAdapter {
 
         font = new BitmapFont();
         preguntaX = ScreenWidth / 4;
-        preguntaY = ScreenHeight - 32;
+        preguntaY = ScreenHeight - 24;
 
         assets = new AssetsManager();
         assets.loadAssets();
@@ -137,6 +138,7 @@ public class MyGame extends ApplicationAdapter {
 
     @Override
     public void render () {
+        timeout();
         touchX = Gdx.input.getX();
         touchY = ScreenHeight - Gdx.input.getY();
 //------------------------------------------------------EXPLANATION----------------------------------------------------
@@ -149,7 +151,7 @@ public class MyGame extends ApplicationAdapter {
             }
 
             batch.begin();
-            font.getData().setScale(3.5f);
+            font.getData().setScale(4f);
             font.setColor(Color.BLACK);
             drawExplanation();
             drawBackButton();
@@ -166,7 +168,6 @@ public class MyGame extends ApplicationAdapter {
 //------------------------------------------------------MAIN GAME------------------------------------------------------
         else if(currentScreen == Screen.MAIN_GAME)
         {
-            timeout();
 
             if (Gdx.input.isTouched()){
                 timeLeft = TIMEOUT_TIME;
@@ -204,11 +205,14 @@ public class MyGame extends ApplicationAdapter {
             batch.draw(assets.buttonCheck, checkButtonBounds.x, checkButtonBounds.y);
             // Pregunta
             textQuestion = questions.get(indexQuestion).getQuestion();
-            font.getData().setScale(3.5F);
+            font.getData().setScale(3.2F);
             font.setColor(Color.BLACK);
-            font.draw(batch, textQuestion, preguntaX, preguntaY);
+            float maxWidth = ScreenWidth - preguntaX * 2;
+            adjustText(textQuestion,preguntaX,preguntaY,maxWidth);
             // Opciones
             String[] optionsAnswer = questions.get(indexQuestion).getOptions();
+            font.getData().setScale(3F);
+            font.setColor(Color.BLACK);
             showOptions(optionsAnswer);
             batch.draw(assets.A, laneA + 30,16,100,100);
             batch.draw(assets.B, laneB + 30,16,100,100);
@@ -342,43 +346,63 @@ public class MyGame extends ApplicationAdapter {
     }
     public void drawExplanation()
     {
+        String explanation;
+        float explanationX = 5;
+        float explanationY = ScreenHeight - 32;
+        float maxWidth = ScreenWidth; // Ancho máximo para el texto
         switch (language){
             case 0:
-                font.draw(batch,
-                        "Aquest joc consisteix en un qüestionari de 4 opcions. Tindràs 4 carrils" +
-                                "\nels quals representen cadascun les opcions." +
-                                "\nPer respondre a les preguntes, has de moure el teu vehicle" +
-                                "\ni deixar-lo a l'opció que creguis que és correcta i després prémer " +
-                                "\nel botó 'Comprova' per verificar si has triat correctament" +
-                                "\nSi estàs preparat, prem el botó 'Jugar'.", 15, ScreenHeight - 16);
-                //font.draw(batch, "Si estàs preparat, prem el botó 'Jugar'.", 15, ScreenHeight - 700);
+                explanation = "Aquest joc consisteix en un qüestionari de 4 opcions. Tindràs 4 carrils els quals representen cadascun les opcions. Per respondre a les preguntes, has de moure el teu vehicle i deixar-lo a l'opció que creguis que és correcta i després prémer el botó 'Comprova' per verificar si has triat correctament. Si estàs preparat, prem el botó 'Jugar'.";
+                adjustText(explanation,explanationX, explanationY, maxWidth);
                 batch.draw(assets.buttonJugar, playButtonBounds.x, playButtonBounds.y);
 
                 break;
             case 1:
-                font.draw(batch,
-                        "Este juego consiste en un quiz de 4 opciones. Tendrás 4 raíles" +
-                                "\nlos cuales reprensentan cada uno las opciones." +
-                                "\nPara contestar a las preguntas, tienes que mover tu vehiculo" +
-                                "\ny dejarlo en la opción que creas la correcta y después darle " +
-                                "\nal botón 'Check' para verificar si has elegido bien" +
-                                "\nSi estás preparado dal al botón 'Jugar'.", 15, ScreenHeight - 16);
-                //font.draw(batch, "Si estás preparado dal al botón 'Jugar'.", 15, ScreenHeight - 700);
+                explanation = "Este juego consiste en un cuestionario de 4 opciones. Tendrás 4 carriles que representan cada una de las opciones. Para responder a las preguntas, debes mover tu vehículo y dejarlo en la opción que creas que es correcta, luego presionar el botón 'Comprobar' para verificar si has elegido correctamente. Si estás listo, presiona el botón 'Jugar'.";
+                adjustText(explanation,explanationX, explanationY, maxWidth);
                 batch.draw(assets.buttonJugar, playButtonBounds.x, playButtonBounds.y);
                 break;
             case 2:
-                font.draw(batch,
-                        "This game consists of a quiz with 4 options. You will have 4 lanes" +
-                                "\neach representing one of the options." +
-                                "\nTo answer the questions, you need to move your vehicle" +
-                                "\nand place it on the option you believe is correct, and then press " +
-                                "\nthe 'Check' button to verify if you have chosen correctly" +
-                                "\nIf you're ready, press the 'Play' button.", 15, ScreenHeight - 16);
-                // font.draw(batch, "If you're ready, press the 'Play' button.", 15, ScreenHeight - 700);
+                explanation = "This game consists of a quiz with 4 options. You will have 4 lanes, each representing one of the options. To answer the questions, you need to move your vehicle and place it on the option you believe is correct, and then press the 'Check' button to verify if you have chosen correctly. If you're ready, press the 'Play' button.";
+                adjustText(explanation,explanationX, explanationY, maxWidth);
                 batch.draw(assets.buttonPlay, playButtonBounds.x, playButtonBounds.y);
                 break;
             default:
         }
+
+    }
+
+    public void adjustText(String text, float textX, float textY, float maxWidth){
+
+        GlyphLayout glyphLayout = new GlyphLayout(font, text);
+        float textWidth = glyphLayout.width;
+
+        float lineSpacingMultiplier = 1.55f; // Ajusta este valor según tus necesidades
+        float lineHeight = glyphLayout.height * lineSpacingMultiplier;
+
+        if (textWidth > maxWidth) {
+            // El texto es demasiado ancho, dividir en líneas
+            String[] lines = text.split(" ");
+            StringBuilder currentLine = new StringBuilder();
+            for (String word : lines) {
+                glyphLayout.setText(font, currentLine + word);
+                if (glyphLayout.width > maxWidth) {
+                    // La línea actual excede el ancho máximo, dibújala y comienza una nueva línea
+                    font.draw(batch, currentLine.toString(), textX, textY);
+                    currentLine = new StringBuilder(word + " ");
+                    textY -= lineHeight;
+                } else {
+                    // La línea actual sigue siendo válida, agrega la palabra a la línea
+                    currentLine.append(word).append(" ");
+                }
+            }
+            // Dibuja la última línea
+            font.draw(batch, currentLine.toString(), textX, textY);
+        }else {
+            // El texto cabe en una sola línea
+            font.draw(batch, text, textX, textX);
+        }
+
     }
     public String finalScore(){
         switch (language){
@@ -410,8 +434,8 @@ public class MyGame extends ApplicationAdapter {
     public void showLives(){
         float y = 0;
         for (int i = 0; i < lives; i++){
-            batch.draw(assets.life,ScreenWidth - 128 - y, ScreenHeight - 128);
-            y += 128;
+            batch.draw(assets.life,ScreenWidth - 64 - y, ScreenHeight - 64, 64,64);
+            y += 64;
         }
     }
 
@@ -455,10 +479,10 @@ public class MyGame extends ApplicationAdapter {
     }
 
     public void showOptions(String[] optionsAnswer){
-        float opcionesY = preguntaY - 64; // Ajusta la posición vertical de las opciones
+        float opcionesY = preguntaY - 125; // Ajusta la posición vertical de las opciones
         for (int i = 0; i < optionsAnswer.length; i++) {
             String opcion = optionsAnswer[i];
-            font.draw(batch, opcion, preguntaX, opcionesY - i * 64);
+            font.draw(batch, opcion, preguntaX, opcionesY - i * 62);
         }
 
     }
