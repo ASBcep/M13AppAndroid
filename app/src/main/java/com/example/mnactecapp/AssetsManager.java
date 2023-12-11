@@ -108,23 +108,23 @@ public class AssetsManager extends ApplicationAdapter {
     public void loadFileHandle(){
 
 
-         FTbackground = new FileHandle(Gdx.files.getLocalStoragePath() + "img/background.png");
-         FuserCar = new FileHandle(Gdx.files.getLocalStoragePath() + "img/userCar.png");
-         FcolisionCar = new FileHandle(Gdx.files.getLocalStoragePath() + "img/colisionCar.png");
-         FbuttonCheck = new FileHandle(Gdx.files.getLocalStoragePath() + "img/buttonCheck.png");
-         Flife = new FileHandle(Gdx.files.getLocalStoragePath() + "img/life.png");
-         FgameOver = new FileHandle(Gdx.files.getLocalStoragePath() + "/img/game_over.png");
-         Fcongrats = new FileHandle(Gdx.files.getLocalStoragePath() + "img/congrats.png");
-         Ffelicidades = new FileHandle(Gdx.files.getLocalStoragePath() + "img/felicidades.png");
-         Ffelicitats = new FileHandle(Gdx.files.getLocalStoragePath() + "img/felicitats.png");
-         FbuttonJugar = new FileHandle(Gdx.files.getLocalStoragePath() + "img/buttonJugar.png");
-         FbuttonPlay = new FileHandle(Gdx.files.getLocalStoragePath() + "img/buttonPlay.png");
-         FbuttonBack = new FileHandle(Gdx.files.getLocalStoragePath() + "img/buttonBack.png");
-         FbuttonHome = new FileHandle(Gdx.files.getLocalStoragePath() + "img/buttonHome.png");
-         FA = new FileHandle(Gdx.files.getLocalStoragePath() + "img/A.png");
-         FB = new FileHandle(Gdx.files.getLocalStoragePath() + "img/B.png");
-         FC = new FileHandle(Gdx.files.getLocalStoragePath() + "img/C.png");
-         FD = new FileHandle(Gdx.files.getLocalStoragePath() + "img/D.png");
+         FTbackground = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/background.png");
+         FuserCar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/userCar.png");
+         FcolisionCar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/colisionCar.png");
+         FbuttonCheck = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonCheck.png");
+         Flife = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/life.png");
+         FgameOver = new FileHandle(Gdx.files.getLocalStoragePath() + "/gameimg/game_over.png");
+         Fcongrats = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/congrats.png");
+         Ffelicidades = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/felicidades.png");
+         Ffelicitats = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/felicitats.png");
+         FbuttonJugar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonJugar.png");
+         FbuttonPlay = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonPlay.png");
+         FbuttonBack = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonBack.png");
+         FbuttonHome = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonHome.png");
+         FA = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/A.png");
+         FB = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/B.png");
+         FC = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/C.png");
+         FD = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/D.png");
 
     }
 
@@ -144,15 +144,15 @@ public class AssetsManager extends ApplicationAdapter {
         }
 
         if (score >= 17 && score <= 20) {
-            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "img/assignedVehicle1720" + difficultyPrefix + ".png");
+            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/assignedVehicle1720" + difficultyPrefix + ".png");
         } else if (score >= 13 && score <= 16) {
-            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "img/assignedVehicle1316" + difficultyPrefix + ".png");
+            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/assignedVehicle1316" + difficultyPrefix + ".png");
         } else if (score >= 9 && score <= 12) {
-            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "img/assignedVehicle912" + difficultyPrefix + ".png");
+            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/assignedVehicle912" + difficultyPrefix + ".png");
         } else if (score >= 5 && score <= 8) {
-            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "img/assignedVehicle58" + difficultyPrefix + ".png");
+            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/assignedVehicle58" + difficultyPrefix + ".png");
         } else if (score >= 0 && score <= 4) {
-            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "img/assignedVehicle04" + difficultyPrefix + ".png");
+            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/assignedVehicle04" + difficultyPrefix + ".png");
         }
 
         assignedVehicle = new Texture(FassignedVehicle);

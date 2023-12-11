@@ -3,11 +3,9 @@ package com.example.mnactecapp
 import ElementsList
 import android.app.Activity
 import android.content.Intent
-import android.database.Cursor
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -17,20 +15,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.documentfile.provider.DocumentFile
-import org.json.JSONArray
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.BufferedReader
 import java.io.File
-import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
-import java.io.InputStreamReader
 
 class ConfigAdmin : AppCompatActivity() {
     //variable per poder gestionar el json quan es tria manualment
-    private val FILE_PICK_REQUEST_CODE_jsonElements = 5766//JSON
     private val PICK_DIRECTORY_REQUEST_CODE_imgFolder = 365337//carpeta d'imatges
     private val PICK_DIRECTORY_REQUEST_CODE_jsonFolder = 5766337//carpeta de json
 
@@ -115,7 +106,7 @@ class ConfigAdmin : AppCompatActivity() {
         startActivityForResult(intent, PICK_DIRECTORY_REQUEST_CODE_jsonFolder)    }
 
     //private fun btnLoadJson(originalLang: Int)
-    private fun btnLoadJson()
+    /*private fun btnLoadJson()
     {
         //ElementManager.idioma = 0
         //l'usuari tria json
@@ -131,17 +122,17 @@ class ConfigAdmin : AppCompatActivity() {
 
         //ElementsList(this)
         //ElementManager.idioma = originalLang
-    }
+    }*/
     //obtindre ruta de l'arxiu json
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?, ) {
         super.onActivityResult(requestCode, resultCode, data)
 
         //gestiono fitxer json
-        if (requestCode == FILE_PICK_REQUEST_CODE_jsonElements && resultCode == Activity.RESULT_OK) {
+        /*if (requestCode == FILE_PICK_REQUEST_CODE_jsonElements && resultCode == Activity.RESULT_OK) {
             val uri = data?.data
             //copiar json
             gestionarArxiuSeleccionat(uri)
-        }
+        }*/
         //gestiono carpeta d'imatges
         if (requestCode == PICK_DIRECTORY_REQUEST_CODE_imgFolder && resultCode == Activity.RESULT_OK) {
             val uri: Uri? = data?.data
