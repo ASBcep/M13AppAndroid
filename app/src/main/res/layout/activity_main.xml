@@ -48,12 +48,7 @@
             android:orientation="vertical"
             tools:ignore="MissingConstraints">
 
-            <TextView
-                android:id="@+id/TvAct1Field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nom de l'àmbit"
-                android:gravity="center"/>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,9 +62,13 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:src="@drawable/defaultelement"
-
-
                     />
+                <TextView
+                    android:id="@+id/TvAct1Field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nom de l'àmbit"
+                    android:gravity="center"/>
             </LinearLayout>
 
             <LinearLayout

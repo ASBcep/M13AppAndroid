@@ -11,7 +11,7 @@ class Activity6 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity6)
 
-        val botonatras: TextView = findViewById(R.id.botonatras)
+        //val botonatras: TextView = findViewById(R.id.botonatras)
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         val btnEasy: Button = findViewById(R.id.BtnFacil)
         val btnNormal: Button = findViewById(R.id.BtnNormal)
@@ -20,11 +20,11 @@ class Activity6 : AppCompatActivity() {
         val btnMainScreen2: Button = findViewById(R.id.btnMainScreen2)
 
 
-        botonatras.setOnClickListener {
+        /*botonatras.setOnClickListener {
             // Crear un Intent para abrir Activity5
             val intent = Intent(this, Activity5::class.java)
             startActivity(intent)
-        }
+        }*/
         botonidiomas1.setOnClickListener {
             // Crear un Intent para abrir idiomas
             val intent = Intent(this, idiomas::class.java)

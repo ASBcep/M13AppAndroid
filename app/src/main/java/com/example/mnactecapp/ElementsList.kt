@@ -126,7 +126,7 @@ class ElementsList(context: Context) {
             resultArray.add("Autonomia: ${elementShown.autonomy} km")
 
         }*/
-        if (elementShown.year != null && elementShown.year != 0) {
+        if (elementShown.year != null && elementShown.year > 0) {
             resultArray.add(when (ElementManager.idioma){
                 0 -> {"Any: ${elementShown.year}"}
                 1 -> {"Año: ${elementShown.year}"}
@@ -135,7 +135,7 @@ class ElementsList(context: Context) {
                 }
             )
         }
-        if (elementShown.autonomy != null && elementShown.autonomy != 0) {
+        if (elementShown.autonomy != null && elementShown.autonomy > 0) {
             resultArray.add(when (ElementManager.idioma){
                 0 -> {"Autonomia: ${elementShown.autonomy} km"}
                 1 -> {"Autonomía: ${elementShown.autonomy} km"}
@@ -144,7 +144,7 @@ class ElementsList(context: Context) {
                 }
             )
         }
-        if (elementShown.disposalCapacity != null && elementShown.disposalCapacity != 0) {
+        if (elementShown.disposalCapacity != null && elementShown.disposalCapacity > 0) {
             resultArray.add(when (ElementManager.idioma){
                 0 -> {"Capacitat del dipòsit: ${elementShown.disposalCapacity} litres"}
                 1 -> {"Capacidad del depósito: ${elementShown.disposalCapacity} litros"}
@@ -162,7 +162,7 @@ class ElementsList(context: Context) {
                 }
             )
         }
-        if (elementShown.cilindrada != null && elementShown.cilindrada != 0) {
+        if (elementShown.cilindrada != null && elementShown.cilindrada > 0) {
             resultArray.add(when (ElementManager.idioma){
                 0, 1 -> {"Cilindrada: ${elementShown.cilindrada} cc"}
                 //1 -> {"Cilindrada: ${elementShown.cilindrada} cc"}
@@ -171,7 +171,7 @@ class ElementsList(context: Context) {
                 }
             )
         }
-        if (elementShown.wingspan != null && elementShown.wingspan != 0) {
+        if (elementShown.wingspan != null && elementShown.wingspan > 0) {
             resultArray.add(when (ElementManager.idioma){
                 0, 1 -> {"Envergadura: ${elementShown.wingspan} m"}
                 //1 -> {"Envergadura: ${elementShown.wingspan} m"}
@@ -216,7 +216,7 @@ class ElementsList(context: Context) {
                 }
             )
         }
-        if (elementShown.length != null && elementShown.length != 0) {
+        if (elementShown.length != null && elementShown.length > 0) {
             resultArray.add(when (ElementManager.idioma){
                 0, 1 -> {"Longitud: ${elementShown.length} m"}
                 //1 -> {"Longitud: ${elementShown.length} m"}
@@ -225,7 +225,7 @@ class ElementsList(context: Context) {
                 }
             )
         }
-        if (elementShown.weight != null && elementShown.weight != 0) {
+        if (elementShown.weight != null && elementShown.weight > 0) {
             resultArray.add(when (ElementManager.idioma){
                 0 -> {"Pes: ${elementShown.weight} kg"}
                 1 -> {"Peso: ${elementShown.weight} kg"}
@@ -234,7 +234,7 @@ class ElementsList(context: Context) {
                 }
             )
         }
-        if (elementShown.potency != null && elementShown.potency != 0) {
+        if (elementShown.potency != null && elementShown.potency > 0) {
             resultArray.add(when (ElementManager.idioma){
                 0 -> {"Potència: ${elementShown.potency} kW"}
                 1 -> {"Potencia: ${elementShown.potency} kW"}
@@ -243,7 +243,7 @@ class ElementsList(context: Context) {
                 }
             )
         }
-        if (elementShown.kmsDone != null && elementShown.kmsDone != 0) {
+        if (elementShown.kmsDone != null && elementShown.kmsDone > 0) {
             resultArray.add(when (ElementManager.idioma){
                 0 -> {"Quilòmetres recorreguts: ${elementShown.kmsDone} km"}
                 1 -> {"Quilómetros recorridos: ${elementShown.kmsDone} km"}
@@ -252,7 +252,7 @@ class ElementsList(context: Context) {
                 }
             )
         }
-        if (elementShown.sostreMaximDeVol != null && elementShown.sostreMaximDeVol != 0) {
+        if (elementShown.sostreMaximDeVol != null && elementShown.sostreMaximDeVol > 0) {
             resultArray.add(when (ElementManager.idioma){
                 0 -> {"Sostre màxim de vol: ${elementShown.sostreMaximDeVol} km"}
                 1 -> {"Techo máximo de vuelo: ${elementShown.sostreMaximDeVol} km"}
@@ -261,7 +261,7 @@ class ElementsList(context: Context) {
                 }
             )
         }
-        if (elementShown.speed != null && elementShown.speed != 0) {
+        if (elementShown.speed != null && elementShown.speed > 0) {
             resultArray.add(when (ElementManager.idioma){
                 0 -> {"Velocitat: ${elementShown.speed} km/h"}
                 1 -> {"Velocidad: ${elementShown.speed} km/h"}
@@ -270,7 +270,7 @@ class ElementsList(context: Context) {
                 }
             )
         }
-        if (elementShown.maxSpeed != null && elementShown.maxSpeed != 0) {
+        if (elementShown.maxSpeed != null && elementShown.maxSpeed > 0) {
             resultArray.add(when (ElementManager.idioma){
                 0 -> {"Velocitat màxima: ${elementShown.maxSpeed} km/h"}
                 1 -> {"Velocidad máxima: ${elementShown.maxSpeed} km/h"}
@@ -279,7 +279,7 @@ class ElementsList(context: Context) {
                 }
             )
         }
-        if (elementShown.field != null && elementShown.field != 0) {
+        if (elementShown.field != null && elementShown.field > 0) {
             resultArray.add(when (ElementManager.idioma){
                 0 -> {"Àmbit: ${elementShown.field}"}
                 1 -> {"Ámbito: ${elementShown.field}"}
