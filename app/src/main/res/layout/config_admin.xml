@@ -82,6 +82,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="cercar json de preguntes NO PROGRAMAT"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="APP programada per Leo Ferraz, Marc Lirón, Pau Mateu, Marc Orobitg i Alex Saborit, alumnes del Centre d'Estudis Politècnics de Barcelona durant el curs 2023-2024"/>
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
