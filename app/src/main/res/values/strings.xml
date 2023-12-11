@@ -26,5 +26,6 @@
     <string name="HeadAct6">TRIA UN NIVELL DE DIFICULTAT</string>
     <string name="HeadAct8">FI DE LA PARTIDA</string>
     <string name="btn_idioma">🌍 IDIOMA</string>
+    <string name="credits">APP programada per Leo Ferraz, Marc Lirón, Pau Mateu, Marc Orobitg i Alex Saborit, alumnes del Centre d\'Estudis Politècnics de Barcelona durant el curs 2023-2024</string>
 
 </resources>
