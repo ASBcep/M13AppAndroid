@@ -40,44 +40,49 @@
                 android:padding="20dp"
                 >
                 <Button
+                    android:id="@+id/openFolderJson"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Importar arxius .JSON des d'una carpeta"/>
+                <Button
                     android:id="@+id/openFolderImagesElements"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Importar imatges d'elements des d'una carpeta"/>
                 <Button
-                    android:id="@+id/openFolderJson"
+                    android:id="@+id/openFolderImagesGame"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Importar arxius .JSON des d'una carpeta"/>
+                    android:text="Importar imatges del joc des d'una carpeta"/>
 
                 <!--TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="tria el json d'àmbits:"/-->
-                <Button
+                <!--Button
                     android:id="@+id/openFileButtonAmbits"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cercar arxiu json d'àmbits NO PROGRAMAT"/>
+                    android:text="Cercar arxiu json d'àmbits NO PROGRAMAT"/-->
                 <!--TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="tria els json d'elements:"/-->
-                <Button
+                <!--Button
                     android:id="@+id/openFileButtonElementsCat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cercar arxiu json d'elements en català"/>
-                <Button
+                    android:text="Cercar arxiu json d'elements en català"/-->
+                <!--Button
                     android:id="@+id/openFileButtonElementsSpa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cercar arxiu json d'elements en castellà"/>
-                <Button
+                    android:text="Cercar arxiu json d'elements en castellà"/-->
+                <!--Button
                     android:id="@+id/openFileButtonElementsEng"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cercar arxiu json d'elements en anglès"/>
+                    android:text="Cercar arxiu json d'elements en anglès"/-->
 
                 <!--Button
                     android:layout_width="wrap_content"
@@ -88,10 +93,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="tria el json de preguntes:"/-->
-                <Button
+                <!--Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="cercar json de preguntes NO PROGRAMAT"/>
+                    android:text="cercar json de preguntes NO PROGRAMAT"/-->
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
