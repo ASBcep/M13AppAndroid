@@ -107,24 +107,23 @@ public class AssetsManager extends ApplicationAdapter {
     }
     public void loadFileHandle(){
 
-
-         FTbackground = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/background.png");
-         FuserCar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/userCar.png");
-         FcolisionCar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/colisionCar.png");
-         FbuttonCheck = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonCheck.png");
-         Flife = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/life.png");
-         FgameOver = new FileHandle(Gdx.files.getLocalStoragePath() + "/gameimg/game_over.png");
-         Fcongrats = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/congrats.png");
-         Ffelicidades = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/felicidades.png");
-         Ffelicitats = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/felicitats.png");
-         FbuttonJugar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonJugar.png");
-         FbuttonPlay = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonPlay.png");
-         FbuttonBack = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonBack.png");
-         FbuttonHome = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonHome.png");
-         FA = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/A.png");
-         FB = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/B.png");
-         FC = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/C.png");
-         FD = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/D.png");
+        FTbackground = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/background.png");
+        FuserCar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/userCar.png");
+        FcolisionCar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/colisionCar.png");
+        FbuttonCheck = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonCheck.png");
+        Flife = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/life.png");
+        FgameOver = new FileHandle(Gdx.files.getLocalStoragePath() + "/gameimg/game_over.png");
+        Fcongrats = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/congrats.png");
+        Ffelicidades = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/felicidades.png");
+        Ffelicitats = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/felicitats.png");
+        FbuttonJugar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonJugar.png");
+        FbuttonPlay = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonPlay.png");
+        FbuttonBack = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonBack.png");
+        FbuttonHome = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonHome.png");
+        FA = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/A.png");
+        FB = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/B.png");
+        FC = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/C.png");
+        FD = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/D.png");
 
     }
 

@@ -44,6 +44,7 @@ class ConfigAdmin : AppCompatActivity() {
         val TvCredits = findViewById<TextView>(R.id.TvCredits)
         val TvChooseField = findViewById<TextView>(R.id.TvChooseField)
 
+        //mostrar text segons idioma
         when (ElementManager.idioma){
             0 -> {btnImgElements.text = getString(R.string.btnImportImgElemCAT)
                 btnImgGame.text = getString(R.string.btnImportImgGameCAT)

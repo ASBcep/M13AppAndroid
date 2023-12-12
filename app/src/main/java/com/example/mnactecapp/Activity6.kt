@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.io.File
 
 class Activity6 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +46,7 @@ class Activity6 : AppCompatActivity() {
                 btnHard.text = getString(R.string.btnHard)
                 act6FrameText.text = getString(R.string.HeadAct6ENG)}
         }
+
         /*botonatras.setOnClickListener {
             // Crear un Intent para abrir Activity5
             val intent = Intent(this, Activity5::class.java)
@@ -56,21 +59,24 @@ class Activity6 : AppCompatActivity() {
         }
         btnEasy.setOnClickListener{
             val dificulty = 1;
-            val intent = Intent(this, Launcher::class.java)
+            /*val intent = Intent(this, Launcher::class.java)
             intent.putExtra(Launcher.launcher.DIFICULTY, dificulty)
-            startActivity(intent)
+            startActivity(intent)*/
+            launchGame(dificulty)
         }
         btnNormal.setOnClickListener{
             val dificulty = 2;
-            val intent = Intent(this, Launcher::class.java)
+            /*val intent = Intent(this, Launcher::class.java)
             intent.putExtra(Launcher.launcher.DIFICULTY, dificulty)
-            startActivity(intent)
+            startActivity(intent)*/
+            launchGame(dificulty)
         }
         btnHard.setOnClickListener{
             val dificulty = 3;
-            val intent = Intent(this, Launcher::class.java)
+            /*val intent = Intent(this, Launcher::class.java)
             intent.putExtra(Launcher.launcher.DIFICULTY, dificulty)
-            startActivity(intent)
+            startActivity(intent)*/
+            launchGame(dificulty)
         }
         btnConfigAdmin.setOnClickListener{
             // Crear un Intent para abrir ConfigAdmin
@@ -81,6 +87,27 @@ class Activity6 : AppCompatActivity() {
             // Crear un Intent para abrir la pantalla principal
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    //comprovació de si les imatges del joc estan a la carpeta gameimg o si s'han d'importar
+    private fun checkGameImages(): Boolean {
+        val directoryPath = "${filesDir}/gameimg"
+
+        val directory = File(directoryPath)
+        if (directory.exists() && directory.isDirectory) {
+            val files = directory.listFiles()
+            return files?.size ?:0 > 1
+        }
+        return false
+    }
+    private fun launchGame(dificulty: Int){
+        if (checkGameImages()) {
+            val intent = Intent(this, Launcher::class.java)
+            intent.putExtra(Launcher.launcher.DIFICULTY, dificulty)
+            startActivity(intent)
+        } else {
+            Toast.makeText(this,"No es pot iniciar el joc, si us plau importeu les imatges del joc", Toast.LENGTH_LONG).show()
         }
     }
 }
