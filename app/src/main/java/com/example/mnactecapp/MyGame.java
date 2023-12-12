@@ -57,6 +57,7 @@ public class MyGame extends ApplicationAdapter {
     @Override
     public void create () {
 
+
         ScreenWidth = Gdx.graphics.getWidth();
         ScreenHeight = Gdx.graphics.getHeight();
 
@@ -307,18 +308,22 @@ public class MyGame extends ApplicationAdapter {
                 default:
             }
         }else if(currentScreen == Screen.WIN){
+
             switch (language){
                 case 0:
+                    assets.loadAssignedVehicle(dificulty,score);
                     batch.draw(assets.felicitats, ScreenWidth / 2 - 800, ScreenHeight - 440,1600,415);
                     font.draw(batch,"Se t'ha assignat el següent vehicle.", ScreenWidth / 4.5f, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
                     break;
                 case 1:
+                    assets.loadAssignedVehicle(dificulty,score);
                     batch.draw(assets.felicidades, ScreenWidth / 2 - 600, ScreenHeight - 440, 1200, 415);
                     font.draw(batch,"Se te ha asignado el siguiente vehiculo.", ScreenWidth / 4.5f, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
                     break;
                 case 2:
+                    assets.loadAssignedVehicle(dificulty,score);
                     batch.draw(assets.congrats, ScreenWidth / 2 - assets.congrats.getWidth()/2f, ScreenHeight - 415);
                     font.draw(batch,"You have been assigned the following vehicle.", ScreenWidth / 4.5f, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
@@ -405,29 +410,43 @@ public class MyGame extends ApplicationAdapter {
 
     }
     public String finalScore(){
-        switch (language){
-            case 0:
-                if (score > 1 || score == 0){
-                    return "Has respost bé " + score + " preguntes de " + questionsAnswered + ".";
-                }else{
-                    return "Has respost bé " + score + " pregunta de " + questionsAnswered + ".";
-                }
 
-            case 1:
-                if (score > 1 || score == 0){
-                    return "Has contestado bien " + score + " preguntas de " + questionsAnswered + ".";
-                }else{
-                    return "Has contestado bien " + score + " pregunta de " + questionsAnswered + ".";
-                }
-            case 2:
-                if (score > 1 || score == 0){
-                    return "You answered " + score + " questions out of " + questionsAnswered + " correctly.";
-                }else{
-                    return "You answered " + score + " question out of " + questionsAnswered + " correctly.";
-                }
+        if (currentScreen == Screen.GAME_OVER){
+            switch (language){
+                case 0:
+                    if (score > 1 || score == 0){
+                        return "Has respost bé " + score + " preguntes de " + questionsAnswered + ".";
+                    }else{
+                        return "Has respost bé " + score + " pregunta de " + questionsAnswered + ".";
+                    }
 
-            default:
+                case 1:
+                    if (score > 1 || score == 0){
+                        return "Has contestado bien " + score + " preguntas de " + questionsAnswered + ".";
+                    }else{
+                        return "Has contestado bien " + score + " pregunta de " + questionsAnswered + ".";
+                    }
+                case 2:
+                    if (score > 1 || score == 0){
+                        return "You answered " + score + " questions out of " + questionsAnswered + " correctly.";
+                    }else{
+                        return "You answered " + score + " question out of " + questionsAnswered + " correctly.";
+                    }
+
+                default:
+            }
+        }else if (currentScreen == Screen.WIN){
+            switch (language){
+                case 0:
+                        return "T'han quedat " + lives + " vides";
+                case 1:
+                        return "Te han quedado " + lives + " vidas";
+                case 2:
+                        return "You had " +  lives + " lives left";
+                default:
+            }
         }
+
         return null;
     }
 
@@ -478,13 +497,33 @@ public class MyGame extends ApplicationAdapter {
         }
     }
 
-    public void showOptions(String[] optionsAnswer){
+    public void showOptions(String[] optionsAnswer) {
         float opcionesY = preguntaY - 125; // Ajusta la posición vertical de las opciones
         for (int i = 0; i < optionsAnswer.length; i++) {
             String opcion = optionsAnswer[i];
-            font.draw(batch, opcion, preguntaX, opcionesY - i * 62);
-        }
+            String letra = obtenerLetra(i); // Obtener la letra correspondiente (A, B, C, D)
 
+            // Concatenar la letra y la opción
+            String opcionConLetra = letra + ": " + opcion;
+
+            // Dibujar la opción con la letra correspondiente
+            font.draw(batch, opcionConLetra, preguntaX, opcionesY - i * 62);
+        }
+    }
+
+    private String obtenerLetra(int indice) {
+        switch (indice) {
+            case 0:
+                return "A";
+            case 1:
+                return "B";
+            case 2:
+                return "C";
+            case 3:
+                return "D";
+            default:
+                return ""; // Manejar casos adicionales si es necesario
+        }
     }
 
 

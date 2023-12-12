@@ -143,15 +143,15 @@ public class AssetsManager extends ApplicationAdapter {
         }
 
         if (score >= 17 && score <= 20) {
-            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/assignedVehicle1720" + difficultyPrefix + ".png");
+            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameAssignedVehicle/assignedVehicle1720" + difficultyPrefix + ".png");
         } else if (score >= 13 && score <= 16) {
-            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/assignedVehicle1316" + difficultyPrefix + ".png");
+            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameAssignedVehicle/assignedVehicle1316" + difficultyPrefix + ".png");
         } else if (score >= 9 && score <= 12) {
-            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/assignedVehicle912" + difficultyPrefix + ".png");
+            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameAssignedVehicle/assignedVehicle912" + difficultyPrefix + ".png");
         } else if (score >= 5 && score <= 8) {
-            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/assignedVehicle58" + difficultyPrefix + ".png");
+            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameAssignedVehicle/assignedVehicle58" + difficultyPrefix + ".png");
         } else if (score >= 0 && score <= 4) {
-            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/assignedVehicle04" + difficultyPrefix + ".png");
+            FassignedVehicle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameAssignedVehicle/assignedVehicle04" + difficultyPrefix + ".png");
         }
 
         assignedVehicle = new Texture(FassignedVehicle);

@@ -98,7 +98,7 @@ class ConfigAdmin : AppCompatActivity() {
             chooseFolderJson()
         }
         btnImgGame.setOnClickListener {
-            destinyFolder = "gameimg"
+            destinyFolder = "gameAssignedVehicle"
             chooseFolderImg()
         }
         btnList.setOnClickListener {
