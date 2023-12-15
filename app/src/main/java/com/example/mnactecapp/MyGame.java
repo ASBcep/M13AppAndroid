@@ -47,6 +47,8 @@ public class MyGame extends ApplicationAdapter {
     private int language;
     private Array<Question>questions;
     private Context context;
+    private float backgroundY = 0;
+    private float backgroundVelocity = 10f;
     public MyGame(Intent intent, Context context) {
         // Obtener dificultad desde la activity donde se elige la dificultad
         dificulty = intent.getIntExtra("dificulty", 1);
@@ -56,7 +58,6 @@ public class MyGame extends ApplicationAdapter {
 
     @Override
     public void create () {
-
 
         ScreenWidth = Gdx.graphics.getWidth();
         ScreenHeight = Gdx.graphics.getHeight();
@@ -70,7 +71,6 @@ public class MyGame extends ApplicationAdapter {
 
         assets = new AssetsManager();
         assets.loadAssets();
-
 
         shrend = new ShapeRenderer();
 
@@ -193,23 +193,31 @@ public class MyGame extends ApplicationAdapter {
                 colision = true;
             }
 
-
-
             batch.begin();
             // Background Image
-            batch.draw(assets.background,0,0);
+            batch.draw(assets.background1, 0, backgroundY,ScreenWidth,ScreenHeight + 5);
+            batch.draw(assets.background2, 0, backgroundY - ScreenHeight,ScreenWidth,ScreenHeight+ 5);
+
+            backgroundY += backgroundVelocity;
+
+            if (backgroundY>=ScreenHeight){
+                backgroundY = 0;
+            }
+
             // User Car
             batch.draw(assets.userCar,recUC.x,recUC.y, 140, 350 );
             // Colision Cars
             spawnColisionCars();
             // Button Check
             batch.draw(assets.buttonCheck, checkButtonBounds.x, checkButtonBounds.y);
+
             // Pregunta
             textQuestion = questions.get(indexQuestion).getQuestion();
             font.getData().setScale(3.2F);
             font.setColor(Color.BLACK);
             float maxWidth = ScreenWidth - preguntaX * 2;
             adjustText(textQuestion,preguntaX,preguntaY,maxWidth);
+
             // Opciones
             String[] optionsAnswer = questions.get(indexQuestion).getOptions();
             font.getData().setScale(3F);
@@ -219,8 +227,10 @@ public class MyGame extends ApplicationAdapter {
             batch.draw(assets.B, laneB + 30,16,100,100);
             batch.draw(assets.C, laneC + 30,16,100,100);
             batch.draw(assets.D, laneD + 30,16,100,100);
+
             // Vidas
             showLives();
+
             // Score
             String scoreTXT = String.valueOf(score);
             font.getData().setScale(3.5F);
@@ -597,7 +607,7 @@ public class MyGame extends ApplicationAdapter {
 
     public void moverUserCar(){
         touchAreaWidth = 1580; // Ancho del área de toque
-        touchAreaHeight = 680;// Alto del área de toque
+        touchAreaHeight = 1180;// Alto del área de toque
         if (!checkButtonBounds.contains(touchX,touchY)){
             recUC.x = Math.max(touchAreaX, Math.min(touchAreaX + touchAreaWidth - recUC.width, touchX - recUC.width / 2));
             recUC.y = Math.max(touchAreaY, Math.min(touchAreaY + touchAreaHeight - recUC.height, touchY - recUC.width / 2));

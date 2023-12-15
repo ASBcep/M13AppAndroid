@@ -10,18 +10,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class AssetsManager extends ApplicationAdapter {
 
-    public Texture Tbackground,userCar, colisionCar,buttonCheck,life,gameOver,congrats,felicidades,felicitats,
+    public Texture background1,background2,userCar, colisionCar,buttonCheck,life,gameOver,congrats,felicidades,felicitats,
             buttonJugar,buttonPlay,buttonBack,buttonHome,assignedVehicle,A,B,C,D;
     public FileHandle FTbackground,FuserCar, FcolisionCar,FbuttonCheck,Flife,FgameOver,Fcongrats,Ffelicidades,Ffelicitats,
             FbuttonJugar,FbuttonPlay,FbuttonBack,FbuttonHome,FassignedVehicle,FA,FB,FC,FD;
-    public TextureRegion background;
-    //ia des d'aquí
-    private AssetManager assetManager;
-    public void create() {
-        assetManager = new AssetManager();
-        loadAssets();
-    }
-    //fi ia
     public void loadAssets(){
 
         /*provar a carregar img directament de drawable
@@ -50,7 +42,8 @@ public class AssetsManager extends ApplicationAdapter {
 
 
         //cargar textura en variables
-        Tbackground = new Texture(FTbackground);
+        background1 = new Texture(FTbackground);
+        background2 = new Texture(FTbackground);
         userCar = new Texture(FuserCar);
         colisionCar = new Texture(FcolisionCar);
         buttonCheck = new Texture(FbuttonCheck);
@@ -67,7 +60,6 @@ public class AssetsManager extends ApplicationAdapter {
         congrats = new Texture(Fcongrats);
         felicidades = new Texture(Ffelicidades);
         felicitats = new Texture(Ffelicitats);
-        background = new TextureRegion(Tbackground,0,0,Tbackground.getWidth(),Tbackground.getHeight());
 
         //by ia from here
         //assetManager = new AssetManager();
@@ -157,7 +149,8 @@ public class AssetsManager extends ApplicationAdapter {
         assignedVehicle = new Texture(FassignedVehicle);
     }
     public void disposeAssets(){
-        Tbackground.dispose();
+        background1.dispose();
+        background2.dispose();
         userCar.dispose();
         colisionCar.dispose();
         buttonCheck.dispose();
