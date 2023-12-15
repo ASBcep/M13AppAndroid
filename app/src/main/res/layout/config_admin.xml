@@ -58,6 +58,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/btnImportImgGameCAT"
                     />
+                <Button
+                    android:id="@+id/openFolderImagesPrize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btnImportImgPrizeCAT"
+                    android:layout_marginTop="20dp"
+                    />
 
                 <!--TextView
                     android:layout_width="wrap_content"

@@ -36,6 +36,7 @@ class ConfigAdmin : AppCompatActivity() {
 
         val btnImgElements = findViewById<Button>(R.id.openFolderImagesElements)
         val btnImgGame = findViewById<Button>(R.id.openFolderImagesGame)
+        val btnImgPrize = findViewById<Button>(R.id.openFolderImagesPrize)
         val btnList = findViewById<Button>(R.id.btnList)
         val btnJson = findViewById<Button>(R.id.openFolderJson)
         val btnMainScreen: Button = findViewById(R.id.btnMainScreen)
@@ -48,6 +49,7 @@ class ConfigAdmin : AppCompatActivity() {
         when (ElementManager.idioma){
             0 -> {btnImgElements.text = getString(R.string.btnImportImgElemCAT)
                 btnImgGame.text = getString(R.string.btnImportImgGameCAT)
+                btnImgPrize.text = getString(R.string.btnImportImgPrizeCAT)
                 btnMainScreen.text = getString(R.string.btnIniciCAT)
                 btnList.text = getString(R.string.btnFieldCAT)
                 btnJson.text = getString(R.string.btnImportJsonCAT)
@@ -98,6 +100,10 @@ class ConfigAdmin : AppCompatActivity() {
             chooseFolderJson()
         }
         btnImgGame.setOnClickListener {
+            destinyFolder = "gameimg"
+            chooseFolderImg()
+        }
+        btnImgPrize.setOnClickListener {
             destinyFolder = "gameAssignedVehicle"
             chooseFolderImg()
         }

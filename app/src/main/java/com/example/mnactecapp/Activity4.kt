@@ -143,9 +143,16 @@ class Activity4 : AppCompatActivity() {
         } else {
             indexField = 0
         }
-        //FALTA canviar que l'àmbit es mostri com a string i no com a enter.
+
+        //toast per debugar
         ElementManager.indexField = indexField
-        Toast.makeText(this,"Es canvia d'àmbit a " + indexField + ": " + fields[indexField].nameField, Toast.LENGTH_SHORT).show()
+        if (ElementManager.debug) {
+            Toast.makeText(
+                this,
+                "Es canvia d'àmbit a " + indexField + ": " + fields[indexField].nameField,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
     fun reiniciarActividad() {
         // Cerrar la actividad actual

@@ -112,8 +112,12 @@
     <string name="btnImportImgElemSPA">Importar imágenes de elementos desde una carpeta</string>
     <string name="btnImportImgElemENG">Import images of elements from a folder</string>
 
-    <string name="btnImportImgGameCAT">Importar imatges puntuació del joc des d\'una carpeta</string>
-    <string name="btnImportImgGameSPA">Importar imágenes puntuación del juego desde una carpeta</string>
-    <string name="btnImportImgGameENG">Import score images of the game from a folder</string>
+    <string name="btnImportImgGameCAT">Importar imatges del joc des d\'una carpeta</string>
+    <string name="btnImportImgGameSPA">Importar imágenes del juego desde una carpeta</string>
+    <string name="btnImportImgGameENG">Import game\'s images from a folder</string>
+
+    <string name="btnImportImgPrizeCAT">Importar imatges de puntuació del joc des d\'una carpeta</string>
+    <string name="btnImportImgPrizeSPA">Importar imágenes de puntuación del juego desde una carpeta</string>
+    <string name="btnImportImgPrizeENG">Import score images of the game from a folder</string>
 
 </resources>

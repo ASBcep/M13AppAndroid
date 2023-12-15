@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
@@ -25,6 +26,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if(ElementManager.debug){
+            Toast.makeText(
+                this,
+                "Mode DEBUG actiu",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
 
         val imgElement: ImageView = findViewById(R.id.imgElementMain)
         val act1FrameText: TextView = findViewById(R.id.act1FrameText)
