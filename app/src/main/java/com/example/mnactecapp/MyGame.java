@@ -66,7 +66,7 @@ public class MyGame extends ApplicationAdapter {
         loadQuestionsJSON();
 
         font = new BitmapFont();
-        preguntaX = ScreenWidth / 4;
+        preguntaX = ScreenWidth / 4 + 25;
         preguntaY = ScreenHeight - 24;
 
         assets = new AssetsManager();
@@ -198,8 +198,8 @@ public class MyGame extends ApplicationAdapter {
             }
 
             batch.begin();
+
             // Background Image
-            // En el método render
             batch.draw(assets.background1, 0, backgroundY1, ScreenWidth, ScreenHeight);
             batch.draw(assets.background2, 0, backgroundY2, ScreenWidth, ScreenHeight);
 
@@ -207,15 +207,15 @@ public class MyGame extends ApplicationAdapter {
             backgroundY1 -= backgroundVelocity;
             backgroundY2 -= backgroundVelocity;
 
-            // Si la parte inferior del fondo 1 está completamente fuera de la pantalla, restablece su posición
             if (backgroundY1 + ScreenHeight <= 0) {
                 backgroundY1 = ScreenHeight;
             }
 
-            // Si la parte inferior del fondo 2 está completamente fuera de la pantalla, restablece su posición
             if (backgroundY2 + ScreenHeight <= 0) {
                 backgroundY2 = ScreenHeight;
             }
+
+
 
             // User Car
             batch.draw(assets.userCar,recUC.x,recUC.y, 140, 350 );
@@ -224,17 +224,20 @@ public class MyGame extends ApplicationAdapter {
             // Button Check
             batch.draw(assets.buttonCheck, checkButtonBounds.x, checkButtonBounds.y);
 
+
+
             // Pregunta
             textQuestion = questions.get(indexQuestion).getQuestion();
             font.getData().setScale(3.2F);
-            font.setColor(Color.BLACK);
+            font.setColor(Color.WHITE);
+
             float maxWidth = ScreenWidth - preguntaX * 2;
             adjustText(textQuestion,preguntaX,preguntaY,maxWidth);
 
             // Opciones
             String[] optionsAnswer = questions.get(indexQuestion).getOptions();
             font.getData().setScale(3F);
-            font.setColor(Color.BLACK);
+            font.setColor(Color.WHITE);
             showOptions(optionsAnswer);
             batch.draw(assets.A, laneA + 30,16,100,100);
             batch.draw(assets.B, laneB + 30,16,100,100);
@@ -249,7 +252,6 @@ public class MyGame extends ApplicationAdapter {
             font.getData().setScale(3.5F);
             font.setColor(Color.BLACK);
             font.draw(batch, "Score: " + scoreTXT, 16, ScreenHeight - 16);
-
 
             drawBackButton();
             batch.end();
