@@ -99,7 +99,7 @@ public class AssetsManager extends ApplicationAdapter {
     }
     public void loadFileHandle(){
 
-        FTbackground = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/background.png");
+        FTbackground = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/background4.png");
         FuserCar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/userCar.png");
         FcolisionCar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/colisionCar.png");
         FbuttonCheck = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonCheck.png");

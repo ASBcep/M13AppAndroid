@@ -47,7 +47,7 @@ public class MyGame extends ApplicationAdapter {
     private int language;
     private Array<Question>questions;
     private Context context;
-    private float backgroundY = 0;
+    private float backgroundY1,backgroundY2;
     private float backgroundVelocity = 10f;
     public MyGame(Intent intent, Context context) {
         // Obtener dificultad desde la activity donde se elige la dificultad
@@ -66,7 +66,7 @@ public class MyGame extends ApplicationAdapter {
         loadQuestionsJSON();
 
         font = new BitmapFont();
-        preguntaX = ScreenWidth / 4;
+        preguntaX = ScreenWidth / 4 + 25;
         preguntaY = ScreenHeight - 24;
 
         assets = new AssetsManager();
@@ -107,6 +107,10 @@ public class MyGame extends ApplicationAdapter {
         recCC1 = new Rectangle(0, ScreenHeight,145,350);
         recCC2 = new Rectangle(0, ScreenHeight,145,350);
         recCC3 = new Rectangle(0, ScreenHeight,145,350);
+
+
+        backgroundY1 = 0;
+        backgroundY2 = -ScreenHeight;
 
 
         // Tiempo para el timeout
@@ -194,15 +198,24 @@ public class MyGame extends ApplicationAdapter {
             }
 
             batch.begin();
+
             // Background Image
-            batch.draw(assets.background1, 0, backgroundY,ScreenWidth,ScreenHeight + 5);
-            batch.draw(assets.background2, 0, backgroundY - ScreenHeight,ScreenWidth,ScreenHeight+ 5);
+            batch.draw(assets.background1, 0, backgroundY1, ScreenWidth, ScreenHeight);
+            batch.draw(assets.background2, 0, backgroundY2, ScreenWidth, ScreenHeight);
 
-            backgroundY += backgroundVelocity;
+            // Mueve los fondos hacia abajo
+            backgroundY1 -= backgroundVelocity;
+            backgroundY2 -= backgroundVelocity;
 
-            if (backgroundY>=ScreenHeight){
-                backgroundY = 0;
+            if (backgroundY1 + ScreenHeight <= 0) {
+                backgroundY1 = ScreenHeight;
             }
+
+            if (backgroundY2 + ScreenHeight <= 0) {
+                backgroundY2 = ScreenHeight;
+            }
+
+
 
             // User Car
             batch.draw(assets.userCar,recUC.x,recUC.y, 140, 350 );
@@ -211,17 +224,20 @@ public class MyGame extends ApplicationAdapter {
             // Button Check
             batch.draw(assets.buttonCheck, checkButtonBounds.x, checkButtonBounds.y);
 
+
+
             // Pregunta
             textQuestion = questions.get(indexQuestion).getQuestion();
             font.getData().setScale(3.2F);
-            font.setColor(Color.BLACK);
+            font.setColor(Color.WHITE);
+
             float maxWidth = ScreenWidth - preguntaX * 2;
             adjustText(textQuestion,preguntaX,preguntaY,maxWidth);
 
             // Opciones
             String[] optionsAnswer = questions.get(indexQuestion).getOptions();
             font.getData().setScale(3F);
-            font.setColor(Color.BLACK);
+            font.setColor(Color.WHITE);
             showOptions(optionsAnswer);
             batch.draw(assets.A, laneA + 30,16,100,100);
             batch.draw(assets.B, laneB + 30,16,100,100);
@@ -236,7 +252,6 @@ public class MyGame extends ApplicationAdapter {
             font.getData().setScale(3.5F);
             font.setColor(Color.BLACK);
             font.draw(batch, "Score: " + scoreTXT, 16, ScreenHeight - 16);
-
 
             drawBackButton();
             batch.end();
