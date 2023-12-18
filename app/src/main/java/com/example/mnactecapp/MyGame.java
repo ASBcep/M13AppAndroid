@@ -47,7 +47,7 @@ public class MyGame extends ApplicationAdapter {
     private int language;
     private Array<Question>questions;
     private Context context;
-    private float backgroundY = 0;
+    private float backgroundY1,backgroundY2;
     private float backgroundVelocity = 10f;
     public MyGame(Intent intent, Context context) {
         // Obtener dificultad desde la activity donde se elige la dificultad
@@ -107,6 +107,10 @@ public class MyGame extends ApplicationAdapter {
         recCC1 = new Rectangle(0, ScreenHeight,145,350);
         recCC2 = new Rectangle(0, ScreenHeight,145,350);
         recCC3 = new Rectangle(0, ScreenHeight,145,350);
+
+
+        backgroundY1 = 0;
+        backgroundY2 = -ScreenHeight;
 
 
         // Tiempo para el timeout
@@ -195,13 +199,22 @@ public class MyGame extends ApplicationAdapter {
 
             batch.begin();
             // Background Image
-            batch.draw(assets.background1, 0, backgroundY,ScreenWidth,ScreenHeight + 5);
-            batch.draw(assets.background2, 0, backgroundY - ScreenHeight,ScreenWidth,ScreenHeight+ 5);
+            // En el método render
+            batch.draw(assets.background1, 0, backgroundY1, ScreenWidth, ScreenHeight);
+            batch.draw(assets.background2, 0, backgroundY2, ScreenWidth, ScreenHeight);
 
-            backgroundY += backgroundVelocity;
+            // Mueve los fondos hacia abajo
+            backgroundY1 -= backgroundVelocity;
+            backgroundY2 -= backgroundVelocity;
 
-            if (backgroundY>=ScreenHeight){
-                backgroundY = 0;
+            // Si la parte inferior del fondo 1 está completamente fuera de la pantalla, restablece su posición
+            if (backgroundY1 + ScreenHeight <= 0) {
+                backgroundY1 = ScreenHeight;
+            }
+
+            // Si la parte inferior del fondo 2 está completamente fuera de la pantalla, restablece su posición
+            if (backgroundY2 + ScreenHeight <= 0) {
+                backgroundY2 = ScreenHeight;
             }
 
             // User Car
