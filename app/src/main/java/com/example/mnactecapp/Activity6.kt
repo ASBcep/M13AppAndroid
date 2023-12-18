@@ -5,10 +5,21 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import java.io.File
 
 class Activity6 : AppCompatActivity() {
+
+    private val getResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult())
+        {
+            if(it.resultCode == RESULT_OK){
+                reiniciarActividad()
+            }else if(it.resultCode == RESULT_CANCELED){
+            }
+        }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity6)
@@ -55,7 +66,7 @@ class Activity6 : AppCompatActivity() {
         botonidiomas1.setOnClickListener {
             // Crear un Intent para abrir idiomas
             val intent = Intent(this, idiomas::class.java)
-            startActivity(intent)
+            getResult.launch(intent)
         }
         btnEasy.setOnClickListener{
             val dificulty = 1;
@@ -116,6 +127,14 @@ class Activity6 : AppCompatActivity() {
             //Toast.makeText(this,"No es pot iniciar el joc, si us plau importeu les imatges del joc", Toast.LENGTH_LONG).show()
             Toast.makeText(this,toast, Toast.LENGTH_LONG).show()
         }
+    }
+
+    fun reiniciarActividad() {
+        // Cerrar la actividad actual
+        finish()
+        // Crear un nuevo Intent para reiniciar la actividad
+        val intent = Intent(this, this::class.java)
+        startActivity(intent)
     }
 }
 /*codi branch main 30/11/2023

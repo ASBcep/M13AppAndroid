@@ -62,6 +62,9 @@ public class MyGame extends ApplicationAdapter {
         ScreenWidth = Gdx.graphics.getWidth();
         ScreenHeight = Gdx.graphics.getHeight();
 
+        // Idioma que se obtendrá del app de android
+        language = ElementManager.INSTANCE.getIdioma();
+
         questions = new Array<>();
         loadQuestionsJSON();
 
@@ -87,9 +90,6 @@ public class MyGame extends ApplicationAdapter {
                 break;
             default:
         }
-
-        // Idioma que se obtendrá del app de android
-        language = ElementManager.INSTANCE.getIdioma();
 
         // Posiciones de los carriles para inicializar los colisionCars
         laneA = 405;
