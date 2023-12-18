@@ -77,6 +77,7 @@ public class MyGame extends ApplicationAdapter {
 
         shrend = new ShapeRenderer();
 
+        dificulty = 0;
         //1 = easy; 2 = normal; 3 = hard;
         switch(dificulty){
             case 1:
@@ -89,6 +90,7 @@ public class MyGame extends ApplicationAdapter {
                 lives = 1;
                 break;
             default:
+                lives = 99;
         }
 
         // Posiciones de los carriles para inicializar los colisionCars
@@ -430,7 +432,7 @@ public class MyGame extends ApplicationAdapter {
             font.draw(batch, currentLine.toString(), textX, textY);
         }else {
             // El texto cabe en una sola línea
-            font.draw(batch, text, textX, textX);
+            font.draw(batch, text, textX, textY);
         }
 
     }
@@ -523,7 +525,7 @@ public class MyGame extends ApplicationAdapter {
     }
 
     public void showOptions(String[] optionsAnswer) {
-        float opcionesY = preguntaY - 125; // Ajusta la posición vertical de las opciones
+        float opcionesY = preguntaY - 160; // Ajusta la posición vertical de las opciones
         for (int i = 0; i < optionsAnswer.length; i++) {
             String opcion = optionsAnswer[i];
             String letra = obtenerLetra(i); // Obtener la letra correspondiente (A, B, C, D)
@@ -654,6 +656,7 @@ public class MyGame extends ApplicationAdapter {
             checkIndexQuestion();
 
 
+
         }
 
         // Acertó la pregunta
@@ -672,7 +675,7 @@ public class MyGame extends ApplicationAdapter {
     public void checkIndexQuestion(){
         if (indexQuestion < questions.size){
             indexQuestion += 1;
-        }else{
+        }else {
             currentScreen = Screen.WIN;
         }
     }
@@ -684,11 +687,11 @@ public class MyGame extends ApplicationAdapter {
         shrend.dispose();
         startNewActivity(Activity4.class);
     }
-
-    public void startNewActivity(Class<?> cls) {
+    private void startNewActivity(Class<?> cls) {
         Intent intent = new Intent(context, cls);
         context.startActivity(intent);
     }
-
 }
+
+
 
