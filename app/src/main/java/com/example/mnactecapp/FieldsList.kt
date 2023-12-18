@@ -22,7 +22,9 @@ class FieldsList(context: Context) {
             // Convertir la lista inmutable a una lista mutable
             fieldsList.toMutableList()
         } catch (e: Exception) {
-            //Toast.makeText(context, "Error en llegir el JSON d'àmbits: ${e.message}", Toast.LENGTH_LONG).show()
+            if(ElementManager.debug){
+                Toast.makeText(context, "Error en llegir el JSON d'àmbits: ${e.message}", Toast.LENGTH_LONG).show()
+            }
             // Retorna una lista con un ámbito de muestra en caso de excepción para evitar valores nulos
             mutableListOf(
                 Field(0,"Tots els àmbits"),

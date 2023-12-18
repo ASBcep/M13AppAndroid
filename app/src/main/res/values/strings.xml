@@ -120,4 +120,8 @@
     <string name="btnImportImgPrizeSPA">Importar imágenes de puntuación del juego desde una carpeta</string>
     <string name="btnImportImgPrizeENG">Import score images of the game from a folder</string>
 
+    <string name="gameNoImagesCAT">No es pot iniciar el joc, si us plau importeu les imatges del joc</string>
+    <string name="gameNoImagesSPA">No se puede iniciar el juego, por favor importa las imágenes del juego</string>
+    <string name="gameNoImagesENG">Game can not be started, please import the game\'s images</string>
+
 </resources>

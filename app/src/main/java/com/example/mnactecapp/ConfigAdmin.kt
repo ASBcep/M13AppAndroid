@@ -143,24 +143,6 @@ class ConfigAdmin : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
         startActivityForResult(intent, PICK_DIRECTORY_REQUEST_CODE_jsonFolder)    }
 
-    //private fun btnLoadJson(originalLang: Int)
-    /*private fun btnLoadJson()
-    {
-        //ElementManager.idioma = 0
-        //l'usuari tria json
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.addCategory(Intent.CATEGORY_OPENABLE)
-        intent.type = "application/json"
-        startActivityForResult(intent, FILE_PICK_REQUEST_CODE_jsonElements)
-
-
-        //Toast.makeText(this,"Idioma canviat a català", Toast.LENGTH_LONG).show()
-
-        //falta copiar el json que triï l'usuari a la carpeta local
-
-        //ElementsList(this)
-        //ElementManager.idioma = originalLang
-    }*/
     //obtindre ruta de l'arxiu json
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?, ) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -233,18 +215,22 @@ class ConfigAdmin : AppCompatActivity() {
                         FileOutputStream(destinationFile).use { output ->
                             input.copyTo(output)
                         }
-                        Toast.makeText(this, "Fitxer copiat: " + destinationFile, Toast.LENGTH_LONG)
+                        if(ElementManager.debug){
+                            Toast.makeText(this, "Fitxer copiat: " + destinationFile, Toast.LENGTH_LONG)
                             .show()
+                        }
                         ElementManager.idioma = jsonLang
                         ElementsList(this)
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    Toast.makeText(
-                        this,
-                        "Error !! Fitxer no copiat: " + destinationFile,
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    if(ElementManager.debug){
+                        Toast.makeText(
+                            this,
+                            "Error !! Fitxer no copiat: " + destinationFile,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                }
                 }
             }
             //retorno l'idioma en què es trobava l'app a l'índex
@@ -256,14 +242,20 @@ class ConfigAdmin : AppCompatActivity() {
         if (!FolderPath.exists()) {
             val CreatedFolder = FolderPath.mkdir()
             if (CreatedFolder) {
-                Toast.makeText(this,"Carpeta " + folder + " creada", Toast.LENGTH_LONG).show()
+                if(ElementManager.debug){
+                    Toast.makeText(this,"Carpeta " + folder + " creada", Toast.LENGTH_LONG).show()
+                }
                 return true
             } else {
-                Toast.makeText(this,"Carpeta " + folder + " no creada i no existent", Toast.LENGTH_LONG).show()
+                if(ElementManager.debug){
+                    Toast.makeText(this,"Carpeta " + folder + " no creada i no existent", Toast.LENGTH_LONG).show()
+                }
                 return false
             }
         } else {
-            Toast.makeText(this,"La carpeta " + folder + " ja existia", Toast.LENGTH_LONG).show()
+            if(ElementManager.debug){
+                Toast.makeText(this,"La carpeta " + folder + " ja existia", Toast.LENGTH_LONG).show()
+            }
             return true
         }
     }
@@ -292,8 +284,9 @@ class ConfigAdmin : AppCompatActivity() {
                 }
             }
         }
-
-        Toast.makeText(this, "Images copiades a la carpeta $folder", Toast.LENGTH_LONG).show()
+        if(ElementManager.debug){
+            Toast.makeText(this, "Images copiades a la carpeta $folder", Toast.LENGTH_LONG).show()
+        }
     }
     private fun copyJsons(selectedFolderUri: Uri, folder: String) {
         val documentTree = DocumentFile.fromTreeUri(this, selectedFolderUri)
@@ -320,8 +313,9 @@ class ConfigAdmin : AppCompatActivity() {
                 }
             }
         }
-
-        Toast.makeText(this, "Jsons copiats a la carpeta $folder", Toast.LENGTH_LONG).show()
+        if(ElementManager.debug){
+            Toast.makeText(this, "Jsons copiats a la carpeta $folder", Toast.LENGTH_LONG).show()
+        }
     }
     //funció que comprova si un fitxer és una imatge
     private fun isImageFile(fileName: String?): Boolean {

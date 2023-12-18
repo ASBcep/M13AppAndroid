@@ -11,6 +11,7 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import java.io.File
+import android.os.Handler
 
 class Activity3 : AppCompatActivity()
 {
@@ -18,6 +19,14 @@ class Activity3 : AppCompatActivity()
     object elementShownConstant
     {
         const val ELEMENT = "ELEMENT"
+    }
+
+    //retornar a MainActivity en cas d'inactivitat
+    private val handler = Handler()
+    private val inactivityRunnable = Runnable {
+        // Tornar a la MainActivity
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
 
@@ -51,6 +60,8 @@ class Activity3 : AppCompatActivity()
             2 -> {btnPlay.text = getString(R.string.btnPlayENG)
                 btnList.text = getString(R.string.btnFieldSPA)}
         }
+
+
 
 
         /*botonpasar.setOnClickListener {
@@ -103,6 +114,26 @@ class Activity3 : AppCompatActivity()
         // Establecer el adaptador en el ListView
         listView.adapter = adaptador
     }
+    //a partir d'aquí, codi per retornar a main activity després de 30 segons d'inactivitat
+    override fun onResume() {
+        super.onResume()
+        resetInactivityTimer()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stopInactivityTimer()
+    }
+
+    private fun resetInactivityTimer() {
+        handler.removeCallbacks(inactivityRunnable)
+        handler.postDelayed(inactivityRunnable, 30000) // 30 segons (30000 mil·lisegons)
+    }
+
+    private fun stopInactivityTimer() {
+        handler.removeCallbacks(inactivityRunnable)
+    }
+
 
 }
 /*codi branch main 30/11/2023 (crec que és igual, repassar)

@@ -35,7 +35,9 @@ class ElementsList(context: Context) {
             elementsList.toMutableList()
         } catch (e: Exception) {
             // Manejar la excepción aquí
-            Toast.makeText(context, "Error en llegir el JSON d'elements: ${e.message}", Toast.LENGTH_LONG).show()
+            if(ElementManager.debug){
+                Toast.makeText(context, "Error en llegir el JSON d'elements: ${e.message}", Toast.LENGTH_LONG).show()
+            }
 
             // Retorna una lista con un elemento de muestra en caso de excepción para evitar valores nulos
             mutableListOf(

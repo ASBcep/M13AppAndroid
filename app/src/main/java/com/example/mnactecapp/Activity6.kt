@@ -107,7 +107,14 @@ class Activity6 : AppCompatActivity() {
             intent.putExtra(Launcher.launcher.DIFICULTY, dificulty)
             startActivity(intent)
         } else {
-            Toast.makeText(this,"No es pot iniciar el joc, si us plau importeu les imatges del joc", Toast.LENGTH_LONG).show()
+            var toast = ""
+             when (ElementManager.idioma){
+            0 -> {toast = getString(R.string.gameNoImagesCAT)}
+            1 -> {toast = getString(R.string.gameNoImagesSPA)}
+            2 -> {toast = getString(R.string.gameNoImagesENG)}
+        }
+            //Toast.makeText(this,"No es pot iniciar el joc, si us plau importeu les imatges del joc", Toast.LENGTH_LONG).show()
+            Toast.makeText(this,toast, Toast.LENGTH_LONG).show()
         }
     }
 }
