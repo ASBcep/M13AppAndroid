@@ -19,7 +19,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 
-
 public class MyGame extends ApplicationAdapter {
 
     enum Screen{EXPLANATION ,MAIN_GAME, GAME_OVER, WIN }
@@ -46,14 +45,14 @@ public class MyGame extends ApplicationAdapter {
     private int score, questionsAnswered;
     private int language;
     private Array<Question>questions;
-    private Context context;
+    private final Context context;
     private float backgroundY1,backgroundY2;
-    private float backgroundVelocity = 10f;
+
+    private QuestionManager questionManager;
     public MyGame(Intent intent, Context context) {
         // Obtener dificultad desde la activity donde se elige la dificultad
         dificulty = intent.getIntExtra("dificulty", 1);
         this.context = context;
-
     }
 
     @Override
@@ -77,7 +76,6 @@ public class MyGame extends ApplicationAdapter {
 
         shrend = new ShapeRenderer();
 
-        dificulty = 0;
         //1 = easy; 2 = normal; 3 = hard;
         switch(dificulty){
             case 1:
@@ -90,7 +88,6 @@ public class MyGame extends ApplicationAdapter {
                 lives = 1;
                 break;
             default:
-                lives = 99;
         }
 
         // Posiciones de los carriles para inicializar los colisionCars
@@ -119,8 +116,10 @@ public class MyGame extends ApplicationAdapter {
         timeLeft = TIMEOUT_TIME;
         // Para ver los rectangulos
         debug = false;
+
+        questionManager = new QuestionManager();
         // Indice de la pregunta
-        indexQuestion = 0;
+        indexQuestion = randomQuestion();
         //Area donde el usuario puede mover el vehiculo
         touchAreaX = 340;
         touchAreaY = 0;
@@ -132,6 +131,7 @@ public class MyGame extends ApplicationAdapter {
         textQuestion = "";
         colision = true;
         batch = new SpriteBatch();
+
 
     }
 
@@ -145,36 +145,23 @@ public class MyGame extends ApplicationAdapter {
 
     @Override
     public void render () {
-        timeout();
+        handleInput();
+        updateGameState();
+        drawGame();
+
+    }
+
+//---------------------------------------------------FUNCIONES--------------------------------------------------------------
+
+    private void handleInput(){
         touchX = Gdx.input.getX();
         touchY = ScreenHeight - Gdx.input.getY();
-//------------------------------------------------------EXPLANATION----------------------------------------------------
-        if(currentScreen == Screen.EXPLANATION) {
-            ScreenUtils.clear(1, 1, 1, 1);
+    }
 
-            if (playButtonBounds.contains(touchX, touchY))
-            {
-                currentScreen = Screen.MAIN_GAME;
-            }
+    private void updateGameState(){
+        timeout();
 
-            batch.begin();
-            font.getData().setScale(4f);
-            font.setColor(Color.BLACK);
-            drawExplanation();
-            drawBackButton();
-            batch.end();
-
-            if(debug){
-                shrend.begin(ShapeRenderer.ShapeType.Filled);
-                shrend.setColor(Color.RED);
-                shrend.rect(playButtonBounds.x, playButtonBounds.y, playButtonBounds.width, playButtonBounds.height);
-                shrend.end();
-            }
-        }
-
-//------------------------------------------------------MAIN GAME------------------------------------------------------
-        else if(currentScreen == Screen.MAIN_GAME)
-        {
+        if (currentScreen == Screen.MAIN_GAME){
 
             if (Gdx.input.isTouched()){
                 timeLeft = TIMEOUT_TIME;
@@ -189,7 +176,7 @@ public class MyGame extends ApplicationAdapter {
             if (checkButtonBounds.contains(touchX, touchY)) {
                 canMove = false;
                 if (colision){
-                    activarColisionCars();
+                    checkAnswer();
                 }else{
                     canMove = true;
                 }
@@ -199,120 +186,141 @@ public class MyGame extends ApplicationAdapter {
                 colision = true;
             }
 
-            batch.begin();
-
-            // Background Image
-            batch.draw(assets.background1, 0, backgroundY1, ScreenWidth, ScreenHeight);
-            batch.draw(assets.background2, 0, backgroundY2, ScreenWidth, ScreenHeight);
-
-            // Mueve los fondos hacia abajo
-            backgroundY1 -= backgroundVelocity;
-            backgroundY2 -= backgroundVelocity;
-
-            if (backgroundY1 + ScreenHeight <= 0) {
-                backgroundY1 = ScreenHeight;
-            }
-
-            if (backgroundY2 + ScreenHeight <= 0) {
-                backgroundY2 = ScreenHeight;
-            }
-
-
-
-            // User Car
-            batch.draw(assets.userCar,recUC.x,recUC.y, 140, 350 );
-            // Colision Cars
-            spawnColisionCars();
-            // Button Check
-            batch.draw(assets.buttonCheck, checkButtonBounds.x, checkButtonBounds.y);
-
-
-
-            // Pregunta
-            textQuestion = questions.get(indexQuestion).getQuestion();
-            font.getData().setScale(3.2F);
-            font.setColor(Color.WHITE);
-
-            float maxWidth = ScreenWidth - preguntaX * 2;
-            adjustText(textQuestion,preguntaX,preguntaY,maxWidth);
-
-            // Opciones
-            String[] optionsAnswer = questions.get(indexQuestion).getOptions();
-            font.getData().setScale(3F);
-            font.setColor(Color.WHITE);
-            showOptions(optionsAnswer);
-            batch.draw(assets.A, laneA + 30,16,100,100);
-            batch.draw(assets.B, laneB + 30,16,100,100);
-            batch.draw(assets.C, laneC + 30,16,100,100);
-            batch.draw(assets.D, laneD + 30,16,100,100);
-
-            // Vidas
-            showLives();
-
-            // Score
-            String scoreTXT = String.valueOf(score);
-            font.getData().setScale(3.5F);
-            font.setColor(Color.BLACK);
-            font.draw(batch, "Score: " + scoreTXT, 16, ScreenHeight - 16);
-
-            drawBackButton();
-            batch.end();
-
-            if(debug){
-                //Azul
-                shrend.begin(ShapeRenderer.ShapeType.Line);
-                shrend.setColor(Color.BLUE);
-                shrend.rect(recUC.x, recUC.y, recUC.width, recUC.height);
-                shrend.end();
-
-                shrend.begin(ShapeRenderer.ShapeType.Line);
-                shrend.setColor(Color.RED);
-                shrend.rect(recCC1.x, recCC1.y, recCC1.width, recCC1.height);
-                shrend.end();
-
-                shrend.begin(ShapeRenderer.ShapeType.Filled);
-                shrend.setColor(Color.RED);
-                shrend.rect(checkButtonBounds.x, checkButtonBounds.y, checkButtonBounds.width, checkButtonBounds.height);
-                shrend.end();
-
-
-                batch.begin();
-                String time = String.valueOf(timeLeft);
-                font.getData().setScale(3.5F);
-                font.setColor(Color.BLACK);
-                font.draw(batch,time,ScreenWidth - 200, ScreenHeight - 400);
-                batch.end();
-            }
-//--------------------------------------------------GAME OVER----------------------------------------------------------
-        }else if( currentScreen == Screen.GAME_OVER){
-
-            ScreenUtils.clear(1, 1, 1, 1);
-
-            batch.begin();
-            batch.draw(assets.gameOver, 320, ScreenHeight - 400, 1280,352);
-            font.getData().setScale(3.5f);
-            font.setColor(Color.BLACK);
-            font.draw(batch,finalScore(),ScreenWidth / 4.5f, ScreenHeight - 450);
-            drawEndgame();
-            drawBackButton();
-            batch.end();
-//----------------------------------------------------WIN--------------------------------------------------------------
-        }else if(currentScreen == Screen.WIN){
-            ScreenUtils.clear(1, 1, 1, 1);
-            batch.begin();
-            font.getData().setScale(3.5f);
-            font.setColor(Color.BLACK);
-            font.draw(batch,finalScore(),ScreenWidth / 4.5f, ScreenHeight - 450);
-            drawEndgame();
-            drawBackButton();
-            batch.end();
-
         }
-
     }
 
-//---------------------------------------------------FUNCIONES--------------------------------------------------------------
+    private void drawGame(){
+        float backgroundVelocity = 10f;
+        switch (currentScreen){
+            case EXPLANATION:
+                ScreenUtils.clear(1, 1, 1, 1);
 
+                if (playButtonBounds.contains(touchX, touchY))
+                {
+                    currentScreen = Screen.MAIN_GAME;
+                }
+
+                batch.begin();
+                font.getData().setScale(4f);
+                font.setColor(Color.BLACK);
+                drawExplanation();
+                drawBackButton();
+                batch.end();
+
+                if(debug){
+                    shrend.begin(ShapeRenderer.ShapeType.Filled);
+                    shrend.setColor(Color.RED);
+                    shrend.rect(playButtonBounds.x, playButtonBounds.y, playButtonBounds.width, playButtonBounds.height);
+                    shrend.end();
+                }
+                break;
+            case MAIN_GAME:
+                batch.begin();
+
+                // Background Image
+                batch.draw(assets.background1, 0, backgroundY1, ScreenWidth, ScreenHeight);
+                batch.draw(assets.background2, 0, backgroundY2, ScreenWidth, ScreenHeight);
+
+                // Mueve los fondos hacia abajo
+                backgroundY1 -= backgroundVelocity;
+                backgroundY2 -= backgroundVelocity;
+
+                if (backgroundY1 + ScreenHeight <= 0) {
+                    backgroundY1 = ScreenHeight;
+                }
+
+                if (backgroundY2 + ScreenHeight <= 0) {
+                    backgroundY2 = ScreenHeight;
+                }
+
+                // User Car
+                batch.draw(assets.userCar,recUC.x,recUC.y, 140, 350 );
+
+                // Colision Cars
+                spawnColisionCars();
+                // Button Check
+                batch.draw(assets.buttonCheck, checkButtonBounds.x, checkButtonBounds.y);
+
+                // Pregunta
+                textQuestion = questions.get(indexQuestion).getQuestion();
+                font.getData().setScale(3.2F);
+                font.setColor(Color.WHITE);
+                float maxWidth = ScreenWidth - preguntaX * 2;
+                adjustText(textQuestion,preguntaX,preguntaY,maxWidth);
+
+                // Opciones
+                String[] optionsAnswer = questions.get(indexQuestion).getOptions();
+                font.getData().setScale(3F);
+                font.setColor(Color.WHITE);
+                showOptions(optionsAnswer);
+                batch.draw(assets.A, laneA + 30,16,100,100);
+                batch.draw(assets.B, laneB + 30,16,100,100);
+                batch.draw(assets.C, laneC + 30,16,100,100);
+                batch.draw(assets.D, laneD + 30,16,100,100);
+                // Vidas
+                showLives();
+                // Score
+                String scoreTXT = String.valueOf(score);
+                font.getData().setScale(3.5F);
+                font.setColor(Color.BLACK);
+                font.draw(batch, "Score: " + scoreTXT, 16, ScreenHeight - 16);
+
+                drawBackButton();
+                batch.end();
+
+                if(debug) {
+                    //Azul
+                    shrend.begin(ShapeRenderer.ShapeType.Line);
+                    shrend.setColor(Color.BLUE);
+                    shrend.rect(recUC.x, recUC.y, recUC.width, recUC.height);
+                    shrend.end();
+
+                    shrend.begin(ShapeRenderer.ShapeType.Line);
+                    shrend.setColor(Color.RED);
+                    shrend.rect(recCC1.x, recCC1.y, recCC1.width, recCC1.height);
+                    shrend.end();
+
+                    shrend.begin(ShapeRenderer.ShapeType.Filled);
+                    shrend.setColor(Color.RED);
+                    shrend.rect(checkButtonBounds.x, checkButtonBounds.y, checkButtonBounds.width, checkButtonBounds.height);
+                    shrend.end();
+
+
+                    batch.begin();
+                    String time = String.valueOf(timeLeft);
+                    String qa = String.valueOf(questionsAnswered);
+                    font.getData().setScale(3.5F);
+                    font.setColor(Color.BLACK);
+                    font.draw(batch, time, ScreenWidth - 200, ScreenHeight - 400);
+                    font.draw(batch,qa,ScreenWidth - 200, ScreenHeight - 600);
+                    batch.end();
+                }
+                break;
+            case GAME_OVER:
+                ScreenUtils.clear(1, 1, 1, 1);
+
+                batch.begin();
+                batch.draw(assets.gameOver, 320, ScreenHeight - 400, 1280,352);
+                font.getData().setScale(3.5f);
+                font.setColor(Color.BLACK);
+                font.draw(batch,finalScore(),ScreenWidth / 4.5f, ScreenHeight - 450);
+                drawEndgame();
+                drawBackButton();
+                batch.end();
+                break;
+            case WIN:
+                ScreenUtils.clear(1, 1, 1, 1);
+                batch.begin();
+                font.getData().setScale(3.5f);
+                font.setColor(Color.BLACK);
+                font.draw(batch,finalScore(),ScreenWidth / 4.5f, ScreenHeight - 450);
+                drawEndgame();
+                drawBackButton();
+                batch.end();
+                break;
+
+        }
+    }
 
     public void drawEndgame(){
         if(currentScreen == Screen.GAME_OVER){
@@ -384,18 +392,18 @@ public class MyGame extends ApplicationAdapter {
         float maxWidth = ScreenWidth; // Ancho máximo para el texto
         switch (language){
             case 0:
-                explanation = "Aquest joc consisteix en un qüestionari de 4 opcions. Tindràs 4 carrils els quals representen cadascun les opcions. Per respondre a les preguntes, has de moure el teu vehicle i deixar-lo a l'opció que creguis que és correcta i després prémer el botó 'Comprova' per verificar si has triat correctament. Si estàs preparat, prem el botó 'Jugar'.";
+                explanation = "Aquest joc consisteix en un qüestionari 20 preguntes amb 4 opcions. Tindràs 4 carrils els quals representen cadascun les opcions. Per respondre a les preguntes, has de moure el teu vehicle i deixar-lo a l'opció que creguis que és correcta i després prémer el botó 'Comprova' per verificar si has triat correctament. Si estàs preparat, prem el botó 'Jugar'.";
                 adjustText(explanation,explanationX, explanationY, maxWidth);
                 batch.draw(assets.buttonJugar, playButtonBounds.x, playButtonBounds.y);
 
                 break;
             case 1:
-                explanation = "Este juego consiste en un cuestionario de 4 opciones. Tendrás 4 carriles que representan cada una de las opciones. Para responder a las preguntas, debes mover tu vehículo y dejarlo en la opción que creas que es correcta, luego presionar el botón 'Comprobar' para verificar si has elegido correctamente. Si estás listo, presiona el botón 'Jugar'.";
+                explanation = "Este juego consiste en un cuestionario de 20 preguntas con 4 opciones. Tendrás 4 carriles que representan cada una de las opciones. Para responder a las preguntas, debes mover tu vehículo y dejarlo en la opción que creas que es correcta, luego presionar el botón 'Comprobar' para verificar si has elegido correctamente. Si estás listo, presiona el botón 'Jugar'.";
                 adjustText(explanation,explanationX, explanationY, maxWidth);
                 batch.draw(assets.buttonJugar, playButtonBounds.x, playButtonBounds.y);
                 break;
             case 2:
-                explanation = "This game consists of a quiz with 4 options. You will have 4 lanes, each representing one of the options. To answer the questions, you need to move your vehicle and place it on the option you believe is correct, and then press the 'Check' button to verify if you have chosen correctly. If you're ready, press the 'Play' button.";
+                explanation = "This game consists of a quiz of 20 questions with 4 options. You will have 4 lanes, each representing one of the options. To answer the questions, you need to move your vehicle and place it on the option you believe is correct, and then press the 'Check' button to verify if you have chosen correctly. If you're ready, press the 'Play' button.";
                 adjustText(explanation,explanationX, explanationY, maxWidth);
                 batch.draw(assets.buttonPlay, playButtonBounds.x, playButtonBounds.y);
                 break;
@@ -436,6 +444,21 @@ public class MyGame extends ApplicationAdapter {
         }
 
     }
+
+    private int randomQuestion() {
+        if (questions.size == 0) {
+            // No hay preguntas disponibles
+            return -1;
+        }
+
+        int totalQuestions = questions.size;
+        // Utiliza el índice seleccionado
+        return questionManager.getRandomUnusedIndex(totalQuestions);
+    }
+    private void resetUsedIndices() {
+        questionManager.resetUsedIndices();
+    }
+
     public String finalScore(){
 
         if (currentScreen == Screen.GAME_OVER){
@@ -633,7 +656,7 @@ public class MyGame extends ApplicationAdapter {
 
 
 
-    public void activarColisionCars() {
+    public void checkAnswer() {
 
         timeLeft = TIMEOUT_TIME;
         recCC1.y -= 25f;
@@ -642,8 +665,9 @@ public class MyGame extends ApplicationAdapter {
 
         // Falló la pregunta
         if (recUC.overlaps(recCC1) || recUC.overlaps(recCC2) || recUC.overlaps(recCC3)) {
-            lives--;
             questionsAnswered += 1;
+            lives--;
+            checkIndexQuestion();
             if (lives <= 0) {
                 currentScreen = Screen.GAME_OVER;
             }
@@ -653,29 +677,27 @@ public class MyGame extends ApplicationAdapter {
             recCC2.setY(ScreenHeight);
             recCC3.setY(ScreenHeight);
             colision = false;
-            checkIndexQuestion();
-
-
 
         }
 
         // Acertó la pregunta
         if (recCC1.y + recCC1.height < 0 && recCC2.y + recCC2.height < 0 && recCC3.y + recCC3.height < 0) {
+            questionsAnswered += 1;
+            score += 1;
+            checkIndexQuestion();
             recCC1.setY(ScreenHeight);
             recCC2.setY(ScreenHeight);
             recCC3.setY(ScreenHeight);
-            score += 1;
-            questionsAnswered += 1;
             colision = false;
-            checkIndexQuestion();
+
         }
 
     }
 
     public void checkIndexQuestion(){
-        if (indexQuestion < questions.size){
-            indexQuestion += 1;
-        }else {
+        if (questionsAnswered < 20){
+            indexQuestion = randomQuestion();
+        }else if (questionsAnswered == 20) {
             currentScreen = Screen.WIN;
         }
     }
@@ -685,10 +707,10 @@ public class MyGame extends ApplicationAdapter {
         batch.dispose();
         assets.disposeAssets();
         shrend.dispose();
-        startNewActivity(Activity4.class);
+        startNewActivity();
     }
-    private void startNewActivity(Class<?> cls) {
-        Intent intent = new Intent(context, cls);
+    private void startNewActivity() {
+        Intent intent = new Intent(context, Activity4.class);
         context.startActivity(intent);
     }
 }
