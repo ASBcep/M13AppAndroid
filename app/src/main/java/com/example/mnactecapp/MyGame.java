@@ -102,7 +102,7 @@ public class MyGame extends ApplicationAdapter {
         homeButton = new Rectangle(32, 32, 247, 250);
         backButton = new Rectangle(ScreenWidth - 32 - assets.buttonBack.getWidth(), 32, 247, 250);
         // Rectangulos para trabajar las colisiones entre el vehiculo del usuario y de los otros coches
-        recUC = new Rectangle(ScreenWidth / 2, ScreenHeight / 2,140,350);
+        recUC = new Rectangle(ScreenWidth / 2, ScreenHeight / 2,200,350);
         recCC1 = new Rectangle(0, ScreenHeight,145,350);
         recCC2 = new Rectangle(0, ScreenHeight,145,350);
         recCC3 = new Rectangle(0, ScreenHeight,145,350);
@@ -232,9 +232,9 @@ public class MyGame extends ApplicationAdapter {
                 if (backgroundY2 + ScreenHeight <= 0) {
                     backgroundY2 = ScreenHeight;
                 }
-
+                float xUC = recUC.x + recUC.width / 6;
                 // User Car
-                batch.draw(assets.userCar,recUC.x,recUC.y, 140, 350 );
+                batch.draw(assets.userCar,xUC,recUC.y, 140, 350 );
 
                 // Colision Cars
                 spawnColisionCars();
