@@ -21,7 +21,7 @@ class Activity3 : AppCompatActivity()
         const val ELEMENT = "ELEMENT"
     }
 
-    //retornar a MainActivity en cas d'inactivitat
+    //retornar a MainActivity en cas d'inactivitat REVISAR, TORNA EN 30 SEGONS INDIFRENTMENT DE SI HI HA ACTIVITAT
     private val handler = Handler()
     private val inactivityRunnable = Runnable {
         // Tornar a la MainActivity

@@ -1,6 +1,7 @@
 <resources>
     <!--<string name="app_name">Activity2</string>-->
-    <string name="app_name">AppAndroid</string>
+    <!--string name="app_name">AppAndroid</string-->
+    <string name="app_name">MNaCTeC App</string>
     <string name="texto">Caract 1\nCaract 2
         \nCaract 3
         \nCaract 4

@@ -120,7 +120,25 @@ class Activity4 : AppCompatActivity() {
         }
         //botón para cambiar de ámbito
         btnChangeField.setOnClickListener{
-            fieldSelector()
+            //fieldSelector()
+            //act1FrameText.text = fields[indexField].nameField
+            var fieldContent = false
+            do {fieldSelector()
+                elementsField = elementsList.loadField(indexField)
+                //verifico si hi ha elements a l'àmbit triat
+                if (elementsField.count() != 0){
+                    fieldContent = true
+                } else {
+                    //toast debug
+                    if (ElementManager.debug) {
+                        Toast.makeText(
+                            this,
+                            "L'àmbit " + indexField + ": " + fields[indexField].nameField + " no té contingut.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            } while (fieldContent == false)
             act1FrameText.text = fields[indexField].nameField
             reiniciarActividad()
         }
