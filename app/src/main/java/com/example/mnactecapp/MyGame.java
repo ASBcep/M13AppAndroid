@@ -79,13 +79,13 @@ public class MyGame extends ApplicationAdapter {
         //1 = easy; 2 = normal; 3 = hard;
         switch(dificulty){
             case 1:
-                lives = 5;
+                lives = 6;
                 break;
             case 2:
-                lives = 3;
+                lives = 4;
                 break;
             case 3:
-                lives = 1;
+                lives = 2;
                 break;
             default:
         }
@@ -503,7 +503,7 @@ public class MyGame extends ApplicationAdapter {
     public void showLives(){
         float y = 0;
         for (int i = 0; i < lives; i++){
-            batch.draw(assets.life,ScreenWidth - 64 - y, ScreenHeight - 64, 64,64);
+            batch.draw(assets.wheel,ScreenWidth - 64 - y, ScreenHeight - 64, 64,64);
             y += 64;
         }
     }

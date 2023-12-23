@@ -10,9 +10,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class AssetsManager extends ApplicationAdapter {
 
-    public Texture background1,background2,userCar, colisionCar,buttonCheck,life,gameOver,congrats,felicidades,felicitats,
+    public Texture background1,background2,userCar, colisionCar,buttonCheck,wheel,gameOver,congrats,felicidades,felicitats,
             buttonJugar,buttonPlay,buttonBack,buttonHome,assignedVehicle,A,B,C,D;
-    public FileHandle FTbackground,FuserCar, FcolisionCar,FbuttonCheck,Flife,FgameOver,Fcongrats,Ffelicidades,Ffelicitats,
+    public FileHandle FTbackground,FuserCar, FcolisionCar,FbuttonCheck,Fwheel,FgameOver,Fcongrats,Ffelicidades,Ffelicitats,
             FbuttonJugar,FbuttonPlay,FbuttonBack,FbuttonHome,FassignedVehicle,FA,FB,FC,FD;
     public void loadAssets(){
 
@@ -55,7 +55,7 @@ public class AssetsManager extends ApplicationAdapter {
         B = new Texture(FB);
         C = new Texture(FC);
         D = new Texture(FD);
-        life = new Texture(Flife);
+        wheel = new Texture(Fwheel);
         gameOver = new Texture(FgameOver);
         congrats = new Texture(Fcongrats);
         felicidades = new Texture(Ffelicidades);
@@ -103,7 +103,7 @@ public class AssetsManager extends ApplicationAdapter {
         FuserCar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/userCar.png");
         FcolisionCar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/colisionCar.png");
         FbuttonCheck = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonCheck.png");
-        Flife = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/life.png");
+        Fwheel = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/wheel.png");
         FgameOver = new FileHandle(Gdx.files.getLocalStoragePath() + "/gameimg/game_over.png");
         Fcongrats = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/congrats.png");
         Ffelicidades = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/felicidades.png");
@@ -162,7 +162,7 @@ public class AssetsManager extends ApplicationAdapter {
         B.dispose();
         C.dispose();
         D.dispose();
-        life.dispose();
+        wheel.dispose();
         gameOver.dispose();
         congrats.dispose();
         felicidades.dispose();
