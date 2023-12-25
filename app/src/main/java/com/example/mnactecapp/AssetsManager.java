@@ -11,9 +11,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class AssetsManager extends ApplicationAdapter {
 
     public Texture background1,background2,userCar, colisionCar,buttonCheck,wheel,gameOver,congrats,felicidades,felicitats,
-            buttonJugar,buttonPlay,buttonBack,buttonHome,assignedVehicle,A,B,C,D;
+            buttonJugar,buttonPlay,buttonBack,buttonHome,assignedVehicle,A,B,C,D,blackBackground;
     public FileHandle FTbackground,FuserCar, FcolisionCar,FbuttonCheck,Fwheel,FgameOver,Fcongrats,Ffelicidades,Ffelicitats,
-            FbuttonJugar,FbuttonPlay,FbuttonBack,FbuttonHome,FassignedVehicle,FA,FB,FC,FD;
+            FbuttonJugar,FbuttonPlay,FbuttonBack,FbuttonHome,FassignedVehicle,FA,FB,FC,FD,FblackBackground;
     public void loadAssets(){
 
         /*provar a carregar img directament de drawable
@@ -60,6 +60,7 @@ public class AssetsManager extends ApplicationAdapter {
         congrats = new Texture(Fcongrats);
         felicidades = new Texture(Ffelicidades);
         felicitats = new Texture(Ffelicitats);
+        blackBackground = new Texture(FblackBackground);
 
         //by ia from here
         //assetManager = new AssetManager();
@@ -116,6 +117,7 @@ public class AssetsManager extends ApplicationAdapter {
         FB = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/B.png");
         FC = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/C.png");
         FD = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/D.png");
+        FblackBackground = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/blackbackground.png");
 
     }
 

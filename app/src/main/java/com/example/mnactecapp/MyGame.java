@@ -242,6 +242,7 @@ public class MyGame extends ApplicationAdapter {
                 batch.draw(assets.buttonCheck, checkButtonBounds.x, checkButtonBounds.y);
 
                 // Pregunta
+                batch.draw(assets.blackBackground,preguntaX, preguntaY - 160 - 4 * 62 , 875, 425 );
                 textQuestion = questions.get(indexQuestion).getQuestion();
                 font.getData().setScale(3.2F);
                 font.setColor(Color.WHITE);
