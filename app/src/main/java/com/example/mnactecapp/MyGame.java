@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,13 +18,15 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 
 public class MyGame extends ApplicationAdapter {
 
     enum Screen{EXPLANATION ,MAIN_GAME, GAME_OVER, WIN }
     private final static int TIMEOUT_TIME = 60;
-    private float timeLeft;
+    private final static int TIMEQUESTION = 30;
+    private float timeLeft, timeQuestion;;
     private Screen currentScreen = Screen.EXPLANATION;
     private SpriteBatch batch;
     private BitmapFont font;
@@ -47,6 +50,7 @@ public class MyGame extends ApplicationAdapter {
     private Array<Question>questions;
     private final Context context;
     private float backgroundY1,backgroundY2;
+    private boolean isCheckButtonPressed;
 
     private QuestionManager questionManager;
     public MyGame(Intent intent, Context context) {
@@ -68,6 +72,7 @@ public class MyGame extends ApplicationAdapter {
         loadQuestionsJSON();
 
         font = new BitmapFont();
+        font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         preguntaX = ScreenWidth / 4 + 25;
         preguntaY = ScreenHeight - 24;
 
@@ -77,6 +82,7 @@ public class MyGame extends ApplicationAdapter {
         shrend = new ShapeRenderer();
 
         //1 = easy; 2 = normal; 3 = hard;
+
         switch(dificulty){
             case 1:
                 lives = 6;
@@ -97,7 +103,7 @@ public class MyGame extends ApplicationAdapter {
         laneD = 1350;
 
         // Limites de los botones
-        checkButtonBounds = new Rectangle(32, 290, 244, 86);
+        checkButtonBounds = new Rectangle(ScreenWidth - 32 - assets.buttonCheck.getWidth(), 290, 244, 86);
         playButtonBounds = new Rectangle(ScreenWidth / 2 - 350, 300, 700, 252);
         homeButton = new Rectangle(32, 32, 247, 250);
         backButton = new Rectangle(ScreenWidth - 32 - assets.buttonBack.getWidth(), 32, 247, 250);
@@ -114,6 +120,7 @@ public class MyGame extends ApplicationAdapter {
 
         // Tiempo para el timeout
         timeLeft = TIMEOUT_TIME;
+        timeQuestion = TIMEQUESTION;
         // Para ver los rectangulos
         debug = false;
 
@@ -128,6 +135,7 @@ public class MyGame extends ApplicationAdapter {
         // Booleano para que el vehiculo del usuario pueda moverse
         canMove = true;
 
+        isCheckButtonPressed = false;
         textQuestion = "";
         colision = true;
         batch = new SpriteBatch();
@@ -135,6 +143,25 @@ public class MyGame extends ApplicationAdapter {
 
     }
 
+
+    public void reset(){
+        switch(dificulty){
+            case 1:
+                lives = 6;
+                break;
+            case 2:
+                lives = 4;
+                break;
+            case 3:
+                lives = 2;
+                break;
+            default:
+        }
+        indexQuestion = randomQuestion();
+        questionsAnswered = 0;
+        score = 0;
+        textQuestion= "";
+    }
 
     public void timeout(){
         timeLeft -= Gdx.graphics.getDeltaTime();
@@ -158,12 +185,12 @@ public class MyGame extends ApplicationAdapter {
         touchY = ScreenHeight - Gdx.input.getY();
     }
 
-    private void updateGameState(){
+    private void updateGameState() {
         timeout();
 
-        if (currentScreen == Screen.MAIN_GAME){
+        if (currentScreen == Screen.MAIN_GAME) {
 
-            if (Gdx.input.isTouched()){
+            if (Gdx.input.isTouched()) {
                 timeLeft = TIMEOUT_TIME;
             }
 
@@ -173,24 +200,31 @@ public class MyGame extends ApplicationAdapter {
                 ajustarLimites();
             }
 
-            if (checkButtonBounds.contains(touchX, touchY)) {
+            timeQuestion -= Gdx.graphics.getDeltaTime();
+            isCheckButtonPressed = Gdx.input.isTouched() && checkButtonBounds.contains(touchX, touchY);
+
+            if (timeQuestion <= 0 || isCheckButtonPressed) {
+                timeQuestion = 0;
                 canMove = false;
-                if (colision){
+                // Verificar si el botón de comprobación está presionado
+                if (colision) {
                     checkAnswer();
-                }else{
+                } else {
+                    // Restablecer el tiempo y permitir que el jugador se mueva nuevamente
                     canMove = true;
+                    timeQuestion = TIMEQUESTION;
                 }
             }
 
-            if (canMove && !checkButtonBounds.contains(touchX, touchY)){
+            if (canMove && !isCheckButtonPressed) {
                 colision = true;
             }
-
         }
+
     }
 
     private void drawGame(){
-        float backgroundVelocity = 10f;
+        float backgroundVelocity = 15f;
         switch (currentScreen){
             case EXPLANATION:
                 ScreenUtils.clear(1, 1, 1, 1);
@@ -232,26 +266,26 @@ public class MyGame extends ApplicationAdapter {
                 if (backgroundY2 + ScreenHeight <= 0) {
                     backgroundY2 = ScreenHeight;
                 }
+
                 float xUC = recUC.x + recUC.width / 6;
                 // User Car
                 batch.draw(assets.userCar,xUC,recUC.y, 140, 350 );
 
-                // Colision Cars
-                spawnColisionCars();
+
                 // Button Check
                 batch.draw(assets.buttonCheck, checkButtonBounds.x, checkButtonBounds.y);
 
                 // Pregunta
-                batch.draw(assets.blackBackground,preguntaX, preguntaY - 160 - 4 * 62 , 875, 425 );
+                batch.draw(assets.blackBackground,preguntaX - 10 , (preguntaY - 140 - 4 * 62) - 15 , 905, 415 );
                 textQuestion = questions.get(indexQuestion).getQuestion();
-                font.getData().setScale(3.2F);
+                font.getData().setScale(2.75F);
                 font.setColor(Color.WHITE);
                 float maxWidth = ScreenWidth - preguntaX * 2;
                 adjustText(textQuestion,preguntaX,preguntaY,maxWidth);
 
                 // Opciones
                 String[] optionsAnswer = questions.get(indexQuestion).getOptions();
-                font.getData().setScale(3F);
+                font.getData().setScale(2.75F);
                 font.setColor(Color.WHITE);
                 showOptions(optionsAnswer);
                 batch.draw(assets.A, laneA + 30,16,100,100);
@@ -265,6 +299,22 @@ public class MyGame extends ApplicationAdapter {
                 font.getData().setScale(3.5F);
                 font.setColor(Color.BLACK);
                 font.draw(batch, "Score: " + scoreTXT, 16, ScreenHeight - 16);
+
+                // Colision Cars
+                spawnColisionCars();
+
+                //Tiempo restante para contestar
+                font.getData().setScale(10F);
+                if (timeQuestion > 15){
+                    font.setColor(Color.GREEN);
+                }else if(timeQuestion <= 15 && timeQuestion > 5){
+                    font.setColor(Color.YELLOW);
+                } else if (timeQuestion <= 5 ){
+                    font.setColor(Color.RED);
+                }
+                DecimalFormat format = new DecimalFormat("0");
+                String timeQuestionS = format.format(timeQuestion);
+                font.draw(batch, timeQuestionS, 16 , ScreenHeight - 120);
 
                 drawBackButton();
                 batch.end();
@@ -288,33 +338,38 @@ public class MyGame extends ApplicationAdapter {
 
 
                     batch.begin();
-                    String time = String.valueOf(timeLeft);
+                    String timeTimeout = String.valueOf(timeLeft);
                     String qa = String.valueOf(questionsAnswered);
+                    String touchXS = String.valueOf(touchX);
+                    String touchYS = String.valueOf(touchY);
+                    String touchXYS = "TouchX: " + touchXS + "\nTouchY: " +  touchYS;
                     font.getData().setScale(3.5F);
                     font.setColor(Color.BLACK);
-                    font.draw(batch, time, ScreenWidth - 200, ScreenHeight - 400);
+                    font.draw(batch, timeTimeout, ScreenWidth - 200, ScreenHeight - 400);
                     font.draw(batch,qa,ScreenWidth - 200, ScreenHeight - 600);
+                    font.draw(batch,touchXYS,16, ScreenHeight - 400);
                     batch.end();
                 }
                 break;
             case GAME_OVER:
-                ScreenUtils.clear(1, 1, 1, 1);
-
+                ScreenUtils.clear(0.3f, 0.3f, 0.3f, 1);
                 batch.begin();
-                batch.draw(assets.gameOver, 320, ScreenHeight - 400, 1280,352);
+                batch.draw(assets.grayBackground, 0, 0, ScreenWidth, ScreenHeight);
+                batch.draw(assets.gameOver, (ScreenWidth - 1280 )/ 2, ScreenHeight - 400, 1280,352);
                 font.getData().setScale(3.5f);
-                font.setColor(Color.BLACK);
-                font.draw(batch,finalScore(),ScreenWidth / 4.5f, ScreenHeight - 450);
+                font.setColor(Color.WHITE);
+                font.draw(batch,finalScore(),ScreenWidth / 2 - 440, ScreenHeight - 450);
                 drawEndgame();
                 drawBackButton();
                 batch.end();
                 break;
             case WIN:
-                ScreenUtils.clear(1, 1, 1, 1);
+                ScreenUtils.clear(0.3f, 0.3f, 0.3f, 1);;
                 batch.begin();
+                batch.draw(assets.grayBackground, 0, 0, ScreenWidth, ScreenHeight);
                 font.getData().setScale(3.5f);
-                font.setColor(Color.BLACK);
-                font.draw(batch,finalScore(),ScreenWidth / 4.5f, ScreenHeight - 450);
+                font.setColor(Color.WHITE);
+                font.draw(batch,finalScore(),ScreenWidth / 2 - 440, ScreenHeight - 450);
                 drawEndgame();
                 drawBackButton();
                 batch.end();
@@ -328,18 +383,27 @@ public class MyGame extends ApplicationAdapter {
             switch (language){
                 case 0:
                     assets.loadAssignedVehicle(dificulty,score);
-                    font.draw(batch,"Se t'ha assignat el següent vehicle.", ScreenWidth / 4.5f, ScreenHeight - 550);
-                    batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
+                    font.draw(batch,"Se t'ha assignat el següent vehicle.", ScreenWidth / 2 - 440, ScreenHeight - 550);
+                    batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
+                    font.getData().setScale(3.5f);
+                    font.draw(batch,"Sortir", (homeButton.getWidth() - 70) / 2 , homeButton.getY() + homeButton.height + 60);
+                    font.draw(batch,"Tornar a jugar", ScreenWidth - 316, backButton.getY() + backButton.height + 60);
                     break;
                 case 1:
                     assets.loadAssignedVehicle(dificulty,score);
-                    font.draw(batch,"Se te ha asignado el siguiente vehiculo.", ScreenWidth / 4.5f, ScreenHeight - 550);
-                    batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
+                    font.draw(batch,"Se te ha asignado el siguiente vehiculo.", ScreenWidth / 2 - 440, ScreenHeight - 550);
+                    batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
+                    font.getData().setScale(3.5f);
+                    font.draw(batch,"Salir", (homeButton.getWidth() - 60) / 2 , homeButton.getY() + homeButton.height + 60);
+                    font.draw(batch,"Volver a jugar", ScreenWidth - 316, backButton.getY() + backButton.height + 60);
                     break;
                 case 2:
                     assets.loadAssignedVehicle(dificulty,score);
-                    font.draw(batch,"You have been assigned the following vehicle.", ScreenWidth / 4.5f, ScreenHeight - 550);
-                    batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
+                    font.draw(batch,"You have been assigned the following vehicle.", ScreenWidth / 2 - 440, ScreenHeight - 550);
+                    batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
+                    font.getData().setScale(3.5f);
+                    font.draw(batch,"Leave", (homeButton.getWidth() - 70) / 2 , homeButton.getY() + homeButton.height + 60);
+                    font.draw(batch,"Try again", ScreenWidth - 300, backButton.getY() + backButton.height + 60);
                     break;
                 default:
             }
@@ -349,42 +413,80 @@ public class MyGame extends ApplicationAdapter {
                 case 0:
                     assets.loadAssignedVehicle(dificulty,score);
                     batch.draw(assets.felicitats, ScreenWidth / 2 - 800, ScreenHeight - 440,1600,415);
-                    font.draw(batch,"Se t'ha assignat el següent vehicle.", ScreenWidth / 4.5f, ScreenHeight - 550);
-                    batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
+                    font.draw(batch,"Se t'ha assignat el següent vehicle.", ScreenWidth / 2 - 440, ScreenHeight - 550);
+                    batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
+                    font.getData().setScale(3.5f);
+                    font.draw(batch,"Sortir", (homeButton.getWidth() - 70) / 2 , homeButton.getY() + homeButton.height + 60);
+                    font.draw(batch,"Tornar a jugar", ScreenWidth - 316, backButton.getY() + backButton.height + 60);
                     break;
                 case 1:
                     assets.loadAssignedVehicle(dificulty,score);
                     batch.draw(assets.felicidades, ScreenWidth / 2 - 600, ScreenHeight - 440, 1200, 415);
-                    font.draw(batch,"Se te ha asignado el siguiente vehiculo.", ScreenWidth / 4.5f, ScreenHeight - 550);
-                    batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
+                    font.draw(batch,"Se te ha asignado el siguiente vehiculo.", ScreenWidth / 2 - 440, ScreenHeight - 550);
+                    batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
+                    font.getData().setScale(3.5f);
+                    font.draw(batch,"Salir", (homeButton.getWidth() - 60) / 2 , homeButton.getY() + homeButton.height + 60);
+                    font.draw(batch,"Volver a jugar", ScreenWidth - 316, backButton.getY() + backButton.height + 60);
                     break;
                 case 2:
                     assets.loadAssignedVehicle(dificulty,score);
                     batch.draw(assets.congrats, ScreenWidth / 2 - assets.congrats.getWidth()/2f, ScreenHeight - 415);
-                    font.draw(batch,"You have been assigned the following vehicle.", ScreenWidth / 4.5f, ScreenHeight - 550);
-                    batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 250, 150, 500,275);
+                    font.draw(batch,"You have been assigned the following vehicle.", ScreenWidth / 2 - 440, ScreenHeight - 550);
+                    batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
+                    font.getData().setScale(3.5f);
+                    font.draw(batch,"Leave", (homeButton.getWidth() - 70) / 2 , homeButton.getY() + homeButton.height + 60);
+                    font.draw(batch,"Play again", ScreenWidth - 285, backButton.getY() + backButton.height + 60);
                     break;
                 default:
             }
         }
     }
 
+
+    public void backButtonAction(){
+        if (homeButton.contains(touchX,touchY)){
+            dispose();
+        }
+        if (backButton.contains(touchX,touchY)){
+            currentScreen = Screen.EXPLANATION;
+        }
+    }
+
     public void drawBackButton()
     {
         if (currentScreen == Screen.MAIN_GAME ){
+
             batch.draw(assets.buttonBack, backButton.x, backButton.y);
+
             if (backButton.contains(touchX, touchY))
             {
-                currentScreen = Screen.EXPLANATION;
+                backButtonAction();
             }
-        }else if (currentScreen == Screen.EXPLANATION || currentScreen == Screen.WIN || currentScreen == Screen.GAME_OVER){
+        }else if (currentScreen == Screen.EXPLANATION){
+
             batch.draw(assets.buttonHome, homeButton.x, homeButton.y);
+
             if (homeButton.contains(touchX, touchY))
             {
-                dispose();
+                backButtonAction();
+            }
+        }else if(currentScreen == Screen.WIN || currentScreen == Screen.GAME_OVER){
+
+            batch.draw(assets.buttonBack, backButton.x, backButton.y);
+            batch.draw(assets.buttonHome, homeButton.x, homeButton.y);
+
+            if (homeButton.contains(touchX, touchY))
+            {
+                backButtonAction();
+            }
+            if (backButton.contains(touchX, touchY))
+            {
+                reset();
+                backButtonAction();
             }
         }
     }
+
     public void drawExplanation()
     {
         String explanation;
@@ -393,13 +495,13 @@ public class MyGame extends ApplicationAdapter {
         float maxWidth = ScreenWidth; // Ancho máximo para el texto
         switch (language){
             case 0:
-                explanation = "Aquest joc consisteix en un qüestionari 20 preguntes amb 4 opcions. Tindràs 4 carrils els quals representen cadascun les opcions. Per respondre a les preguntes, has de moure el teu vehicle i deixar-lo a l'opció que creguis que és correcta i després prémer el botó 'Comprova' per verificar si has triat correctament. Si estàs preparat, prem el botó 'Jugar'.";
+                explanation = "Aquest joc consisteix en un qüestionari 20 preguntes amb 4 opcions. Tindràs 4 carrils els quals representen cadascun les opcions. Per respondre a les preguntes, has de moure el teu vehicle i deixar-lo a l'opció que creguis que és correcta i després prémer el botó 'Check' per verificar si has triat correctament. Si estàs preparat, prem el botó 'Jugar'.";
                 adjustText(explanation,explanationX, explanationY, maxWidth);
                 batch.draw(assets.buttonJugar, playButtonBounds.x, playButtonBounds.y);
 
                 break;
             case 1:
-                explanation = "Este juego consiste en un cuestionario de 20 preguntas con 4 opciones. Tendrás 4 carriles que representan cada una de las opciones. Para responder a las preguntas, debes mover tu vehículo y dejarlo en la opción que creas que es correcta, luego presionar el botón 'Comprobar' para verificar si has elegido correctamente. Si estás listo, presiona el botón 'Jugar'.";
+                explanation = "Este juego consiste en un cuestionario de 20 preguntas con 4 opciones. Tendrás 4 carriles que representan cada una de las opciones. Para responder a las preguntas, debes mover tu vehículo y dejarlo en la opción que creas que es correcta, luego presionar el botón 'Check' para verificar si has elegido correctamente. Si estás listo, presiona el botón 'Jugar'.";
                 adjustText(explanation,explanationX, explanationY, maxWidth);
                 batch.draw(assets.buttonJugar, playButtonBounds.x, playButtonBounds.y);
                 break;
@@ -456,9 +558,6 @@ public class MyGame extends ApplicationAdapter {
         // Utiliza el índice seleccionado
         return questionManager.getRandomUnusedIndex(totalQuestions);
     }
-    private void resetUsedIndices() {
-        questionManager.resetUsedIndices();
-    }
 
     public String finalScore(){
 
@@ -489,11 +588,11 @@ public class MyGame extends ApplicationAdapter {
         }else if (currentScreen == Screen.WIN){
             switch (language){
                 case 0:
-                        return "T'han quedat " + lives + " vides";
+                        return "T'han quedat " + lives + " rodas";
                 case 1:
-                        return "Te han quedado " + lives + " vidas";
+                        return "Te han quedado " + lives + " ruedas";
                 case 2:
-                        return "You had " +  lives + " lives left";
+                        return "You had " +  lives + " wheels left";
                 default:
             }
         }
@@ -549,7 +648,7 @@ public class MyGame extends ApplicationAdapter {
     }
 
     public void showOptions(String[] optionsAnswer) {
-        float opcionesY = preguntaY - 160; // Ajusta la posición vertical de las opciones
+        float opcionesY = preguntaY - 150; // Ajusta la posición vertical de las opciones
         for (int i = 0; i < optionsAnswer.length; i++) {
             String opcion = optionsAnswer[i];
             String letra = obtenerLetra(i); // Obtener la letra correspondiente (A, B, C, D)
@@ -658,7 +757,6 @@ public class MyGame extends ApplicationAdapter {
 
 
     public void checkAnswer() {
-
         timeLeft = TIMEOUT_TIME;
         recCC1.y -= 25f;
         recCC2.y -= 25f;
