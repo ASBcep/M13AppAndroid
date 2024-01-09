@@ -53,7 +53,8 @@ public class MyGame extends ApplicationAdapter {
     private float backgroundY1,backgroundY2;
     private QuestionManager questionManager;
     private Animation<TextureRegion> explosion;
-    private float stateTime;
+    private float stateTime, timer;
+    private boolean showExplosion;
 
     public MyGame(Intent intent, Context context) {
         // Obtener dificultad desde la activity donde se elige la dificultad
@@ -146,7 +147,8 @@ public class MyGame extends ApplicationAdapter {
         stateTime = 0f;
         /*TextureRegion currentFrame = explosion.getKeyFrame(stateTime, true);
                 batch.draw(currentFrame, ScreenWidth / 2 - 400, ScreenHeight / 2 - 400, 800,800);*/
-
+        showExplosion = false;
+        timer = 0;
     }
 
 
@@ -210,7 +212,6 @@ public class MyGame extends ApplicationAdapter {
 
             timeQuestion -= Gdx.graphics.getDeltaTime();
 
-
             if (timeQuestion <= 0 || isButtonPressed(checkButtonBounds)) {
                 timeQuestion = 0;
                 canMove = false;
@@ -221,6 +222,7 @@ public class MyGame extends ApplicationAdapter {
                     // Restablecer el tiempo y permitir que el jugador se mueva nuevamente
                     canMove = true;
                     timeQuestion = TIMEQUESTION;
+
                 }
             }
 
@@ -237,6 +239,7 @@ public class MyGame extends ApplicationAdapter {
 
     private void drawGame(){
         float backgroundVelocity = 15f;
+        stateTime += Gdx.graphics.getDeltaTime();
         switch (currentScreen){
             case EXPLANATION:
                 ScreenUtils.clear(1, 1, 1, 1);
@@ -245,8 +248,6 @@ public class MyGame extends ApplicationAdapter {
                 {
                     currentScreen = Screen.MAIN_GAME;
                 }
-
-                stateTime += Gdx.graphics.getDeltaTime();
 
                 batch.begin();
                 font.getData().setScale(4f);
@@ -318,7 +319,7 @@ public class MyGame extends ApplicationAdapter {
                 spawnColisionCars();
 
                 //Tiempo restante para contestar
-                font.getData().setScale(10F);
+                font.getData().setScale(10);
                 if (timeQuestion > 15){
                     font.setColor(Color.GREEN);
                 }else if(timeQuestion <= 15 && timeQuestion > 5){
@@ -329,8 +330,17 @@ public class MyGame extends ApplicationAdapter {
                 DecimalFormat format = new DecimalFormat("0");
                 String timeQuestionS = format.format(timeQuestion);
                 font.draw(batch, timeQuestionS, 16 , ScreenHeight - 120);
+                font.getData().setScale(4);
+                String timerS = String.valueOf(timer);
+                font.draw(batch,timerS,ScreenWidth - 500, 500);
 
                 drawBackButton();
+
+
+                if (showExplosion){
+                    TextureRegion currentFrame = explosion.getKeyFrame(stateTime, true);
+                    batch.draw(currentFrame, ScreenWidth / 2 - 500, ScreenHeight / 2 - 500, 1000,1000);
+                }
                 batch.end();
 
                 if(debug) {
@@ -763,17 +773,18 @@ public class MyGame extends ApplicationAdapter {
         recCC1.y -= 25f;
         recCC2.y -= 25f;
         recCC3.y -= 25f;
-
         // Falló la pregunta
         if (recUC.overlaps(recCC1) || recUC.overlaps(recCC2) || recUC.overlaps(recCC3)) {
+            // Si hay colisión, reducir las vidas
+            // Restablecer las posiciones de los coches y avanzar a la siguiente pregunta
+            timer = 5;
+            showExplosion = true;
             questionsAnswered += 1;
             lives--;
             checkIndexQuestion();
             if (lives <= 0) {
                 currentScreen = Screen.GAME_OVER;
             }
-            // Si hay colisión, reducir las vidas
-            // Restablecer las posiciones de los coches y avanzar a la siguiente pregunta
             recCC1.setY(ScreenHeight);
             recCC2.setY(ScreenHeight);
             recCC3.setY(ScreenHeight);
