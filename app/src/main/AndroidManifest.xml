@@ -13,9 +13,12 @@
         android:theme="@style/Theme.MNACTECApp"
         tools:targetApi="31">
         <activity
+            android:name=".login"
+            android:exported="false" />
+        <activity
             android:name=".ConfigAdmin"
             android:exported="false"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -31,8 +34,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".Activity4"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".Activity6"
             android:screenOrientation="landscape" />
@@ -41,11 +43,10 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".idiomas"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Launcher"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>
