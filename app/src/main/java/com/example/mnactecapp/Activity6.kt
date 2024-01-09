@@ -91,7 +91,7 @@ class Activity6 : AppCompatActivity() {
         }
         btnConfigAdmin.setOnClickListener{
             // Crear un Intent para abrir ConfigAdmin
-            val intent = Intent(this, ConfigAdmin::class.java)
+            val intent = Intent(this, login::class.java)
             startActivity(intent)
         }
         btnMainScreen.setOnClickListener {
