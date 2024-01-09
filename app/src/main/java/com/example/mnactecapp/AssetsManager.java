@@ -1,19 +1,16 @@
 package com.example.mnactecapp;
 
-import android.annotation.SuppressLint;
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 public class AssetsManager extends ApplicationAdapter {
 
-    public Texture background1,background2,userCar, colisionCar,buttonCheck,wheel,gameOver,congrats,felicidades,felicitats,
-            buttonJugar,buttonPlay,buttonBack,buttonHome,assignedVehicle,A,B,C,D,blackBackground,grayBackground;
-    public FileHandle FTbackground,FuserCar, FcolisionCar,FbuttonCheck,Fwheel,FgameOver,Fcongrats,Ffelicidades,Ffelicitats,
-            FbuttonJugar,FbuttonPlay,FbuttonBack,FbuttonHome,FassignedVehicle,FA,FB,FC,FD,FblackBackground,FgrayBackground;
+    public Texture sheet, background1,background2,userCar, colisionCar,buttonCheck,wheel,gameOver,congrats,felicidades,felicitats,
+            buttonJugar,buttonPlay,buttonBack,buttonHome,assignedVehicle,A,B,C,D, blackBackgroundCircle,grayBackground;
+    public FileHandle Fsheet, FTbackground,FuserCar, FcolisionCar,FbuttonCheck,Fwheel,FgameOver,Fcongrats,Ffelicidades,Ffelicitats,
+            FbuttonJugar,FbuttonPlay,FbuttonBack,FbuttonHome,FassignedVehicle,FA,FB,FC,FD, FblackBackgroundCircle,FgrayBackground;
     public void loadAssets(){
 
         /*provar a carregar img directament de drawable
@@ -60,8 +57,9 @@ public class AssetsManager extends ApplicationAdapter {
         congrats = new Texture(Fcongrats);
         felicidades = new Texture(Ffelicidades);
         felicitats = new Texture(Ffelicitats);
-        blackBackground = new Texture(FblackBackground);
+        blackBackgroundCircle = new Texture(FblackBackgroundCircle);
         grayBackground = new Texture(FgrayBackground);
+        sheet = new Texture(Fsheet);
 
         //by ia from here
         //assetManager = new AssetManager();
@@ -118,9 +116,9 @@ public class AssetsManager extends ApplicationAdapter {
         FB = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/B.png");
         FC = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/C.png");
         FD = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/D.png");
-        FblackBackground = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/blackbackground.png");
+        FblackBackgroundCircle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/blackbackgroundcircle.png");
         FgrayBackground = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/grayBackground.jpg");
-
+        Fsheet = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/explosion_sheet_001.png");
     }
 
     public void loadAssignedVehicle(int difficulty, int score) {
