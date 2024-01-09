@@ -412,6 +412,7 @@ public class MyGame extends ApplicationAdapter {
                     assets.loadAssignedVehicle(dificulty,score);
                     font.draw(batch,"Se t'ha assignat el següent vehicle.", ScreenWidth / 2 - 440, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
+                    batch.draw(assets.frame, ScreenWidth / 2 - 380 , 32, 760,430);
                     font.getData().setScale(3.5f);
                     font.draw(batch,"Sortir", (homeButton.getWidth() - 70) / 2 , homeButton.getY() + homeButton.height + 60);
                     font.draw(batch,"Tornar a jugar", ScreenWidth - 316, backButton.getY() + backButton.height + 60);
@@ -420,6 +421,7 @@ public class MyGame extends ApplicationAdapter {
                     assets.loadAssignedVehicle(dificulty,score);
                     font.draw(batch,"Se te ha asignado el siguiente vehiculo.", ScreenWidth / 2 - 440, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
+                    batch.draw(assets.frame, ScreenWidth / 2 - 380 , 32, 760,430);
                     font.getData().setScale(3.5f);
                     font.draw(batch,"Salir", (homeButton.getWidth() - 60) / 2 , homeButton.getY() + homeButton.height + 60);
                     font.draw(batch,"Volver a jugar", ScreenWidth - 316, backButton.getY() + backButton.height + 60);
@@ -428,6 +430,7 @@ public class MyGame extends ApplicationAdapter {
                     assets.loadAssignedVehicle(dificulty,score);
                     font.draw(batch,"You have been assigned the following vehicle.", ScreenWidth / 2 - 440, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
+                    batch.draw(assets.frame, ScreenWidth / 2 - 380 , 32, 760,430);
                     font.getData().setScale(3.5f);
                     font.draw(batch,"Leave", (homeButton.getWidth() - 70) / 2 , homeButton.getY() + homeButton.height + 60);
                     font.draw(batch,"Try again", ScreenWidth - 300, backButton.getY() + backButton.height + 60);
@@ -442,6 +445,7 @@ public class MyGame extends ApplicationAdapter {
                     batch.draw(assets.felicitats, ScreenWidth / 2 - 800, ScreenHeight - 440,1600,415);
                     font.draw(batch,"Se t'ha assignat el següent vehicle.", ScreenWidth / 2 - 440, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
+                    batch.draw(assets.frame, ScreenWidth / 2 - 380 , 32, 760,430);
                     font.getData().setScale(3.5f);
                     font.draw(batch,"Sortir", (homeButton.getWidth() - 70) / 2 , homeButton.getY() + homeButton.height + 60);
                     font.draw(batch,"Tornar a jugar", ScreenWidth - 316, backButton.getY() + backButton.height + 60);
@@ -451,6 +455,7 @@ public class MyGame extends ApplicationAdapter {
                     batch.draw(assets.felicidades, ScreenWidth / 2 - 600, ScreenHeight - 440, 1200, 415);
                     font.draw(batch,"Se te ha asignado el siguiente vehiculo.", ScreenWidth / 2 - 440, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
+                    batch.draw(assets.frame, ScreenWidth / 2 - 380 , 32, 760,430);
                     font.getData().setScale(3.5f);
                     font.draw(batch,"Salir", (homeButton.getWidth() - 60) / 2 , homeButton.getY() + homeButton.height + 60);
                     font.draw(batch,"Volver a jugar", ScreenWidth - 316, backButton.getY() + backButton.height + 60);
@@ -460,6 +465,7 @@ public class MyGame extends ApplicationAdapter {
                     batch.draw(assets.congrats, ScreenWidth / 2 - assets.congrats.getWidth()/2f, ScreenHeight - 415);
                     font.draw(batch,"You have been assigned the following vehicle.", ScreenWidth / 2 - 440, ScreenHeight - 550);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
+                    batch.draw(assets.frame, ScreenWidth / 2 - 380 , 32, 760,430);
                     font.getData().setScale(3.5f);
                     font.draw(batch,"Leave", (homeButton.getWidth() - 70) / 2 , homeButton.getY() + homeButton.height + 60);
                     font.draw(batch,"Play again", ScreenWidth - 285, backButton.getY() + backButton.height + 60);
@@ -765,13 +771,12 @@ public class MyGame extends ApplicationAdapter {
     }
 
 
-
     public void checkAnswer() {
         timeLeft = TIMEOUT_TIME;
         recCC1.y -= 25f;
         recCC2.y -= 25f;
         recCC3.y -= 25f;
-        
+
         // Falló la pregunta
         if (recUC.overlaps(recCC1) || recUC.overlaps(recCC2) || recUC.overlaps(recCC3)) {
             stateTime = 0f;
