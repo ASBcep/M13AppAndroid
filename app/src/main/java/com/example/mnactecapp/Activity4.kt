@@ -11,7 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import org.w3c.dom.Text
+//import org.w3c.dom.Text
 
 class Activity4 : AppCompatActivity() {
 
@@ -120,9 +120,9 @@ class Activity4 : AppCompatActivity() {
         }
         //botón para cambiar de ámbito
         btnChangeField.setOnClickListener{
-            //fieldSelector()
-            //act1FrameText.text = fields[indexField].nameField
             var fieldContent = false
+            //cribo si en l'àmbit hi ha contingut,
+            // si no n'hi ha es tria el següent àmbit i es torna a comprovar, successivament.
             do {fieldSelector()
                 elementsField = elementsList.loadField(indexField)
                 //verifico si hi ha elements a l'àmbit triat
