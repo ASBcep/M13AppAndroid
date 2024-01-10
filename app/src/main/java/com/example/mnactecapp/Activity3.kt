@@ -101,7 +101,7 @@ class Activity3 : AppCompatActivity() {
 
     private fun resetInactivityTimer() {
         handler.removeCallbacks(inactivityRunnable)
-        handler.postDelayed(inactivityRunnable, 30000)
+        handler.postDelayed(inactivityRunnable, 60000)
     }
 
     private fun stopInactivityTimer() {

@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import login
 import java.io.File
 
 class Activity6 : AppCompatActivity() {
@@ -148,7 +149,7 @@ class Activity6 : AppCompatActivity() {
 
     private fun resetInactivityTimer() {
         handler.removeCallbacks(inactivityRunnable)
-        handler.postDelayed(inactivityRunnable, 30000) // 30 segundos
+        handler.postDelayed(inactivityRunnable, 60000) // 30 segundos
     }
 
     private fun reiniciarActividad() {

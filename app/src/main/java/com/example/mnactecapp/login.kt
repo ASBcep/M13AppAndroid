@@ -1,12 +1,15 @@
-package com.example.mnactecapp
-
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.mnactecapp.ConfigAdmin
+import com.example.mnactecapp.ElementManager
+import com.example.mnactecapp.MainActivity
+import com.example.mnactecapp.R
 
 class login : AppCompatActivity() {
 
@@ -15,16 +18,25 @@ class login : AppCompatActivity() {
     lateinit var editTextNombreUsuario: EditText
     lateinit var editTextContraseña: EditText
 
+    // Declarar Handler y Runnable para inactividad
+    private val handler = Handler()
+    private val inactivityRunnable = Runnable {
+        mostrarToast("Sin actividad. Redirigiendo a MainActivity.")
+        startActivity(Intent(this, MainActivity::class.java))
+        finish() // Finalizar esta actividad para evitar que el usuario vuelva aquí al presionar el botón Atrás.
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Inicializar vistas después de setContentView
+        // Inicialización de vistas
         textViewTitulo = findViewById(R.id.textViewTitulo)
         btnAcceder = findViewById(R.id.btnAcceder)
         editTextNombreUsuario = findViewById(R.id.editTextNombreUsuario)
         editTextContraseña = findViewById(R.id.editTextContraseña)
 
+        // Botón Acceder
         btnAcceder.setOnClickListener {
             val nom = editTextNombreUsuario.text.toString()
             val contra = editTextContraseña.text.toString()
@@ -35,9 +47,16 @@ class login : AppCompatActivity() {
             } else {
                 mostrarToast("Nom o contrasenya incorrectes")
             }
+
+            // Resetear temporizador de inactividad
+            resetInactivityTimer()
         }
 
+        // Actualizar idioma
         actualizarIdioma()
+
+        // Iniciar temporizador de inactividad
+        resetInactivityTimer()
     }
 
     private fun mostrarToast(mensaje: String) {
@@ -57,5 +76,24 @@ class login : AppCompatActivity() {
         editTextNombreUsuario.setText(nombreUsuarioTexto)
         editTextContraseña.setText(contraseñaTexto)
         textViewTitulo.text = tituloTexto
+    }
+
+    private fun resetInactivityTimer() {
+        // Eliminar el Runnable anterior
+        handler.removeCallbacks(inactivityRunnable)
+        // Establecer un nuevo Runnable para reiniciar la actividad después de 60 segundos
+        handler.postDelayed(inactivityRunnable, 60000) // 60 segundos
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Reiniciar temporizador de inactividad
+        resetInactivityTimer()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // Detener temporizador de inactividad
+        handler.removeCallbacks(inactivityRunnable)
     }
 }
