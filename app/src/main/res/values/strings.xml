@@ -125,4 +125,21 @@
     <string name="gameNoImagesSPA">No se puede iniciar el juego, por favor importa las imágenes del juego</string>
     <string name="gameNoImagesENG">Game can not be started, please import the game\'s images</string>
 
+    <string name="textViewTituloCAT">Opcions Avançades</string>
+    <string name="textViewTituloSPA">Opciones Avanzadas</string>
+    <string name="textViewTituloENG">Advanced Options</string>
+
+    <string name="editTextNombreUsuarioCAT">nom</string>
+    <string name="editTextNombreUsuarioSPA">nombre</string>
+    <string name="editTextNombreUsuarioENG">name</string>
+
+    <string name="editTextContraseñaCAT">contrasenya</string>
+    <string name="editTextContraseñaSPA">contraseña</string>
+    <string name="editTextContraseñaENG">password</string>
+
+    <string name="btnAccederCAT">accedir</string>
+    <string name="btnAccederSPA">acceder</string>
+    <string name="btnAccederENG">access</string>
+
+
 </resources>
