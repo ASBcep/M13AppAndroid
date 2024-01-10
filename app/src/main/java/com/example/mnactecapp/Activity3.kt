@@ -58,7 +58,7 @@ class Activity3 : AppCompatActivity()
             1 -> {btnPlay.text = getString(R.string.btnPlaySPA)
                 btnList.text = getString(R.string.btnFieldSPA)}
             2 -> {btnPlay.text = getString(R.string.btnPlayENG)
-                btnList.text = getString(R.string.btnFieldSPA)}
+                btnList.text = getString(R.string.btnFieldENG)}
         }
 
 
