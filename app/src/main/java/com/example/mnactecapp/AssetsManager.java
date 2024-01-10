@@ -9,7 +9,7 @@ public class AssetsManager extends ApplicationAdapter {
 
     public Texture frame, sheet, background1,background2,userCar, colisionCar,buttonCheck,wheel,gameOver,congrats,felicidades,felicitats,
             buttonJugar,buttonPlay,buttonBack,buttonHome,assignedVehicle,A,B,C,D, blackBackgroundCircle,grayBackground;
-    public FileHandle Fframe, Fsheet, FTbackground,FuserCar, FcolisionCar,FbuttonCheck,Fwheel,FgameOver,Fcongrats,Ffelicidades,Ffelicitats,
+    public FileHandle  Fframe, Fsheet, FTbackground,FuserCar, FcolisionCar,FbuttonCheck,Fwheel,FgameOver,Fcongrats,Ffelicidades,Ffelicitats,
             FbuttonJugar,FbuttonPlay,FbuttonBack,FbuttonHome,FassignedVehicle,FA,FB,FC,FD, FblackBackgroundCircle,FgrayBackground;
     public void loadAssets(){
 
@@ -36,7 +36,6 @@ public class AssetsManager extends ApplicationAdapter {
         //comentat per provar a carregar img directament de drawable
 
         loadFileHandle();
-
 
         //cargar textura en variables
         background1 = new Texture(FTbackground);
@@ -101,7 +100,6 @@ public class AssetsManager extends ApplicationAdapter {
     public void loadFileHandle(){
 
         FTbackground = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/background4.png");
-        FuserCar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/userCar.png");
         FcolisionCar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/colisionCar.png");
         FbuttonCheck = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/buttonCheck.png");
         Fwheel = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/wheel.png");
@@ -121,6 +119,21 @@ public class AssetsManager extends ApplicationAdapter {
         FgrayBackground = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/grayBackground.jpg");
         Fsheet = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/explosion_sheet_001.png");
         Fframe = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/frame.png");
+    }
+
+
+    public void loadUserCar(int difficulty){
+        switch (difficulty) {
+            case 1:
+                FuserCar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/userCarEasy.png");
+                break;
+            case 2:
+                FuserCar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/userCarNormal.png");
+                break;
+            case 3:
+                FuserCar = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/userCarHard.png");
+                break;
+        }
     }
 
     public void loadAssignedVehicle(int difficulty, int score) {
