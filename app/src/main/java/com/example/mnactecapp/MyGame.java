@@ -52,7 +52,7 @@ public class MyGame extends ApplicationAdapter {
     private final Context context;
     private float backgroundY1,backgroundY2;
     private QuestionManager questionManager;
-    private Animation<TextureRegion> explosionGame, explosionGO;
+    private Animation<TextureRegion> explosionGame;
     private float stateTime;
     private boolean showExplosion;
 
@@ -145,11 +145,8 @@ public class MyGame extends ApplicationAdapter {
 
         TextureRegion[][] regions = TextureRegion.split(assets.sheet, 256, 256); // Ajusta el tamaño del frame
         TextureRegion[] frames = Arrays.copyOf(regions[0], regions[0].length, TextureRegion[].class);
-        explosionGame = new Animation<>(0.1f, frames); // duración de cada frame en segundos
+        explosionGame = new Animation<>(0.08f, frames); // duración de cada frame en segundos
 
-        TextureRegion[][] regionsGO = TextureRegion.split(assets.sheetGO, 56, 55); // Ajusta el tamaño del frame
-        TextureRegion[] framesGO = Arrays.copyOf(regionsGO[0], regionsGO[0].length, TextureRegion[].class);
-        explosionGO = new Animation<>(0.1f, framesGO); // duración de cada frame en segundos
         stateTime = 0f;
         showExplosion = false;
     }
@@ -399,17 +396,18 @@ public class MyGame extends ApplicationAdapter {
                 ScreenUtils.clear(0.3f, 0.3f, 0.3f, 1);
                 batch.begin();
                 batch.draw(assets.grayBackground, 0, 0, ScreenWidth, ScreenHeight);
-                batch.draw(assets.gameOver, (ScreenWidth - 1280 )/ 2, ScreenHeight - 400, 1280,352);
-                font.getData().setScale(3.5f);
-                font.setColor(Color.WHITE);
-                font.draw(batch,finalScore(),ScreenWidth / 2 - 440, ScreenHeight - 440);
-                drawEndgame();
-                drawBackButton();
-                font.setColor(Color.WHITE);
-                    /*TextureRegion currentFrame = explosionGO.getKeyFrame(stateTime, true);
-                    batch.draw(currentFrame, ScreenWidth / 2 - 200, ScreenHeight / 2 - 200, 400,400);*/
-
-
+                if (showExplosion && stateTime < explosionGame.getAnimationDuration()){
+                    explosionGame.setPlayMode(Animation.PlayMode.NORMAL);
+                    TextureRegion currentFrame = explosionGame.getKeyFrame(stateTime, false);
+                    batch.draw(currentFrame, ScreenWidth / 2 - 3250, ScreenHeight / 2 - 3250, 6500,6500);
+                }else{
+                    batch.draw(assets.gameOver, (ScreenWidth - 1280 )/ 2, ScreenHeight - 400, 1280,352);
+                    font.getData().setScale(3.5f);
+                    font.setColor(Color.WHITE);
+                    font.draw(batch,finalScore(),ScreenWidth / 2 - 440, ScreenHeight - 440);
+                    drawEndgame();
+                    drawBackButton();
+                }
                 batch.end();
                 break;
             case WIN:
