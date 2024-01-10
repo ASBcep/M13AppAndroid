@@ -1,3 +1,5 @@
+package com.example.mnactecapp
+
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -6,10 +8,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mnactecapp.ConfigAdmin
-import com.example.mnactecapp.ElementManager
-import com.example.mnactecapp.MainActivity
-import com.example.mnactecapp.R
 
 class login : AppCompatActivity() {
 

@@ -75,7 +75,6 @@ public class MyGame extends ApplicationAdapter {
         loadQuestionsJSON();
 
         font = new BitmapFont();
-        font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         preguntaX = ScreenWidth / 4 + 25;
         preguntaY = ScreenHeight - 24;
 

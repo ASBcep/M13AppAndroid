@@ -9,7 +9,7 @@ public class AssetsManager extends ApplicationAdapter {
 
     public Texture frame, sheet, background1,background2,userCar, colisionCar,buttonCheck,wheel,gameOver,congrats,felicidades,felicitats,
             buttonJugar,buttonPlay,buttonBack,buttonHome,assignedVehicle,A,B,C,D, blackBackgroundCircle,grayBackground;
-    public FileHandle  Fframe, Fsheet, FTbackground,FuserCar, FcolisionCar,FbuttonCheck,Fwheel,FgameOver,Fcongrats,Ffelicidades,Ffelicitats,
+    public FileHandle Fframe, Fsheet, FTbackground,FuserCar, FcolisionCar,FbuttonCheck,Fwheel,FgameOver,Fcongrats,Ffelicidades,Ffelicitats,
             FbuttonJugar,FbuttonPlay,FbuttonBack,FbuttonHome,FassignedVehicle,FA,FB,FC,FD, FblackBackgroundCircle,FgrayBackground;
     public void loadAssets(){
 
