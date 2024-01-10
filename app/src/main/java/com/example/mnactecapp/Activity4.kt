@@ -1,9 +1,10 @@
 package com.example.mnactecapp
 
-
 import ElementsList
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -11,26 +12,24 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-//import org.w3c.dom.Text
 
 class Activity4 : AppCompatActivity() {
 
-    // carrego el llistat d'elements LOCAL des de la llista GLOBAL
     val elements = ElementManager.elements
-    // carrego les dades d'àmbit a mostrar LOCAL des de la llista GLOBAL
     val fields = ElementManager.fields
     var indexField = ElementManager.indexField
-    val totalField = ElementManager.fields.count() - 1//resto 1 ja que començem pel 0
+    val totalField = ElementManager.fields.count() - 1
 
-    //val act1FrameText: TextView = findViewById(R.id.act1FrameText)
+    private val handler = Handler()
+    private val inactivityRunnable = Runnable {
+        reiniciarActividad()
+    }
 
     private val getResult =
         registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult())
-        {
-            if(it.resultCode == RESULT_OK){
+            ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
                 reiniciarActividad()
-            }else if(it.resultCode == RESULT_CANCELED){
             }
         }
 
@@ -38,148 +37,132 @@ class Activity4 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity4)
 
-        //val botonpasar: TextView = findViewById(R.id.botonpasar)
-        //val botonatras: TextView = findViewById(R.id.botonatras)
-
         val act1FrameText: TextView = findViewById(R.id.act1FrameText)
-
         val botonidiomas1: TextView = findViewById(R.id.botonidiomas1)
         val btnChangeField: Button = findViewById(R.id.btnChangeField)
         val btnMainScreen: Button = findViewById(R.id.btnMainScreen)
 
         act1FrameText.text = fields[indexField].nameField
 
-        //mostrar text segons idioma
-        when (ElementManager.idioma){
-            0 -> {btnChangeField.text = getString(R.string.btnChangeFieldCAT)
+        when (ElementManager.idioma) {
+            0 -> {
+                btnChangeField.text = getString(R.string.btnChangeFieldCAT)
                 botonidiomas1.text = getString(R.string.btn_idioma)
-                btnMainScreen.text = getString(R.string.btnIniciCAT)}
-            1 -> {btnChangeField.text = getString(R.string.btnChangeFieldSPA)
+                btnMainScreen.text = getString(R.string.btnIniciCAT)
+            }
+            1 -> {
+                btnChangeField.text = getString(R.string.btnChangeFieldSPA)
                 botonidiomas1.text = getString(R.string.btn_idioma)
-                btnMainScreen.text = getString(R.string.btnIniciSPA)}
-            2 -> {btnChangeField.text = getString(R.string.btnChangeFieldENG)
+                btnMainScreen.text = getString(R.string.btnIniciSPA)
+            }
+            2 -> {
+                btnChangeField.text = getString(R.string.btnChangeFieldENG)
                 botonidiomas1.text = getString(R.string.btn_language)
-                btnMainScreen.text = getString(R.string.btnIniciENG)}
+                btnMainScreen.text = getString(R.string.btnIniciENG)
+            }
         }
-
-
-        /*botonpasar.setOnClickListener {
-            // Crear un Intent para abrir Activity6
-            val intent = Intent(this, Activity6::class.java)
-            startActivity(intent)
-        }*/
-
-        /*botonatras.setOnClickListener {
-            // Crear un Intent para abrir Activity3
-            val intent = Intent(this, Activity3::class.java)
-            startActivity(intent)
-        }*/
-        //inici programació amb llista GLOBAL
-
-        //val elementsField = elements//prova sense cribar per àmbit
-        //final programació amb llista GLOBAL
-        /*prova sense usar la classe ElementsList
-        val intent = getIntent()
-        val field = intent.getIntExtra(fieldConstant.FIELD, 1)
-
-        val elementsList = ElementsList(this)
-        val elementsField = elementsList.loadField(field)
-        */
 
         val elementsList = ElementsList(this)
         var elementsField = elementsList.loadField(indexField)
-
-
-        //cribo per àmbit els elements a mostrar a la llista
-       /* if (indexField > 0){
-            for(i in 0 until elements.count()) {
-                if(elements[i].field == indexField){
-                    elementsField.add(elements[i])
-                }
-            }
-        } else {
-            elementsField = elements
-        }
-*/
 
         val listAltresElements = findViewById<RecyclerView>(R.id.ListAltresElements)
         val layoutManager = GridLayoutManager(this, 3)
         listAltresElements.layoutManager = layoutManager
 
         val adapter = ElementAdapter(elementsField) { selectedElement ->
-            // Manejar el clic del elemento aquí
             navigateToActivity3(selectedElement)
         }
 
         listAltresElements.adapter = adapter
 
         botonidiomas1.setOnClickListener {
-            // Crear un Intent para abrir idiomas
             val intent = Intent(this, idiomas::class.java)
             getResult.launch(intent)
         }
-        //botón para cambiar de ámbito
-        btnChangeField.setOnClickListener{
+
+        btnChangeField.setOnClickListener {
             var fieldContent = false
-            //cribo si en l'àmbit hi ha contingut,
-            // si no n'hi ha es tria el següent àmbit i es torna a comprovar, successivament.
-            do {fieldSelector()
+            do {
+                fieldSelector()
                 elementsField = elementsList.loadField(indexField)
-                //verifico si hi ha elements a l'àmbit triat
-                if (elementsField.count() != 0){
+                if (elementsField.count() != 0) {
                     fieldContent = true
                 } else {
-                    //toast debug
                     if (ElementManager.debug) {
                         Toast.makeText(
                             this,
-                            "L'àmbit " + indexField + ": " + fields[indexField].nameField + " no té contingut.",
+                            "L'àmbit $indexField: ${fields[indexField].nameField} no té contingut.",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
-            } while (fieldContent == false)
+            } while (!fieldContent)
             act1FrameText.text = fields[indexField].nameField
             reiniciarActividad()
         }
+
         btnMainScreen.setOnClickListener {
-            // Crear un Intent para abrir la pantalla principal
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
+        // Detectar toques en la vista raíz
+        val rootView = findViewById<View>(android.R.id.content)
+        rootView.setOnTouchListener { _, _ ->
+            resetInactivityTimer()
+            false
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        resetInactivityTimer()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stopInactivityTimer()
+    }
+
+    private fun resetInactivityTimer() {
+        handler.removeCallbacks(inactivityRunnable)
+        handler.postDelayed(inactivityRunnable, 30000) // 30 segundos
+    }
+
+    private fun stopInactivityTimer() {
+        handler.removeCallbacks(inactivityRunnable)
     }
 
     private fun navigateToActivity3(selectedElement: Element) {
-        // Crear un Intent para abrir Activity3
         val intent = Intent(this, Activity3::class.java)
         intent.putExtra(Activity3.elementShownConstant.ELEMENT, selectedElement)
         startActivity(intent)
     }
+
     private fun fieldSelector() {
-        if (indexField < totalField){
+        if (indexField < totalField) {
             indexField++
         } else {
             indexField = 0
         }
 
-        //toast per debugar
         ElementManager.indexField = indexField
         if (ElementManager.debug) {
             Toast.makeText(
                 this,
-                "Es canvia d'àmbit a " + indexField + ": " + fields[indexField].nameField,
+                "Es canvia d'àmbit a $indexField: ${fields[indexField].nameField}",
                 Toast.LENGTH_SHORT
             ).show()
         }
     }
-    fun reiniciarActividad() {
-        // Cerrar la actividad actual
+
+    private fun reiniciarActividad() {
         finish()
-        // Crear un nuevo Intent para reiniciar la actividad
         val intent = Intent(this, this::class.java)
         startActivity(intent)
     }
 }
+
 
 /*codi branch main 30/11/2023
 

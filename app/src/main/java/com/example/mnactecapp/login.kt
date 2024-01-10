@@ -9,19 +9,23 @@ import android.widget.TextView
 import android.widget.Toast
 
 class login : AppCompatActivity() {
-    var textViewTitulo : TextView = findViewById(R.id.textViewTitulo)
-    var btnAcceder: Button = findViewById(R.id.btnAcceder)
-    var editTextNombreUsuario: EditText = findViewById(R.id.editTextNombreUsuario)
-    var editTextContraseña: EditText = findViewById(R.id.editTextContraseña)
+
+    lateinit var textViewTitulo: TextView
+    lateinit var btnAcceder: Button
+    lateinit var editTextNombreUsuario: EditText
+    lateinit var editTextContraseña: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        // Inicializar vistas después de setContentView
+        textViewTitulo = findViewById(R.id.textViewTitulo)
+        btnAcceder = findViewById(R.id.btnAcceder)
+        editTextNombreUsuario = findViewById(R.id.editTextNombreUsuario)
+        editTextContraseña = findViewById(R.id.editTextContraseña)
 
-
-        btnAcceder.setOnClickListener{
-
+        btnAcceder.setOnClickListener {
             val nom = editTextNombreUsuario.text.toString()
             val contra = editTextContraseña.text.toString()
 
@@ -32,28 +36,26 @@ class login : AppCompatActivity() {
                 mostrarToast("Nom o contrasenya incorrectes")
             }
         }
-        when (ElementManager.idioma){
-            0 -> {btnAcceder.text = getString(R.string.btnAccederCAT)
-                editTextNombreUsuario.setText(getString(R.string.editTextNombreUsuarioCAT))
-                editTextContraseña.setText(getString(R.string.editTextContraseñaCAT))
-                textViewTitulo.text = getString(R.string.textViewTituloCAT)}
 
-            1 -> {btnAcceder.text = getString(R.string.btnAccederSPA)
-                editTextNombreUsuario.setText(getString(R.string.editTextNombreUsuarioSPA))
-                editTextContraseña.setText(getString(R.string.editTextContraseñaSPA))
-                textViewTitulo.text = getString(R.string.textViewTituloSPA)}
-
-            2 -> {btnAcceder.text = getString(R.string.btnAccederENG)
-                editTextNombreUsuario.setText(getString(R.string.editTextNombreUsuarioENG))
-                editTextContraseña.setText(getString(R.string.editTextContraseñaENG))
-                textViewTitulo.text = getString(R.string.textViewTituloENG) }
-        }
+        actualizarIdioma()
     }
 
     private fun mostrarToast(mensaje: String) {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
     }
 
+    private fun actualizarIdioma() {
+        when (ElementManager.idioma) {
+            0 -> setearTextoIdioma(getString(R.string.btnAccederCAT), getString(R.string.editTextNombreUsuarioCAT), getString(R.string.editTextContraseñaCAT), getString(R.string.textViewTituloCAT))
+            1 -> setearTextoIdioma(getString(R.string.btnAccederSPA), getString(R.string.editTextNombreUsuarioSPA), getString(R.string.editTextContraseñaSPA), getString(R.string.textViewTituloSPA))
+            2 -> setearTextoIdioma(getString(R.string.btnAccederENG), getString(R.string.editTextNombreUsuarioENG), getString(R.string.editTextContraseñaENG), getString(R.string.textViewTituloENG))
+        }
+    }
 
-
+    private fun setearTextoIdioma(btnTexto: String, nombreUsuarioTexto: String, contraseñaTexto: String, tituloTexto: String) {
+        btnAcceder.text = btnTexto
+        editTextNombreUsuario.setText(nombreUsuarioTexto)
+        editTextContraseña.setText(contraseñaTexto)
+        textViewTitulo.text = tituloTexto
+    }
 }

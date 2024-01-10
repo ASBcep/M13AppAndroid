@@ -3,58 +3,84 @@ package com.example.mnactecapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 
 class idiomas : AppCompatActivity() {
-    //var idioma = "0"
 
+    // Timer y Runnable para reiniciar actividad después de inactividad
+    private val handler = Handler()
+    private val inactivityRunnable = Runnable {
+        reiniciarActividad()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_idiomas)
+
+        // Inicialización de vistas
         val btnCat = findViewById<Button>(R.id.btnCat)
         val btnSpa = findViewById<Button>(R.id.btnSpa)
         val btnEng = findViewById<Button>(R.id.btnEng)
         val btnMainScreen: Button = findViewById(R.id.btnMainScreen)
         val btnList: Button = findViewById(R.id.btnList)
 
+        // Detectar toques en la vista raíz para reiniciar la actividad después de 30 segundos de inactividad
+        val rootView = findViewById<View>(android.R.id.content)
+        rootView.setOnTouchListener { _, _ ->
+            resetInactivityTimer()
+            false
+        }
+
+        // Botones para cambiar idioma
         btnCat.setOnClickListener {
-            ElementManager.idioma = 0
-            if(ElementManager.debug){
-                Toast.makeText(this,"Idioma canviat a català", Toast.LENGTH_LONG).show()
-            }
-            //val intent = Intent(this,MainActivity::class.java)
-            setResult(RESULT_OK,intent)
-            finish()
+            cambiarIdioma(0, "Idioma canviat a català")
         }
         btnSpa.setOnClickListener {
-            ElementManager.idioma = 1
-            if(ElementManager.debug){
-                Toast.makeText(this,"Idioma cambiado a castellano", Toast.LENGTH_LONG).show()
-            }
-            //val intent = Intent(this,MainActivity::class.java)
-            setResult(RESULT_OK,intent)
-            finish()
+            cambiarIdioma(1, "Idioma cambiado a castellano")
         }
         btnEng.setOnClickListener {
-            ElementManager.idioma = 2
-            if(ElementManager.debug){
-                Toast.makeText(this,"Language changed to English", Toast.LENGTH_LONG).show()
-            }
-            //val intent = Intent(this,MainActivity::class.java)
-            setResult(RESULT_OK,intent)
-            finish()
+            cambiarIdioma(2, "Language changed to English")
         }
+
         btnMainScreen.setOnClickListener {
-            // Crear un Intent para abrir la pantalla principal
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, MainActivity::class.java))
         }
+
         btnList.setOnClickListener {
-            // Crear un Intent para abrir Activity4 (llistat d'elements)
-            val intent = Intent(this, Activity4::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, Activity4::class.java))
         }
+    }
+
+    private fun cambiarIdioma(idioma: Int, mensaje: String) {
+        ElementManager.idioma = idioma
+        if (ElementManager.debug) {
+            Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+        }
+        setResult(RESULT_OK, intent)
+        finish()
+    }
+
+    private fun resetInactivityTimer() {
+        handler.removeCallbacks(inactivityRunnable)
+        handler.postDelayed(inactivityRunnable, 30000) // 30 segundos
+    }
+
+    private fun reiniciarActividad() {
+        finish()
+        val intent = Intent(this, this::class.java)
+        startActivity(intent)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        resetInactivityTimer()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(inactivityRunnable)
     }
 }
