@@ -7,9 +7,9 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class AssetsManager extends ApplicationAdapter {
 
-    public Texture sheet, background1,background2,userCar, colisionCar,buttonCheck,wheel,gameOver,congrats,felicidades,felicitats,
+    public Texture frame, sheet, background1,background2,userCar, colisionCar,buttonCheck,wheel,gameOver,congrats,felicidades,felicitats,
             buttonJugar,buttonPlay,buttonBack,buttonHome,assignedVehicle,A,B,C,D, blackBackgroundCircle,grayBackground;
-    public FileHandle Fsheet, FTbackground,FuserCar, FcolisionCar,FbuttonCheck,Fwheel,FgameOver,Fcongrats,Ffelicidades,Ffelicitats,
+    public FileHandle Fframe, Fsheet, FTbackground,FuserCar, FcolisionCar,FbuttonCheck,Fwheel,FgameOver,Fcongrats,Ffelicidades,Ffelicitats,
             FbuttonJugar,FbuttonPlay,FbuttonBack,FbuttonHome,FassignedVehicle,FA,FB,FC,FD, FblackBackgroundCircle,FgrayBackground;
     public void loadAssets(){
 
@@ -60,6 +60,7 @@ public class AssetsManager extends ApplicationAdapter {
         blackBackgroundCircle = new Texture(FblackBackgroundCircle);
         grayBackground = new Texture(FgrayBackground);
         sheet = new Texture(Fsheet);
+        frame = new Texture(Fframe);
 
         //by ia from here
         //assetManager = new AssetManager();
@@ -119,6 +120,7 @@ public class AssetsManager extends ApplicationAdapter {
         FblackBackgroundCircle = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/blackbackgroundcircle.png");
         FgrayBackground = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/grayBackground.jpg");
         Fsheet = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/explosion_sheet_001.png");
+        Fframe = new FileHandle(Gdx.files.getLocalStoragePath() + "gameimg/frame.png");
     }
 
     public void loadAssignedVehicle(int difficulty, int score) {
