@@ -52,7 +52,7 @@ public class MyGame extends ApplicationAdapter {
     private final Context context;
     private float backgroundY1,backgroundY2;
     private QuestionManager questionManager;
-    private Animation<TextureRegion> explosion;
+    private Animation<TextureRegion> explosionGame, explosionGO;
     private float stateTime;
     private boolean showExplosion;
 
@@ -80,7 +80,9 @@ public class MyGame extends ApplicationAdapter {
         preguntaY = ScreenHeight - 24;
 
         assets = new AssetsManager();
+        assets.loadUserCar(dificulty);
         assets.loadAssets();
+
 
         shrend = new ShapeRenderer();
 
@@ -143,7 +145,11 @@ public class MyGame extends ApplicationAdapter {
 
         TextureRegion[][] regions = TextureRegion.split(assets.sheet, 256, 256); // Ajusta el tamaño del frame
         TextureRegion[] frames = Arrays.copyOf(regions[0], regions[0].length, TextureRegion[].class);
-        explosion = new Animation<>(0.175f, frames); // duración de cada frame en segundos
+        explosionGame = new Animation<>(0.1f, frames); // duración de cada frame en segundos
+
+        TextureRegion[][] regionsGO = TextureRegion.split(assets.sheetGO, 56, 55); // Ajusta el tamaño del frame
+        TextureRegion[] framesGO = Arrays.copyOf(regionsGO[0], regionsGO[0].length, TextureRegion[].class);
+        explosionGO = new Animation<>(0.1f, framesGO); // duración de cada frame en segundos
         stateTime = 0f;
         showExplosion = false;
     }
@@ -209,9 +215,6 @@ public class MyGame extends ApplicationAdapter {
 
             timeQuestion -= Gdx.graphics.getDeltaTime();
 
-            if (timeQuestion > 28 && timeQuestion < 29){
-                showExplosion = false;
-            }
 
             if (timeQuestion <= 0 || isButtonPressed(checkButtonBounds)) {
                 timeQuestion = 0;
@@ -284,7 +287,19 @@ public class MyGame extends ApplicationAdapter {
 
                 float xUC = recUC.x + recUC.width / 6;
                 // User Car
-                batch.draw(assets.userCar,xUC,recUC.y, 140, 350 );
+                switch (dificulty){
+                    case 1:
+                        batch.draw(assets.userCar,xUC,recUC.y, 155, 410 );
+                        break;
+                    case 2:
+                        batch.draw(assets.userCar,xUC,recUC.y, 150, 350 );
+                        break;
+                    case 3:
+                        batch.draw(assets.userCar,xUC,recUC.y, 110, 300 );
+                        break;
+
+                }
+
 
 
                 // Button Check
@@ -292,7 +307,7 @@ public class MyGame extends ApplicationAdapter {
 
                 // Pregunta
                 float maxWidth = ScreenWidth - preguntaX * 2;
-                batch.draw(assets.blackBackgroundCircle,preguntaX - 20 , preguntaY - 160 , maxWidth, 180 );
+                batch.draw(assets.blackBackgroundCircle,preguntaX - 20 , preguntaY - 160 , maxWidth + 15, 180 );
                 textQuestion = questions.get(indexQuestion).getQuestion();
                 font.getData().setScale(3);
                 font.setColor(Color.WHITE);
@@ -335,8 +350,9 @@ public class MyGame extends ApplicationAdapter {
                 drawBackButton();
 
 
-                if (showExplosion){
-                    TextureRegion currentFrame = explosion.getKeyFrame(stateTime, true);
+                if (showExplosion && stateTime < explosionGame.getAnimationDuration()){
+                    explosionGame.setPlayMode(Animation.PlayMode.NORMAL);
+                    TextureRegion currentFrame = explosionGame.getKeyFrame(stateTime, false);
                     batch.draw(currentFrame, ScreenWidth / 2 - 900, ScreenHeight / 2 - 900, 1800,1800);
                 }
                 batch.end();
@@ -379,15 +395,21 @@ public class MyGame extends ApplicationAdapter {
                 }
                 break;
             case GAME_OVER:
+                showExplosion = true;
                 ScreenUtils.clear(0.3f, 0.3f, 0.3f, 1);
                 batch.begin();
                 batch.draw(assets.grayBackground, 0, 0, ScreenWidth, ScreenHeight);
                 batch.draw(assets.gameOver, (ScreenWidth - 1280 )/ 2, ScreenHeight - 400, 1280,352);
                 font.getData().setScale(3.5f);
                 font.setColor(Color.WHITE);
-                font.draw(batch,finalScore(),ScreenWidth / 2 - 440, ScreenHeight - 450);
+                font.draw(batch,finalScore(),ScreenWidth / 2 - 440, ScreenHeight - 440);
                 drawEndgame();
                 drawBackButton();
+                font.setColor(Color.WHITE);
+                    /*TextureRegion currentFrame = explosionGO.getKeyFrame(stateTime, true);
+                    batch.draw(currentFrame, ScreenWidth / 2 - 200, ScreenHeight / 2 - 200, 400,400);*/
+
+
                 batch.end();
                 break;
             case WIN:
@@ -396,7 +418,7 @@ public class MyGame extends ApplicationAdapter {
                 batch.draw(assets.grayBackground, 0, 0, ScreenWidth, ScreenHeight);
                 font.getData().setScale(3.5f);
                 font.setColor(Color.WHITE);
-                font.draw(batch,finalScore(),ScreenWidth / 2 - 440, ScreenHeight - 450);
+                font.draw(batch,finalScore(),ScreenWidth / 2 - 440, ScreenHeight - 440);
                 drawEndgame();
                 drawBackButton();
                 batch.end();
@@ -410,7 +432,7 @@ public class MyGame extends ApplicationAdapter {
             switch (language){
                 case 0:
                     assets.loadAssignedVehicle(dificulty,score);
-                    font.draw(batch,"Se t'ha assignat el següent vehicle.", ScreenWidth / 2 - 440, ScreenHeight - 550);
+                    font.draw(batch,"Se t'ha assignat el següent vehicle.", ScreenWidth / 2 - 440, ScreenHeight - 540);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
                     batch.draw(assets.frame, ScreenWidth / 2 - 380 , 32, 760,430);
                     font.getData().setScale(3.5f);
@@ -419,7 +441,7 @@ public class MyGame extends ApplicationAdapter {
                     break;
                 case 1:
                     assets.loadAssignedVehicle(dificulty,score);
-                    font.draw(batch,"Se te ha asignado el siguiente vehiculo.", ScreenWidth / 2 - 440, ScreenHeight - 550);
+                    font.draw(batch,"Se te ha asignado el siguiente vehiculo.", ScreenWidth / 2 - 440, ScreenHeight - 540);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
                     batch.draw(assets.frame, ScreenWidth / 2 - 380 , 32, 760,430);
                     font.getData().setScale(3.5f);
@@ -428,7 +450,7 @@ public class MyGame extends ApplicationAdapter {
                     break;
                 case 2:
                     assets.loadAssignedVehicle(dificulty,score);
-                    font.draw(batch,"You have been assigned the following vehicle.", ScreenWidth / 2 - 440, ScreenHeight - 550);
+                    font.draw(batch,"You have been assigned the following vehicle.", ScreenWidth / 2 - 440, ScreenHeight - 540);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
                     batch.draw(assets.frame, ScreenWidth / 2 - 380 , 32, 760,430);
                     font.getData().setScale(3.5f);
@@ -442,8 +464,8 @@ public class MyGame extends ApplicationAdapter {
             switch (language){
                 case 0:
                     assets.loadAssignedVehicle(dificulty,score);
-                    batch.draw(assets.felicitats, ScreenWidth / 2 - 800, ScreenHeight - 440,1600,415);
-                    font.draw(batch,"Se t'ha assignat el següent vehicle.", ScreenWidth / 2 - 440, ScreenHeight - 550);
+                    batch.draw(assets.felicitats, ScreenWidth / 2 - 800, ScreenHeight - 430,1600,415);
+                    font.draw(batch,"Se t'ha assignat el següent vehicle.", ScreenWidth / 2 - 440, ScreenHeight - 540);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
                     batch.draw(assets.frame, ScreenWidth / 2 - 380 , 32, 760,430);
                     font.getData().setScale(3.5f);
@@ -452,8 +474,8 @@ public class MyGame extends ApplicationAdapter {
                     break;
                 case 1:
                     assets.loadAssignedVehicle(dificulty,score);
-                    batch.draw(assets.felicidades, ScreenWidth / 2 - 600, ScreenHeight - 440, 1200, 415);
-                    font.draw(batch,"Se te ha asignado el siguiente vehiculo.", ScreenWidth / 2 - 440, ScreenHeight - 550);
+                    batch.draw(assets.felicidades, ScreenWidth / 2 - 600, ScreenHeight - 430, 1200, 415);
+                    font.draw(batch,"Se te ha asignado el siguiente vehiculo.", ScreenWidth / 2 - 440, ScreenHeight - 540);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
                     batch.draw(assets.frame, ScreenWidth / 2 - 380 , 32, 760,430);
                     font.getData().setScale(3.5f);
@@ -463,7 +485,7 @@ public class MyGame extends ApplicationAdapter {
                 case 2:
                     assets.loadAssignedVehicle(dificulty,score);
                     batch.draw(assets.congrats, ScreenWidth / 2 - assets.congrats.getWidth()/2f, ScreenHeight - 415);
-                    font.draw(batch,"You have been assigned the following vehicle.", ScreenWidth / 2 - 440, ScreenHeight - 550);
+                    font.draw(batch,"You have been assigned the following vehicle.", ScreenWidth / 2 - 440, ScreenHeight - 540);
                     batch.draw(assets.assignedVehicle, ScreenWidth / 2 - 375 , 32, 750,425);
                     batch.draw(assets.frame, ScreenWidth / 2 - 380 , 32, 760,430);
                     font.getData().setScale(3.5f);
@@ -787,6 +809,7 @@ public class MyGame extends ApplicationAdapter {
             lives--;
             checkIndexQuestion();
             if (lives <= 0) {
+                showExplosion = false;
                 currentScreen = Screen.GAME_OVER;
             }
             recCC1.setY(ScreenHeight);
@@ -814,6 +837,7 @@ public class MyGame extends ApplicationAdapter {
         if (questionsAnswered < 20){
             indexQuestion = randomQuestion();
         }else if (questionsAnswered == 20) {
+            showExplosion = false;
             currentScreen = Screen.WIN;
         }
     }
