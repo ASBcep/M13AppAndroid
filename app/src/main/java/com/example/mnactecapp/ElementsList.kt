@@ -15,7 +15,8 @@ class ElementsList(context: Context) {
     init {
         when (ElementManager.idioma) {
             0 -> routeJsonLang = "/json/elements_cat.json"
-            1 -> routeJsonLang = "/json/elements_spa.json"
+            //1 -> routeJsonLang = "/json/elements_spa.json"
+            1 -> routeJsonLang = "/json/elements_esp.json"
             2 -> routeJsonLang = "/json/elements_eng.json"
         }
     }
