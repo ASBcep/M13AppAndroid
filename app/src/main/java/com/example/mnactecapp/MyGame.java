@@ -237,7 +237,7 @@ public class MyGame extends ApplicationAdapter {
     }
 
     private void drawGame(){
-        float backgroundVelocity = 15f;
+        float backgroundVelocity = 10f;
         stateTime += Gdx.graphics.getDeltaTime();
         switch (currentScreen){
             case EXPLANATION:
@@ -792,9 +792,9 @@ public class MyGame extends ApplicationAdapter {
 
     public void checkAnswer() {
         timeLeft = TIMEOUT_TIME;
-        recCC1.y -= 25f;
-        recCC2.y -= 25f;
-        recCC3.y -= 25f;
+        recCC1.y -= 15f;
+        recCC2.y -= 15f;
+        recCC3.y -= 15f;
 
         // Falló la pregunta
         if (recUC.overlaps(recCC1) || recUC.overlaps(recCC2) || recUC.overlaps(recCC3)) {
