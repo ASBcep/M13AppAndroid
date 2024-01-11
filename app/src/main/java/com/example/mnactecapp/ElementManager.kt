@@ -24,5 +24,5 @@ object ElementManager {
     var idioma: Int = 0
 
     //Per mostrar toasts que ajuden a debugar
-    val debug = true
+    val debug = false
 }
