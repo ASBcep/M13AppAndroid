@@ -274,11 +274,11 @@ public class MyGame extends ApplicationAdapter {
                 backgroundY2 -= backgroundVelocity;
 
                 if (backgroundY1 + ScreenHeight <= 0) {
-                    backgroundY1 = ScreenHeight;
+                    backgroundY1 = ScreenHeight - 20;
                 }
 
                 if (backgroundY2 + ScreenHeight <= 0) {
-                    backgroundY2 = ScreenHeight;
+                    backgroundY2 = ScreenHeight - 20 ;
                 }
 
                 float xUC = recUC.x + recUC.width / 6;
