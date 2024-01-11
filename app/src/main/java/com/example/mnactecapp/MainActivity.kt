@@ -1,9 +1,10 @@
 package com.example.mnactecapp
-
 import ElementsList
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -22,6 +23,11 @@ class MainActivity : AppCompatActivity() {
                 // Manejar el resultado cancelado si es necesario
             }
         }
+
+    private val handler = Handler()
+    private val inactivityRunnable = Runnable {
+        reiniciarActividad()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,6 +101,32 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, Activity4::class.java)
             startActivity(intent)
         }
+
+        // Detectar toques en la vista raíz
+        val rootView = findViewById<View>(android.R.id.content)
+        rootView.setOnTouchListener { _, _ ->
+            resetInactivityTimer()
+            false
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        resetInactivityTimer()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stopInactivityTimer()
+    }
+
+    private fun resetInactivityTimer() {
+        handler.removeCallbacks(inactivityRunnable)
+        handler.postDelayed(inactivityRunnable, 60000) // 60 seconds
+    }
+
+    private fun stopInactivityTimer() {
+        handler.removeCallbacks(inactivityRunnable)
     }
 
     fun reiniciarActividad() {
@@ -103,6 +135,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 }
+
 
 /* backup 11/12/2023 pre canvi "element per defecte" a "element random de l'àmbit"
 package com/.example.mnactecapp
