@@ -13,6 +13,7 @@ class login : AppCompatActivity() {
 
     lateinit var textViewTitulo: TextView
     lateinit var btnAcceder: Button
+    lateinit var btnVolver: Button
     lateinit var editTextNombreUsuario: EditText
     lateinit var editTextContraseña: EditText
 
@@ -31,6 +32,7 @@ class login : AppCompatActivity() {
         // Inicialización de vistas
         textViewTitulo = findViewById(R.id.textViewTitulo)
         btnAcceder = findViewById(R.id.btnAcceder)
+        btnVolver = findViewById(R.id.btnVolver) // Agregado
         editTextNombreUsuario = findViewById(R.id.editTextNombreUsuario)
         editTextContraseña = findViewById(R.id.editTextContraseña)
 
@@ -50,6 +52,13 @@ class login : AppCompatActivity() {
             resetInactivityTimer()
         }
 
+        // Botón Volver
+        btnVolver.setOnClickListener {
+            // Iniciar MainActivity
+            startActivity(Intent(this, MainActivity::class.java))
+            finish() // Finalizar esta actividad para evitar que el usuario vuelva aquí al presionar el botón Atrás.
+        }
+
         // Actualizar idioma
         actualizarIdioma()
 
@@ -62,25 +71,15 @@ class login : AppCompatActivity() {
     }
 
     private fun actualizarIdioma() {
-        when (ElementManager.idioma) {
-            0 -> setearTextoIdioma(getString(R.string.btnAccederCAT), getString(R.string.editTextNombreUsuarioCAT), getString(R.string.editTextContraseñaCAT), getString(R.string.textViewTituloCAT))
-            1 -> setearTextoIdioma(getString(R.string.btnAccederSPA), getString(R.string.editTextNombreUsuarioSPA), getString(R.string.editTextContraseñaSPA), getString(R.string.textViewTituloSPA))
-            2 -> setearTextoIdioma(getString(R.string.btnAccederENG), getString(R.string.editTextNombreUsuarioENG), getString(R.string.editTextContraseñaENG), getString(R.string.textViewTituloENG))
-        }
+        // ... (código anterior)
     }
 
     private fun setearTextoIdioma(btnTexto: String, nombreUsuarioTexto: String, contraseñaTexto: String, tituloTexto: String) {
-        btnAcceder.text = btnTexto
-        editTextNombreUsuario.setText(nombreUsuarioTexto)
-        editTextContraseña.setText(contraseñaTexto)
-        textViewTitulo.text = tituloTexto
+        // ... (código anterior)
     }
 
     private fun resetInactivityTimer() {
-        // Eliminar el Runnable anterior
-        handler.removeCallbacks(inactivityRunnable)
-        // Establecer un nuevo Runnable para reiniciar la actividad después de 60 segundos
-        handler.postDelayed(inactivityRunnable, 60000) // 60 segundos
+        // ... (código anterior)
     }
 
     override fun onResume() {
